@@ -1,0 +1,43 @@
+.myMap{
+    width: 100%;
+    height:800rpx;
+}
+
+.nav-item{
+	width:100%;
+	height:80rpx;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	background: #F3656C;
+	justify-content:space-around;
+}
+.nav-child{
+	box-sizing: border-box;
+	text-align: center;
+	font-size: 18pt;
+  padding-top: 5px;
+	color: #FFF;
+}
+.tap-undline{
+    width:100%;
+    margin-top:0rpx;
+    border:solid 1px #fff;
+}
+.history-time
+{
+  box-sizing: border-box;
+	font-size: 10pt;
+}
+.history-list
+{
+  box-sizing: border-box;
+	font-size: 13pt;
+	color: #66CD00;
+}
+.history-undline{
+    width:100%;
+    margin-top:10rpx;
+    border:solid 1rpx lightgray;
+}

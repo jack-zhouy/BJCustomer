@@ -1,0 +1,50 @@
+<!-- 个人信息 -->
+<view class="summary">
+	<!-- <view class="avatar-container"> -->
+		<image src="{{loginState? userInfo.avatarUrl : '../../images/default-avatar.png'}}" class="avatar" />
+	<!-- </view> -->
+		<view class="nickname" wx:if="{{loginState}}">{{userId}}</view>
+    <view class="nickname" wx:if="{{!loginState}}" bindtap="gotoLogin">登录</view>
+</view>
+<!-- 账户 -->
+<view class="account">
+	<view class="item">
+		<view class="value balance">0.00</view>
+		<view class="caption">余额</view>
+	</view>
+	<view class="item">
+		<view class="value coupon">0</view>
+		<view class="caption">优惠</view>
+	</view>
+	<view class="item">
+		<view class="value credit">0</view>
+		<view class="caption">积分</view>
+	</view>
+</view>
+<!-- 列表 -->
+<view class="listview">
+	<view class="item">
+		<image class="hd" src="../../images/address.png"/>
+		<navigator class="bd" url="../../address/list/list" open-type="navigate" hover-class="none">收货地址</navigator>
+	</view>
+</view>
+<!-- 管理员 -->
+<view class="listview" >
+
+	<view class="item">
+		<image class="hd" src="../../images/category.png" />
+		<navigator class="bd" url="../../category/list/list" open-type="navigate" hover-class="none">历史订单</navigator>
+	</view>
+  	<view class="item">
+		<image class="hd" src="../../images/setting.png" />
+		<navigator class="bd" url="../../shop/setting/setting" open-type="navigate" hover-class="none">资料更新</navigator>
+	</view>
+	<view class="item">
+		<image class="hd" src="../../images/food.png" />
+		<navigator class="bd" url="../../food/list/list" open-type="navigate" hover-class="none">投诉通道</navigator>
+	</view>
+</view>
+<!-- 退出登录 -->
+<view class="order-buy">
+  <text class="btn-buy" bindtap="logout" wx:if="{{loginState}}">退出登录</text>
+</view>

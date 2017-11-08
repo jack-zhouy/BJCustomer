@@ -1,0 +1,37 @@
+<!--pages/contact/contact.wxml-->
+<view class="fullpage">
+    <view class="body">
+        <image src="../../images/icon/phone.jpg" class="blog" />
+        <view class="cfff tac">
+            <text>—— 联系我们 ——</text>
+        </view>
+        <view class="btn_box tac cfff">
+            <view class="btn">
+                <view class="btn_outer">
+                    <view class="btn_inner">
+                        <contact-button size="30" type="default-light"></contact-button>
+                    </view>
+                </view>
+                <text class="f28">在线客服</text>
+            </view>
+            <view class="btn">
+                <view class="btn_outer" bindtap="makePhoneCall">
+                    <view class="btn_inner">
+                        <image src="../../images/icon/tel.png" class="btn_img" />
+                    </view>
+                </view>
+
+                <text class="f28">一键电话</text>
+            </view>
+        </view>
+        <view class="contact_text cfff">
+            <text>
+                百江燃气|伴你同行
+                招商合作:13913015340
+                客服微信:13913015340
+                公众平台:百江订气
+                服务地址:云南省昆明市xx街道
+            </text>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,138 @@
+<!--order.wxml--> 
+<form bindsubmit="form_OrderSubmit">
+
+<view class="section Mysection">
+  <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
+    <view class="flex-item flex_text">用户ID</view>
+    <view class="flex-item MyInput"> 
+      <input id="userId" name="userId" type="text"/>
+    </view>
+  </view>
+</view>
+
+<view class="section Mysection">
+  <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
+    <view class="flex-item flex_text">用户姓名</view>
+    <view class="flex-item MyInput"> 
+      <input id="name" name="name" type="text" />
+    </view>
+  </view>
+</view>
+
+<!-- <view class="section Mysection">
+  <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
+    <view class="flex-item flex_text">联系电话</view>
+    <view class="flex-item MyInput"> 
+      <input id="phone" name="phone" type="number" maxlength='11'/>
+    </view>
+  </view>
+</view> -->
+
+<view class="section Mysection"  style='background-color: lightgrey;'>
+  <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
+    <view class="flex-item Mypicker"> 
+        <picker id="goodsType" name="goodsType" bindchange="bindPickerChange" value="{{array[index]}}" range="{{array}}">
+          <view class="picker" style='margin-left:16px;'>
+           商品种类 {{array[index]}}
+          </view>
+        </picker>
+    </view>
+  </view>
+</view>
+
+<view class="section .Mysection">
+  <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
+    <view class="flex-item flex_text">气价明细
+    <button class="Mybutton">
+      <text style="color:white">使用代金券</text>
+    </button>
+    </view>
+    <view class="flex-item MyInput"> 
+      <text style="width: 400rpx;height:250rpx;">今日气价:50.00元/瓶\r\n微信气价:48.00元/瓶\r\n运气费用:5.00元/瓶\r\n代金券:0.00元\r\n总金额:48*1+5*1-0=53元</text> 
+    </view>
+  </view>
+</view>
+
+<view class="section Mysection"  style='background-color: lightgrey;'>
+  <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
+    <view class="flex-item Mypicker"> 
+        <picker id="quantity" name="quantity" bindchange="bindPickerChange1" value="{{arrayNum[index]}}" range="{{arrayNum}}">
+          <view class="picker" style='margin-left:16px;'>
+            订气瓶数 {{arrayNum[index]}}
+          </view>
+        </picker>
+    </view>
+  </view>
+</view>
+
+<view class="section Mysection" style='background-color: lightgrey;'>
+  <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
+    <view class="flex-item Mypicker"> 
+      <picker id="deliveryDate" name="deliveryDate" mode="date" value="{{date}}" start="2017-09-01" end="2017-12-31" bindchange="bindDateChange">
+         <view class="picker" style='margin-left:16px;'>
+             送气日期  {{date}}
+          </view>
+        </picker>
+    </view>
+  </view>
+</view>
+
+<view class="section Mysection" style='background-color: lightgrey;'>
+  <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
+    <view class="flex-item Mypicker"> 
+      <picker id="deliveryTime" name="deliveryTime" mode="time" value="{{time}}" start="09:01" end="19:00" bindchange="bindTimeChange">
+         <view class="picker" style='margin-left:16px;'>
+            送气时间  {{time}}
+          </view>
+        </picker>
+    </view>
+  </view>
+</view>
+
+<view class="section Mysection">
+  <!-- 地址选择 -->
+  <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
+ <!-- 用户尚未添加地址时 -->
+		<view class="address" bindtap="selectAddress" wx:if="{{!address}}">  
+			<view class="flex-item flex_text" >添加送气地址</view>
+		</view>
+
+		<!-- 用户已添加过地址 -->
+	  <view class="item" wx:else>
+			<view class="bd" bindtap="selectAddress">
+			<view style="margin-top:-10px" class="receiver">
+			<input id="receiverName" name="receiverName"  value="{{AddressData.userName}}"/>
+			<input id="receiverPhone" name="receiverPhone" style="margin-left:-70px" value="{{AddressData.telNumber}}"/>
+		  </view> 
+
+      <view style="margin-top:-10px" class="receiver">
+        <input id="province" name="province" value="{{AddressData.provinceName}}"/>
+        <input id="city" name="city" value="{{AddressData.cityName}}"/>
+        <input id="county" name="county" value="{{AddressData.countyName}}"/>  
+      </view>
+
+      <input id="detail" name="detail" class="detailInfoStyle" value="{{AddressData.detailInfo}}"/>
+		</view>	      
+	</view>
+</view>
+</view>
+
+
+<view class="section .Mysection">
+  <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
+    <view class="flex-item flex_text">客户留言</view>
+    <view class="flex-item MyInput"> 
+      <textarea id="note" name="note" style="width:400rpx;margin-top:-5px;height:100rpx;" placeholder="请输入备注信息"/>  
+    </view>
+  </view>
+</view>
+
+<view style="margin-top:5px;" class="section">
+ <button disabled="{{submitDisabled}}" style="background-color:{{submitBtnBgBgColor}};width: 80%;" formType="submit"  loading="{{btnLoading}}"> {{submitBtnTxt}} 
+ </button>
+
+</view>
+
+</form>
+
+

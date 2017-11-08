@@ -1,0 +1,126 @@
+@import "../login/login.wxss";
+
+.smsCode {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  padding-right: 10%;
+}
+
+.smsCode input {
+  width: 336rpx;
+}
+
+.smsCode .getSmsCodeBtn {
+  font-size: 30rpx;
+  color: #fff;
+  width: 216rpx;
+  box-sizing: border-box;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-top: 10rpx;
+  margin-right: 0;
+}
+
+.logo {
+  margin-top: 80rpx;
+  margin-bottom: 120rpx;
+}
+
+.logo image {
+  width: 600rpx;
+  height: 100rpx;
+}
+
+.pickerTitle{
+  height: 60rpx;
+  margin-top: 20rpx;
+  color:gray; 
+  font-size:30rpx;
+}
+
+.pickerIndexText{
+  height: 60rpx;
+  margin:20rpx;
+  font-size:30rpx;
+}
+
+
+
+/*收货地址*/
+.address {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	background: white;
+	position: relative;
+}
+
+.title {
+  color:gray; 
+  font-size:30rpx;
+}
+
+/*用户地址项*/
+
+/*每一项*/
+ .item {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1px 0;
+	border-bottom: 1px solid #ddd;
+	background: white;
+	margin-left: 0;
+	line-height: initial;
+}
+
+/*主体内容*/
+.item .bd {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+/*收件人信息*/
+.item .bd .receiver {
+	color: black;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	margin: 10px 0;
+	margin-left: 10px;
+}
+
+/*姓氏*/
+.item .bd .receiver .firstname {
+	font-size: 30rpx;	
+}
+
+/*性别*/
+.item .bd .receiver .gender {
+	font-size: 30rpx;
+	margin: 0 10px;
+}
+
+/*手机号码*/
+.item .bd .receiver .mobile {
+	font-size: 30rpx;
+}
+
+/*收件地址*/
+ .item .bd .detail {
+	font-size: 30rpx;
+	margin: 5px 0;
+	margin-left: 10px;
+}
+
+.detailInfoStyle{
+  color:black;
+  margin-top:-30px;
+  margin-left:8px;
+}

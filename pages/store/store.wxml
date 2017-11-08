@@ -1,0 +1,74 @@
+<loading hidden="{{loading}}">
+  Loading...
+</loading>
+
+
+<scroll-view class="container" style="height: {{windowHeight}}px;" scroll-y="true" bindscrolltolower="onPullDownRefresh" lower-threshold="{{scrollTop}}">
+  <view class="list-item" wx:for="{{goods}}" wx:key="id">
+ 
+    <navigator class="list-info">
+      <view class="list-thumb">
+        <image class="thumb" src="{{item.picture}}"></image>
+        <icon class="i-play"></icon>
+      </view>
+
+      <view class="list-content">
+        <view class="list-title">
+          <text>{{item.goodName}}</text>
+        </view>
+        <view class="list-brief">{{item.id}}</view>
+        
+      	<view class="price-stepper">
+					<view class="price">{{item.price}}</view>
+					  <view class="stepper">
+						<!-- 减号 -->
+						<image src="/images/subtract.png" class="symbol" bindtap="subtract" wx:if="{{cartData[item.id]}}" data-good="{{item}}" />
+						<!-- 数量 -->
+						<view class="value">{{cartData[item.id]}}</view>
+						<!-- 加号 -->
+						<image src="/images/add.png" class="symbol" bindtap="add" data-good="{{item}}"/>
+					</view>
+					
+				</view>
+      </view>
+    </navigator>
+  </view>
+</scroll-view>
+
+<!-- 购物车 -->
+<view class="ft">
+	<view class="cart-container" bindtap="cascadeToggle">
+		<view class="badge badge-offset" wx:if="{{quantity}}">{{quantity}}</view>
+		<image src="/images/cart.png" class="cart" />
+	</view>
+	<view class="fee" bindtap="cascadeToggle">
+		<view wx:if="{{amount}}" class="food-fee">{{amount}}</view>
+	</view>
+	<view class="checkout {{ amount > 0 ? '' : 'checkout-disabled'}}" bindtap="{{amount > 0 ? 'checkout' : ''}}">{{amount > 0 ? '去结算' : '还差' + '1元起送'}}</view>
+	
+</view>
+
+<!-- 购物车容器 -->
+<view class="modal">
+	<view animation="{{animationMask}}" class="modal-mask {{maskVisual}}" bindtap="cascadeDismiss"></view>
+	<view animation="{{animationData}}" class="modal-content" style="height: {{cartHeight}}px; bottom: -{{cartHeight}}px;">
+	    <view class="modal-header">
+	        <text class="modal-title">购物车</text>
+	        <image src="/images/close.png" class="modal-close" bindtap="cascadeDismiss" />
+	    </view>
+	    <scroll-view class="modal-body" scroll-y="true" style="height: {{scrollHeight}}px;">
+	    	<view class="item" wx:for="{{cartObjects}}" wx:key="">
+	    		<view class="title">{{item.good.goodName}}</view>
+	    		<view class="fee">{{item.good.price * item.quantity}}</view>
+	    		<view class="stepper">
+					<!-- 减号 -->
+					<image src="/images/subtract.png" class="symbol" bindtap="subtract" wx:if="{{cartData[item.good.id]}}" data-good="{{item.good}}" />
+					<!-- 数量 -->
+					<view class="value">{{cartData[item.good.id]}}</view>
+					<!-- 加号 -->
+					<image src="/images/add.png" class="symbol" bindtap="add" data-good="{{item.good}}" />
+				</view>
+	    	</view>
+    	</scroll-view>
+	</view>
+</view>

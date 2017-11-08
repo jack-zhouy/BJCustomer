@@ -1,0 +1,60 @@
+<view class="repair_area">
+  <view style="padding-top:15px;" class="section mySection">
+    <text class="my_text text-center">代金券信息</text>
+  </view>
+  
+  <view style="background-color:white" class="section mySection">
+      <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
+    <view class="flex-item flex_text">我推荐微信关注人数：</view>
+    <view style="margin-top:4px;" class="flex-item myInput"> 
+      <textarea placeholder="0" placeholder-style="color:red"/>
+    </view>
+  </view>
+  </view>
+
+  <view style="background-color:white"  class="section mySection ">
+    <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
+      <view class="flex-item flex_text">我推荐微信绑定人数：
+    </view>
+      <view style="margin-top:4px;" class="flex-item myInput"> 
+        <textarea placeholder="0" placeholder-style="color:red"/>
+      </view>
+    </view>
+  </view>
+
+  <view style="background-color:white"  class="section mySection ">
+    <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
+      <view class="flex-item flex_text">我推荐订气成功人数：
+      </view>
+      <view style="margin-top:4px;" class="flex-item myInput"> 
+        <textarea placeholder="0" placeholder-style="color:red"/>
+      </view>
+    </view>
+  </view>
+
+
+  <view style="background-color:white"  class="section mySection ">
+    <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
+      <view class="flex-item flex_text">每次订气最多使用代金券：
+      </view>
+      <view style="margin-top:4px;" class="flex-item myInput"> 
+        <textarea placeholder="300.0元" placeholder-style="color:red"/>
+      </view>
+    </view>
+  </view>
+
+  <view style="background-color:white"  class="section mySection ">
+    <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
+      <view class="flex-item flex_text">我获得的代金券总额：
+      </view>
+      <view style="margin-top:4px;" class="flex-item myInput"> 
+        <textarea placeholder="6.0元" placeholder-style="color:red"/>
+      </view>
+    </view> 
+  </view>
+</view>
+
+  <view style="margin-top: 40rpx;"  class="section">
+    <button bindsubmit="bindCheckAccount" style="background-color:#F3656C;width:90%" form-type="submit">
+    <text style="color:white">查 看 流 水 账</text></button>
+  </view>

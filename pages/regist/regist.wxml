@@ -1,0 +1,83 @@
+<view class="content">
+    <form bindsubmit="formSubmit">
+        <view class="input-area">
+          <view class="input-log">  
+            <image class="userinfo-logIcon" src="{{logIcon0}}"></image>  
+            <input id="userId" name="userId" maxlength='11' type="text" placeholder="用户ID" />
+          </view>  
+
+          <view class="input-log">  
+            <image class="userinfo-logIcon" src="{{logIcon}}"></image>  
+            <input id="name" name="name" maxlength='11' type="text" placeholder="用户姓名" />
+          </view>  
+
+          <view class="input-log">  
+            <image class="userinfo-logIcon" src="{{pwdIcon}}"></image>  
+            <input id="password" name="password" maxlength='20' type="password" placeholder="密码" />
+          </view>
+
+          <view class="input-log">  
+            <image class="userinfo-logIcon" src="{{logTel}}"></image>  
+            <input id="phone1" name="phone1" maxlength='11' type="text" placeholder="手机号" />
+          </view>
+
+          <view class="input-log">
+          <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image>  
+            <view class="pickerTitle"> 客户类型: </view>
+				    <picker id="typeCode" name="typeCode" class="pickerIndexText" bindchange="bindPickerChange1" value="{{customerTypeArray[customerTypeIndex]}}" range="{{customerTypeArray}}">
+					  <view class="subtitle-label">{{customerTypeArray[customerTypeIndex]}}</view>
+			    	</picker>
+          </view>
+
+          <view class="input-log">
+          <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image>  
+            <view class="pickerTitle"> 客户来源: </view>
+				    <picker id="sourceCode" name="sourceCode" class="pickerIndexText" bindchange="bindPickerChange" value="{{customerSourceArray[customerSourceIndex]}}" range="{{customerSourceArray}}">
+					  <view class="subtitle-label">{{customerSourceArray[customerSourceIndex]}}</view>
+			    	</picker>
+          </view>
+
+          <view class="input-log">  
+            <image class="userinfo-logIcon" src="/images/location.png"></image> 
+
+            <!-- 地址选择 -->
+	          <view  class="container">
+           
+	        	<!-- 用户尚未添加地址时 -->
+		          <view class="address" bindtap="selectAddress" wx:if="{{!address}}">  
+			          <view class="title" >添加地址</view>
+		          </view>
+
+		          <!-- 用户已添加过地址 -->
+	          	<view class="item" wx:else>
+			          <view class="bd" bindtap="selectAddress">
+				        <!-- <view style="margin-top:-10px" class="receiver">
+					        <input id="receiverName" name="receiverName"  value="{{AddressData.userName}}"/>
+					        <input id="receiverPhone" name="receiverPhone" style="margin-left:-70px" value="{{AddressData.telNumber}}"/>
+				        </view> -->
+
+                <view style="margin-top:-10px" class="receiver">
+                  <input id="province" name="province" value="{{AddressData.provinceName}}"/>
+                  <input id="city" name="city" value="{{AddressData.cityName}}"/>
+                  <input id="county" name="county" value="{{AddressData.countyName}}"/>  
+                </view>
+
+                <input id="detail" name="detail" class="detailInfoStyle" value="{{AddressData.detailInfo}}"/>
+			        </view>
+			      
+		        </view>
+           </view>
+        </view> 
+
+        <view class="btn-area">
+            <button  disabled="{{registDisabled}}" style="background-color:{{registBtnBgBgColor}}"   formType="submit"  loading="{{btnLoading}}"> {{registBtnTxt}} </button>
+            <view class="txt-area">
+                 <navigator open-type="switchTab" url="../index/index"><text class="forgot-password">回首页                         </text></navigator>
+                 <navigator redirect url="../login/login"><text class="register">登录账号
+                 </text></navigator>
+            </view>
+        </view>
+     </view>
+    
+    </form>
+</view>

@@ -1,0 +1,37 @@
+<!--pages/index/index.wxml-->
+<scroll-view class="main pt">
+  <view>
+    <view>
+      <view class="slide">
+        <swiper indicator-dots="true" autoplay="true" duration="1000">
+          <!--swiper-item只能包含一个节点再多会自动删除-->
+          <swiper-item wx:for="{{lunboList}}" wx:for-item="lunboItem">
+            <view>
+              <image src="{{lunboItem.picurl}}" class="slide-image"></image>
+            </view>
+          </swiper-item>
+        </swiper>
+      </view>
+      <view class="border_box nav_box padding-bottom pt_50">
+        <block wx:for="{{navList}}" wx:for-item="navItem" wx:key="index">
+          <view class="nav_item">
+            <navigator url="{{navItem.gotoUrl}}" open-type="navigate">
+              <image src="{{navItem.picurl}}"></image>
+              <text class="pt_20">{{navItem.title}}</text>
+            </navigator>
+          </view>
+        </block>
+      </view>
+       <view class=" nav_box padding-bottom pt_50">
+        <block wx:for="{{classList}}" wx:for-item="classItem" wx:key="index">
+          <view class="nav_item">
+            <navigator url="{{classItem.gotoUrl}}" open-type="navigate">
+              <image src="{{classItem.picurl}}"></image>
+              <text class="pt_20">{{classItem.title}}</text>
+            </navigator>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</scroll-view>
