@@ -2,21 +2,14 @@ var util = require("../../utils/util.js");
 
 //获取应用实例
 const app = getApp();
-
+var that;
 Page({
   data: {
     submitBtnTxt: "提交",
     submitBtnBgBgColor: "#0099FF",
     btnLoading: false,
     submitDisabled: false,
-    
-    userNum: '',
-    userName: '',
-    userAdd: '',
-    userTel: '',
-    date: '',
-    time: '',
-    note:'',
+
     array: ['15kg液化气', '20kg液化气', '25kg液化气'],
     objectArray: [
       {
@@ -50,6 +43,8 @@ Page({
       }
     ],
     index: 0,
+    addressBoolean: false,
+    AddressData: {},  
   },
   
   // 页面显示（一个页面只会调用一次）
@@ -127,25 +122,16 @@ Page({
       return false;
     }
   },
-  checkTelephone: function (param) {
-    var telephone1 = param.phone.trim();
-    if (telephone1.length <= 0) {
+  checkUserId: function (param) {
+    var userId = param.userId.trim();
+    if (userId.length < 0) {
       wx.showModal({
         title: '提示',
         showCancel: false,
-        content: '请设置联系号码'
+        content: '请输入用户ID'
       });
       return false;
-    } else if (telephone1.length < 1 || telephone1.length > 11) {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '请输入正确的联系号码'
-      });
-      return false;
-    } else {
-      return true;
-    }
+    } 
   },
 
   form_OrderSubmit: function (e) {
@@ -154,16 +140,11 @@ Page({
     this.mysubmit(param);
   },
   mysubmit: function (param) {
-    var flag = this.checkUserName(param) && this.checkTelephone(param)
+    var flag = this.checkUserName(param) && this.checkUserId(param)
     var that = this;
      if(flag){
       this.setregistData1();
       setTimeout(function () {
-        wx.showToast({
-          title: '成功',
-          icon: 'success',
-          duration: 1500
-        });
         that.setregistData2();
         that.redirectTo(param);
       }, 2000);
@@ -187,27 +168,75 @@ Page({
       btnLoading: !this.data.btnLoading
     });
   },
-
+  selectAddress: function () {
+    wx.chooseAddress({
+      success: function (res) {
+        that.setData({
+          AddressData: res,
+          addressBoolean: true,
+        });
+      }
+    })
+  },
   redirectTo: function (param) {
     //需要将param转换为字符串
-    param = JSON.stringify(param);
+    
     // wx.redirectTo({
     //   url: '../main/index?param=' + param//参数只能是字符串形式，不能为json对象
     // })
-    console.log("param");
-    console.log(param);
+    var orderInfo = {
+      userId: "",
+      name: "",
+      goodsType: "",
+      quantity: "",
+      deliveryDate: "",
+      deliveryTime: "",
+      address: {
+        userName:null,
+        telNumber:null,
+        province: null,
+        city: null,
+        county: null,
+        detail: null,
+      },
+      note:"",
+    };
+    orderInfo.userId = param.userId;
+    orderInfo.name = param.name;
+    orderInfo.goodsType = param.goodsType;
+    orderInfo.quantity = param.quantity;
+    orderInfo.deliveryDate = param.deliveryDate;
+    orderInfo.deliveryTime = param.deliveryTime;
+    orderInfo.address.userName = param.userName;
+    orderInfo.address.telNumber = param.telNumber;
+    orderInfo.address.province = param.province;
+    orderInfo.address.city = param.city;
+    orderInfo.address.county = param.county;
+    orderInfo.address.detail = param.detail;
+    orderInfo = JSON.stringify(orderInfo);
     wx.request({
       url: 'http://118.31.77.228:8006/api/goods', //仅为示例，并非真实的接口地址
-      data: param,
+      data: orderInfo,
       method: "POST",
 
       complete: function (res) {
         console.log(res);
-        if (res == null || res.data == null) {
+        if (res.statusCode == 201) {
+          console.error('网络请求成功')
+          wx.showToast({
+            title: '注册成功',
+            icon: 'success',
+            duration: 1500
+          });
+          return;
+        }
+
+        if (res == null || res.statusCode == 409) {
           console.error('网络请求失败')
           wx.showModal({
-            title: '提交失败',
-            showCancel: false
+            title: '用户ID已被注册',
+            showCancel: false,
+            duration: 1500
           })
           return;
         }

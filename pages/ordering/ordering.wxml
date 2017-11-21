@@ -19,26 +19,14 @@
   </view>
 </view>
 
-<!-- <view class="section Mysection">
+ <view class="section Mysection">
   <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
     <view class="flex-item flex_text">联系电话</view>
     <view class="flex-item MyInput"> 
       <input id="phone" name="phone" type="number" maxlength='11'/>
     </view>
   </view>
-</view> -->
-
-<view class="section Mysection"  style='background-color: lightgrey;'>
-  <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
-    <view class="flex-item Mypicker"> 
-        <picker id="goodsType" name="goodsType" bindchange="bindPickerChange" value="{{array[index]}}" range="{{array}}">
-          <view class="picker" style='margin-left:16px;'>
-           商品种类 {{array[index]}}
-          </view>
-        </picker>
-    </view>
-  </view>
-</view>
+</view> 
 
 <view class="section .Mysection">
   <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
@@ -56,9 +44,21 @@
 <view class="section Mysection"  style='background-color: lightgrey;'>
   <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
     <view class="flex-item Mypicker"> 
+        <picker id="goodsType" name="goodsType" bindchange="bindPickerChange" value="{{array[index]}}" range="{{array}}">
+          <view class="picker" style='margin-left:16px;'>
+           商品种类 {{array[index]}}
+          </view>
+        </picker>
+    </view>
+  </view>
+</view>
+
+<view class="section Mysection"  style='background-color: lightgrey;'>
+  <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
+    <view class="flex-item Mypicker"> 
         <picker id="quantity" name="quantity" bindchange="bindPickerChange1" value="{{arrayNum[index]}}" range="{{arrayNum}}">
           <view class="picker" style='margin-left:16px;'>
-            订气瓶数 {{arrayNum[index]}}
+            订气数量 {{arrayNum[index]}}
           </view>
         </picker>
     </view>
@@ -92,18 +92,19 @@
 <view class="section Mysection">
   <!-- 地址选择 -->
   <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
+  <view  class="container">
  <!-- 用户尚未添加地址时 -->
-		<view class="address" bindtap="selectAddress" wx:if="{{!address}}">  
-			<view class="flex-item flex_text" >添加送气地址</view>
+		<view class="address" bindtap="selectAddress" wx:if="{{!addressBoolean}}">  
+			<view class="flex-item flex_text" >送气地址</view>
 		</view>
 
 		<!-- 用户已添加过地址 -->
 	  <view class="item" wx:else>
 			<view class="bd" bindtap="selectAddress">
-			<view style="margin-top:-10px" class="receiver">
-			<input id="receiverName" name="receiverName"  value="{{AddressData.userName}}"/>
-			<input id="receiverPhone" name="receiverPhone" style="margin-left:-70px" value="{{AddressData.telNumber}}"/>
-		  </view> 
+			  <view style="margin-top:-10px" class="receiver">
+			  <input id="receiverName" name="receiverName"  value="{{AddressData.userName}}"/>
+			  <input id="receiverPhone" name="receiverPhone" style="margin-left:-70px" value="{{AddressData.telNumber}}"/>
+        </view> 
 
       <view style="margin-top:-10px" class="receiver">
         <input id="province" name="province" value="{{AddressData.provinceName}}"/>
@@ -112,8 +113,10 @@
       </view>
 
       <input id="detail" name="detail" class="detailInfoStyle" value="{{AddressData.detailInfo}}"/>
-		</view>	      
+		</view>	
+         
 	</view>
+</view>
 </view>
 </view>
 
