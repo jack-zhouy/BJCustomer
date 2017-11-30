@@ -2,7 +2,11 @@ var util = require("../../utils/util.js");
 var that;
 Page({
   data: {
-    registBtnTxt: "注册",
+    userInfo: {},
+    userId: null,
+    loginState: false,
+
+    registBtnTxt: "提交",
     registBtnBgBgColor: "#0099FF",
     getSmsCodeBtnTxt: "获取验证码",
     getSmsCodeBtnColor: "#0099FF",
@@ -11,7 +15,7 @@ Page({
     logIcon0: "../../images/icon_member_selected.png",
     logIcon: "../../images/logIcon.png",
     pwdIcon: "../../images/pwdIcon.png",
-    verifiIcon:"../../images/verifiIcon.png",
+    verifiIcon: "../../images/verifiIcon.png",
     logTel: "../../images/telephone.png",
     logAdd: "../../images/icon_home.png",
     customerSourceIcon: "../../images/default-avatar.png",
@@ -36,7 +40,7 @@ Page({
       }
     ],
     customerSourceIndex: 0,
-    customerTypeArray: [],
+    customerTypeArray: ['个人家庭用户', '餐饮用户', '企业用户'],
     objectArray: [
       {
         id: 0,
@@ -51,16 +55,16 @@ Page({
         name: '企业用户'
       }
     ],
-    customerTypeIndex:0,
+    customerTypeIndex: 0,
     address: false,
-    AddressData: {}, 
+    AddressData: {},
 
     items: [
-      { name: '是', value: 'yes', checked: 'true'},
+      { name: '是', value: 'yes', checked: 'true' },
       { name: '否', value: 'no' },
-    ], 
+    ],
 
-    customerType_boolean:false,
+    customerType_boolean: false,
     msg_customerType: {},
     customerSource_boolean: false,
     msg_customerSource: {},
@@ -71,11 +75,17 @@ Page({
   },
   onReady: function () {
     // 页面渲染完成
-    // this.customerType_request;
-    // this.customerSource_request;
   },
   onShow: function () {
     // 页面显示
+    var app = getApp();
+    if (app.globalData.loginState) {
+      that.setData({
+        loginState: true,
+        userInfo: app.globalData.userInfo,
+        userId: app.globalData.userId
+      });
+    }
   },
   onHide: function () {
     // 页面隐藏
@@ -84,58 +94,48 @@ Page({
     // 页面关闭
   },
 
-//请求后台客户类型
-customerType_request:function(){
-  var that = this;
-  wx.request({
-    url: 'http://118.31.77.228:8006/api/CustomerType',
-    method: "GET",
-    complete: function (res) {
-      console.log(res);
-      if (res.statusCode == 200) {
-        console.error('网络请求成功');
-        var types = res.data.items;
-        var i= 0;
-        for (;i <= res.data.total;i++)
-        {
-          var typed = res.data.items[i];
-          that.data.customerTypeArray.push(typed);
+  //请求后台客户类型
+  customerType_request: function () {
+    wx.request({
+      url: 'http://118.31.77.228:8006/api/CustomerType',
+      method: "GET",
+      complete: function (res) {
+        console.log(res);
+        if (res.statusCode == 200) {
+          console.error('网络请求成功');
+          customerType_boolean = true;
+          msg_customerType = res.data;
+          console.log("msg_customerType");
+          console.log(msg_customerType);
+          return;
         }
-
-        
-        that.data.customerType_boolean=true;
-        that.data.msg_customerType = res.data;
-        console.log("msg_customerType");
-        console.log(this.msg_customerType);
-        return;
       }
-    }
-  });
+    });
 
-},
-//请求后台客户来源
-customerSource_request: function () {
-  wx.request({
-    url: 'http://118.31.77.228:8006/api/CustomerSource',
-    method: "GET",
-    complete: function (res) {
-      console.log(res);
-      if (res.statusCode == 200) {
-        console.error('网络请求成功');
-        this.customerSource_boolean=true;
-        this.msg_customerSource = res.data;
-        console.log("msg_customerSource");
-        console.log(this.msg_customerSource);
-        return;
+  },
+  //请求后台客户来源
+  customerSource_request: function () {
+    wx.request({
+      url: 'http://118.31.77.228:8006/api/CustomerSource',
+      method: "GET",
+      complete: function (res) {
+        console.log(res);
+        if (res.statusCode == 200) {
+          console.error('网络请求成功');
+          customerSource_boolean = true;
+          msg_customerSource = res.data;
+          console.log("msg_customerSource");
+          console.log(msg_customerSource);
+          return;
+        }
       }
-    }
-  });
+    });
 
-},
+  },
   radioChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value)
   },
-  
+
   bindPickerChange: function (e) {
     // 监听picker事件
     this.setData({
@@ -152,28 +152,28 @@ customerSource_request: function () {
     wx.chooseAddress({
       success: function (res) {
         that.setData({
-          AddressData:res,
+          AddressData: res,
           address: true,
         });
       }
     })
   },
-  checkUserId: function (param) {
-    var inputUserId = param.userId.trim();
-    if (inputUserId.length > 0) {
-      return true;
-    } else {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '请设置用户ID'
-      });
-      return false;
-    }
-  },
+  // checkUserId: function (param) {
+  //   var inputUserId = param.userId.trim();
+  //   if (inputUserId.length > 0) {
+  //     return true;
+  //   } else {
+  //     wx.showModal({
+  //       title: '提示',
+  //       showCancel: false,
+  //       content: '请设置用户ID'
+  //     });
+  //     return false;
+  //   }
+  // },
   checkUserName: function (param) {
     var inputUserName = param.name.trim();
-    if (inputUserName.length>0) {
+    if (inputUserName.length > 0) {
       return true;
     } else {
       wx.showModal({
@@ -184,7 +184,7 @@ customerSource_request: function () {
       return false;
     }
   },
-  checkTelephone1: function (param) { 
+  checkTelephone1: function (param) {
     var userName = param.name.trim();
     var telephone1 = param.phone1.trim();
     if (telephone1.length <= 0) {
@@ -251,7 +251,7 @@ customerSource_request: function () {
     this.mysubmit(param);
   },
   mysubmit: function (param) {
-    var flag = this.checkUserName(param) && this.checkPassword(param) && this.checkTelephone1(param) && this.checkUserId(param) && this.checkIdentity(param);
+    var flag = this.checkUserName(param) && this.checkPassword(param) && this.checkTelephone1(param)&& this.checkIdentity(param);
     var that = this;
     if (flag) {
       this.setregistData1();
@@ -264,7 +264,7 @@ customerSource_request: function () {
   },
   setregistData1: function () {
     this.setData({
-      registBtnTxt: "注册中",
+      registBtnTxt: "提交中",
       registDisabled: !this.data.registDisabled,
       registBtnBgBgColor: "#999",
       btnLoading: !this.data.btnLoading
@@ -272,7 +272,7 @@ customerSource_request: function () {
   },
   setregistData2: function () {
     this.setData({
-      registBtnTxt: "注册",
+      registBtnTxt: "提交",
       registDisabled: !this.data.registDisabled,
       registBtnBgBgColor: "#0099FF",
       btnLoading: !this.data.btnLoading
@@ -280,20 +280,20 @@ customerSource_request: function () {
   },
   redirectTo: function (param) {
     var customerInfo = {
-      userId:"",
+      //userId: "",
       name: "",
-      password:"",
-      phone1:"",
-      typeCode:"",
-      sourceCode:"",
+      password: "",
+      phone1: "",
+      typeCode: "",
+      sourceCode: "",
       address: {
         province: null,
         city: null,
-        county:null,
-        detail:null,
+        county: null,
+        detail: null,
       }
     };
-    customerInfo.userId = param.userId;
+    //customerInfo.userId = param.userId;
     customerInfo.name = param.name;
     customerInfo.password = param.password;
     customerInfo.phone1 = param.phone1;
@@ -306,12 +306,13 @@ customerSource_request: function () {
     customerInfo = JSON.stringify(customerInfo);
     //console.log(customerInfo);
     wx.request({
-      url: 'http://118.31.77.228:8006/api/customers', 
+      url: 'http://118.31.77.228:8006/api/customers/{userId}',
+      header: {'userId': userId},  
       data: customerInfo,
-      method: "POST",
+      method: "PUT",
       complete: function (res) {
         console.log(res);
-        if (res.statusCode == 201){
+        if (res.statusCode == 200) {
           console.error('网络请求成功')
           wx.showToast({
             title: '注册成功',
@@ -322,9 +323,19 @@ customerSource_request: function () {
         }
 
         if (res == null || res.statusCode == 409) {
-          console.error('网络请求失败')
+          console.error('用户或手机号码已经存在')
           wx.showModal({
-            title: '用户ID已被注册',
+            title: '用户或手机号码已经存在',
+            showCancel: false,
+            duration: 1500
+          })
+          return;
+        }
+
+        if (res == null || res.statusCode == 406) {
+          console.error('参数错误')
+          wx.showModal({
+            title: '参数错误',
             showCancel: false,
             duration: 1500
           })

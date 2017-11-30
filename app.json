@@ -11,8 +11,8 @@
     "pages/remark/remark",
     "pages/login/login",
     "pages/regist/regist",
-    "pages/forgetpwd/forgetpwd",
-    "pages/member/member"
+    "pages/member/member",
+    "pages/editProfile/editProfile"
 
   ],
   "window": {

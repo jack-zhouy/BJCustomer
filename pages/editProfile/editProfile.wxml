@@ -2,11 +2,6 @@
     <form bindsubmit="formSubmit">
         <view class="input-area">
           <view class="input-log">  
-            <image class="userinfo-logIcon" src="{{logIcon0}}"></image>  
-            <input id="userId" name="userId" maxlength='11' type="text" placeholder="用户ID" />
-          </view>  
-
-          <view class="input-log">  
             <image class="userinfo-logIcon" src="{{logIcon}}"></image>  
             <input id="name" name="name" maxlength='11' type="text" placeholder="用户名称" />
           </view>  
@@ -93,8 +88,8 @@
         <view class="btn-area">
             <button  disabled="{{registDisabled}}" style="background-color:{{registBtnBgBgColor}}"   formType="submit"  loading="{{btnLoading}}"> {{registBtnTxt}} </button>
             <view class="txt-area">
-                 <navigator open-type="switchTab" url="../index/index"><text class="forgot-password">回首页                         </text></navigator>
-                 <navigator redirect url="../login/login"><text class="register">登录账号
+                 <navigator open-type="switchTab" url="../index/index"><text class="forgot-password">返回首页                         </text></navigator>
+                 <navigator open-type="switchTab" url="../member/member" ><text class="register">返回我的账号
                  </text></navigator>
             </view>
         </view>

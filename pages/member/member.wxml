@@ -22,12 +22,12 @@
 	</view>
 </view>
 <!-- 列表 -->
-<view class="listview">
+<!-- <view class="listview">
 	<view class="item">
 		<image class="hd" src="../../images/address.png"/>
 		<navigator class="bd" url="../../address/list/list" open-type="navigate" hover-class="none">收货地址</navigator>
 	</view>
-</view>
+</view> -->
 <!-- 管理员 -->
 <view class="listview" >
 
@@ -37,7 +37,7 @@
 	</view>
   	<view class="item">
 		<image class="hd" src="../../images/setting.png" />
-		<navigator class="bd" url="../../shop/setting/setting" open-type="navigate" hover-class="none">资料更新</navigator>
+		<navigator class="bd" url="../editProfile/editProfile" open-type="navigate" hover-class="none">资料更新</navigator>
 	</view>
 	<view class="item">
 		<image class="hd" src="../../images/food.png" />

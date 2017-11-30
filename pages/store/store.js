@@ -18,7 +18,6 @@ Page({
     cartObjects: [],
     amount: 0,
     maskVisual: 'hidden',
- 
   },
 
   requestData: function (a) {
@@ -58,19 +57,15 @@ Page({
   },
   // 页面显示（一个页面只会调用一次）
   onShow: function () {
-
   },
   // 页面初次渲染完成（每次打开页面都会调用一次）
   onReady: function () {
-
   },
   // 页面隐藏（当navigateTo或底部tab切换时调用）
   onHide: function () {
-
   },
   // 页面关闭（当redirectTo或navigateBack的时候调用）
   onUnload: function () {
-
   },
   // 下拉加载
   onPullDownRefresh: function (e) {
@@ -80,8 +75,6 @@ Page({
     })
     this.requestData();
   },
-
-
   checkout: function () {
     // 将对象序列化
     var result;
@@ -98,7 +91,6 @@ Page({
       };
       cartObjects.push(cart);
     });
-
     // 页面显示（一个页面只会调用一次）  
       var app = getApp();
       //如果没有登录就跳转到登录页面
@@ -172,7 +164,6 @@ Page({
         return;
       }
     }
-    
       // 添加商品到数组
       var cart = {};
       cart.good = good;
