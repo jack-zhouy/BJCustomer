@@ -36,10 +36,10 @@
             </radio-group>
           </view>
 
-          <view class="input-log" bindtap="customerType_request" wx:if="{{!customerType_boolean}}">
+          <view class="input-log">
           <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image>  
             <view class="pickerTitle"> 客户类型: </view>
-				    <picker id="typeCode" name="typeCode" class="pickerIndexText" bindchange="bindPickerChange1" value="{{customerTypeArray[customerTypeIndex]}}" range="{{customerTypeArray}}">
+				    <picker mode ="selector" id="typeCode" name="typeCode" class="pickerIndexText" bindchange="bindPickerChange1"  range="{{customerTypeArray}}">
 					  <view class="subtitle-label">{{customerTypeArray[customerTypeIndex]}}</view>
 			    	</picker>
           </view>

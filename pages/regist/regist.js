@@ -37,6 +37,7 @@ Page({
     ],
     customerSourceIndex: 0,
     customerTypeArray: [],
+    originalCustomerTypeArray: [],
     objectArray: [
       {
         id: 0,
@@ -64,10 +65,12 @@ Page({
     msg_customerType: {},
     customerSource_boolean: false,
     msg_customerSource: {},
+
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     that = this;
+    that.customerType_request();
   },
   onReady: function () {
     // 页面渲染完成
@@ -93,21 +96,19 @@ customerType_request:function(){
     complete: function (res) {
       console.log(res);
       if (res.statusCode == 200) {
-        console.error('网络请求成功');
-        var types = res.data.items;
-        var i= 0;
-        for (;i <= res.data.total;i++)
-        {
-          var typed = res.data.items[i];
-          that.data.customerTypeArray.push(typed);
+        console.log('网络请求成功');
+        var count = res.data.items.length;
+        for (var i = 0;i < count;i++)
+        { 
+          var tempType  = res.data.items[i].name;
+          that.data.customerTypeArray.push(tempType);
         }
-
-        
-        that.data.customerType_boolean=true;
-        that.data.msg_customerType = res.data;
-        console.log("msg_customerType");
-        console.log(this.msg_customerType);
-        return;
+        that.setData({
+          customerTypeArray: that.data.customerTypeArray,
+          originalCustomerTypeArray: res.data.items
+        })
+        console.log(that.data.customerTypeArray);
+        console.log(that.data.originalCustomerTypeArray);
       }
     }
   });
@@ -147,6 +148,7 @@ customerSource_request: function () {
     this.setData({
       customerTypeIndex: e.detail.value
     })
+    console.log(that.data.originalCustomerTypeArray[that.data.customerTypeIndex].code)
   },
   selectAddress: function () {
     wx.chooseAddress({
