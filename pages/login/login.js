@@ -7,8 +7,7 @@ Page({
     loginBtnBgBgColor: "#0099FF",
     btnLoading: false,
     disabled: false,
-    inputUserName: '',
-    inputPassword: '',
+    //小图标路径
     pwdIcon: "../../images/pwdIcon.png",
     logIcon: "../../images/logIcon.png",
     userInfo: {},
@@ -46,30 +45,27 @@ Page({
   },
   getUserInfo: function (e) {
     var app = getApp();
-    console.log(e)
+ 
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
   },
-
   onReady: function () {
     // 页面渲染完成
 
   },
   onShow: function () {
     // 页面显示
-
   },
   onHide: function () {
     // 页面隐藏
-
   },
   onUnload: function () {
     // 页面关闭
-
   },
+  //提交login表单
   formSubmit: function (e) {
     var param = e.detail.value;
     this.mysubmit(param);
@@ -97,7 +93,7 @@ Page({
       btnLoading: !this.data.btnLoading
     });
   },
-
+//验证登录输入信息正确性
   checkLoginInfo: function (param) {
     var userid = param.userId.trim();
     var password = param.password.trim();
@@ -105,13 +101,14 @@ Page({
       wx.showModal({
         title: '提示',
         showCancel: false,
-        content: '请输入用户名密码'
+        content: '请输入登录名和密码'
       });
       return false;
     } else {
       return true;
     }
   },
+  //向后台提交登录userId和password信息
   checkUserInfo: function (param) {
     var userid = param.userId.trim();
     var password = param.password.trim();
@@ -140,21 +137,19 @@ Page({
       }
     })
   },
+  //跳转页面
   redirectTo: function (param) {
-    console.log(param);
     wx.switchTab({
       url: param
     })
   },
-
   loginFailed: function () {
     var that = this;
     wx.showModal({
       title: '提示',
       showCancel: false,
-      content: '用户ID或密码有误，请重新输入'
+      content: '登录名或密码有误，请重新输入'
     });
-    console.log("login failed");
     this.setLoginData2();
   },
   loginSuc: function () {
@@ -167,7 +162,6 @@ Page({
       });
       that.setLoginData2();
       that.redirectTo("../index/index");
-
     }, 2000);
   }
 

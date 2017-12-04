@@ -30,7 +30,6 @@ Page({
       },
       success: function (res) {
         // 数据从逻辑层发送到视图层，同时改变对应的 this.data 的值
-        console.log(res.data);
         that.setData({
           goods: res.data.items,
           loading: true
@@ -80,7 +79,6 @@ Page({
     var result;
     var cartObjects = [];
     that.data.cartObjects.forEach(function (item, index) {
-      console.log(item);
       result += item.good.goodName;
       result += item.good.price;
       result += ";";
@@ -174,12 +172,9 @@ Page({
       });
       // 因为请求网络是异步的，因此汇总在此，上同
       that.amount();
-      //console.log("cartObjects");
-      //console.log(cartObjects);
   },
   cascadeToggle: function () {
     //切换购物车开与关
-    // console.log(that.data.maskVisual);
     if (that.data.maskVisual == 'show') {
       that.cascadeDismiss();
     } else {

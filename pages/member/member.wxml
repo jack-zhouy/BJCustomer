@@ -22,22 +22,18 @@
 	</view>
 </view>
 <!-- 列表 -->
-<!-- <view class="listview">
+<view class="listview" >
 	<view class="item">
 		<image class="hd" src="../../images/address.png"/>
-		<navigator class="bd" url="../../address/list/list" open-type="navigate" hover-class="none">收货地址</navigator>
+		<navigator class="bd" url="../../address/list/list" open-type="navigate" hover-class="none">历史订单             </navigator>
 	</view>
-</view> -->
-<!-- 管理员 -->
-<view class="listview" >
-
-	<view class="item">
+	<view class="item" bindtap='navigateToCheckProfile'>
 		<image class="hd" src="../../images/category.png" />
-		<navigator class="bd" url="../../category/list/list" open-type="navigate" hover-class="none">历史订单</navigator>
+		<navigator class="bd" open-type="navigate" hover-class="none">查看资料</navigator>
 	</view>
-  	<view class="item">
+  	<view class="item" bindtap='navigateToEditProfile'>
 		<image class="hd" src="../../images/setting.png" />
-		<navigator class="bd" url="../editProfile/editProfile" open-type="navigate" hover-class="none">资料更新</navigator>
+		<navigator class="bd" open-type="navigate" hover-class="none">修改资料</navigator>
 	</view>
 	<view class="item">
 		<image class="hd" src="../../images/food.png" />

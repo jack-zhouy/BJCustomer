@@ -28,6 +28,5 @@ Page({
       'fail': function (res) {
       }
     })
-    console.log(e.detail.value.textarea)
   },
 })

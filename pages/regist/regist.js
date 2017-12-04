@@ -2,12 +2,39 @@ var util = require("../../utils/util.js");
 var that;
 Page({
   data: {
-    registBtnTxt: "注册",
+    //全局状态信息
+    userInfo: {},
+    userId: null,
+    loginState: false,
+    customerInfo: {},
+
+    registBtnTxt: "提交",
     registBtnBgBgColor: "#0099FF",
-    getSmsCodeBtnTxt: "获取验证码",
-    getSmsCodeBtnColor: "#0099FF",
     btnLoading: false,
     registDisabled: false,
+
+    inputUserIdDisable:false,
+    needToBeHidden:false,
+    needToBeShown:false,
+    LabelNeedToBeHidden:false,
+    inputNeedToBeShown:true,
+    addSelectNeedToBeShown:false,
+    inputDisable:false,
+    checkProfileState:false,
+    editProfileState:false,
+
+    userId_value:"",
+    name_value:"",
+    identity_value:"",
+    phone_value:"",
+    password_value:"",
+    hasCylinder_value:"",
+    customerType_value:"",
+    customerSource_value:"",
+    company_name_value:"",
+    address_value:"",
+    existedCustomerInfo: {},
+    //小图标路径
     logIcon0: "../../images/icon_member_selected.png",
     logIcon: "../../images/logIcon.png",
     pwdIcon: "../../images/pwdIcon.png",
@@ -15,69 +42,67 @@ Page({
     logTel: "../../images/telephone.png",
     logAdd: "../../images/icon_home.png",
     customerSourceIcon: "../../images/default-avatar.png",
-    companyIcon: "../../images/icon_home.png",
-    customerSourceArray: ['电视、广播广告', '老客户推荐', '热线咨询', '其他'],
-    objectArray: [
-      {
-        id: 0,
-        name: '电视、广播广告'
-      },
-      {
-        id: 1,
-        name: '老客户推荐'
-      },
-      {
-        id: 2,
-        name: '热线咨询'
-      },
-      {
-        id: 3,
-        name: '其他'
-      }
-    ],
+    companyIcon: "../../images/icon_home_selected.png",
+    //客户类型、来源选择器数据
+    customerTypeIndex: 0,
     customerSourceIndex: 0,
     customerTypeArray: [],
     originalCustomerTypeArray: [],
-    objectArray: [
-      {
-        id: 0,
-        name: '个人家庭用户'
-      },
-      {
-        id: 1,
-        name: '餐饮用户'
-      },
-      {
-        id: 2,
-        name: '企业用户'
-      }
-    ],
-    customerTypeIndex:0,
+    customerSourceArray:[],
+    originalCustomerSourceArray:[],
+    //地址数据
     address: false,
     AddressData: {}, 
-
+    //是否携带钢瓶radio数据
     items: [
-      { name: '是', value: 'yes', checked: 'true'},
-      { name: '否', value: 'no' },
+      { name: '是', value: '是', checked:"true"},
+      { name: '否', value: '否'},
     ], 
-
-    customerType_boolean:false,
-    msg_customerType: {},
-    customerSource_boolean: false,
-    msg_customerSource: {},
-
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     that = this;
     that.customerType_request();
+    that.customerSource_request(); 
+//判断是查看资料还是修改资料模式
+    var model = options.model;
+    if (model == 'checkProfile') {
+      that.checkProfileRequest();
+      that.setData({
+        inputUserIdDisable: true,
+        checkProfileState: true,
+        needToBeHidden: true,
+        needToBeShown:true,
+        inputNeedToBeShown:false,
+        addSelectNeedToBeShown:true,
+        inputDisable:true,
+      })
+
+    }
+    else if (model == 'editProfile') {
+      that.checkProfileRequest();
+      that.setData({
+        inputUserIdDisable: true,
+        checkProfileState: true,
+        editProfileState:true,
+        LabelNeedToBeHidden:true,
+        needToBeShown: true,
+      })
+    }
   },
   onReady: function () {
     // 页面渲染完成
-    // this.customerType_request;
-    // this.customerSource_request;
   },
   onShow: function () {
+    var app = getApp();
+    if (app.globalData.loginState) {
+      that.setData({
+        loginState: true,
+        userInfo: app.globalData.userInfo,
+        userId: app.globalData.userId
+      });
+    }
+
     // 页面显示
   },
   onHide: function () {
@@ -85,6 +110,105 @@ Page({
   },
   onUnload: function () {
     // 页面关闭
+  },
+  //请求后台客户资料
+  checkProfileRequest: function () {
+    var that = this;
+    var app = getApp();
+    var hasCylinder;
+    wx.request({
+      url: 'http://118.31.77.228:8006/api/customers',
+      method: "GET",
+      data: {
+        userId: app.globalData.userId
+      },
+     
+      complete: function (res) {
+        
+        if (res.statusCode == 200) {
+        
+          if (res.data.items[0].haveCylinder == true) {
+            hasCylinder = "是"
+          }
+          else {
+            hasCylinder = "否"
+          };
+
+          that.setData({
+            userId_value: res.data.items[0].userId,
+            name_value: res.data.items[0].name,
+            identity_value: res.data.items[0].identity,
+            phone_value: res.data.items[0].phone,
+            customerType_value: res.data.items[0].customerType.name,
+            customerSource_value: res.data.items[0].customerSource.name,
+            company_name_value: res.data.items[0].customerCompany.name,
+            address_value: res.data.items[0].address.province + res.data.items[0].address.city +
+            res.data.items[0].address.county + res.data.items[0].address.detail,
+            hasCylinder_value: hasCylinder,  
+
+          })
+        }
+      }
+    });
+  },
+  //请求修改后台客户资料
+  editProfileRequest: function (param) {
+    var that = this;
+    var app = getApp();
+    var editCustomerInfo = {};
+
+    if (param.name.length > 0) {
+      editCustomerInfo.name = param.name;
+    }
+    if (param.identity.length > 0) {
+      editCustomerInfo.identity = param.identity;
+    }
+    if (param.password.length > 0) {
+      editCustomerInfo.password = param.password;
+    }
+    if (param.phone.length > 0) {
+      editCustomerInfo.phone = param.phone;
+    }
+    if (param.customerType.length > 0) {
+      var customerTypeTemp = {};
+      customerTypeTemp.code = param.customerType;
+      editCustomerInfo.customerType = customerTypeTemp;
+    }
+    if (param.customerSource.length > 0) {
+      var customerSourceTemp = {};
+      customerSourceTemp.code = param.customerSource;
+      editCustomerInfo.customerSource = customerSourceTemp;
+    }   
+    if (param.province!=null){
+      var customerAddressTemp = {};
+      customerAddressTemp.province = param.province;
+      customerAddressTemp.city = param.city;
+      customerAddressTemp.county = param.county;
+      customerAddressTemp.detail = param.detail;
+      editCustomerInfo.address = customerAddressTemp;
+    }
+    if (param.customerCompany.length > 0) {
+      var customerCompanyTemp = {};
+      customerCompanyTemp.name = param.customerCompany;
+      editCustomerInfo.customerCompany = customerCompanyTemp;
+    }
+    editCustomerInfo = JSON.stringify(editCustomerInfo);
+
+    wx.request({  
+      url: 'http://118.31.77.228:8006/api/customers/' + that.data.userId + '?userId=' + that.data.userId,
+      method: "PUT",
+      data: editCustomerInfo,
+      complete: function (res) {
+        
+        if (res.statusCode == 200) {
+          wx.showToast({
+            title: '提交成功',
+            icon: 'success',
+            duration: 1500
+          });
+        }
+      }
+    });
   },
 
 //请求后台客户类型
@@ -94,9 +218,8 @@ customerType_request:function(){
     url: 'http://118.31.77.228:8006/api/CustomerType',
     method: "GET",
     complete: function (res) {
-      console.log(res);
+      
       if (res.statusCode == 200) {
-        console.log('网络请求成功');
         var count = res.data.items.length;
         for (var i = 0;i < count;i++)
         { 
@@ -107,12 +230,9 @@ customerType_request:function(){
           customerTypeArray: that.data.customerTypeArray,
           originalCustomerTypeArray: res.data.items
         })
-        console.log(that.data.customerTypeArray);
-        console.log(that.data.originalCustomerTypeArray);
       }
     }
   });
-
 },
 //请求后台客户来源
 customerSource_request: function () {
@@ -120,37 +240,38 @@ customerSource_request: function () {
     url: 'http://118.31.77.228:8006/api/CustomerSource',
     method: "GET",
     complete: function (res) {
-      console.log(res);
       if (res.statusCode == 200) {
-        console.error('网络请求成功');
-        this.customerSource_boolean=true;
-        this.msg_customerSource = res.data;
-        console.log("msg_customerSource");
-        console.log(this.msg_customerSource);
-        return;
+        
+        var count = res.data.items.length;
+        for (var i = 0; i < count; i++) {
+          var tempSource = res.data.items[i].name;
+          that.data.customerSourceArray.push(tempSource);
+        }
+        that.setData({
+          customerSourceArray: that.data.customerSourceArray,
+          originalCustomerSourceArray: res.data.items
+        })
       }
     }
   });
-
 },
-  radioChange: function (e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
-  },
-  
-  bindPickerChange: function (e) {
-    // 监听picker事件
-    this.setData({
-      customerSourceIndex: e.detail.value
-    })
-  },
-  bindPickerChange1: function (e) {
-    // 监听picker事件
+//监听radio事件
+radioChange: function (e) {
+},
+// 监听picker事件
+bindPickerChange: function (e) {
+ this.setData({
+   customerSourceIndex: e.detail.value
+  })
+},
+// 监听picker事件
+bindPickerChange1: function (e) {
     this.setData({
       customerTypeIndex: e.detail.value
     })
-    console.log(that.data.originalCustomerTypeArray[that.data.customerTypeIndex].code)
   },
-  selectAddress: function () {
+//获取地址信息
+selectAddress: function () {
     wx.chooseAddress({
       success: function (res) {
         that.setData({
@@ -160,7 +281,8 @@ customerSource_request: function () {
       }
     })
   },
-  checkUserId: function (param) {
+  //验证userId输入是否正确
+checkUserId: function (param) {
     var inputUserId = param.userId.trim();
     if (inputUserId.length > 0) {
       return true;
@@ -168,12 +290,13 @@ customerSource_request: function () {
       wx.showModal({
         title: '提示',
         showCancel: false,
-        content: '请设置用户ID'
+        content: '请设置登录名'
       });
       return false;
     }
   },
-  checkUserName: function (param) {
+//验证name输入是否正确
+checkUserName: function (param) {
     var inputUserName = param.name.trim();
     if (inputUserName.length>0) {
       return true;
@@ -181,32 +304,33 @@ customerSource_request: function () {
       wx.showModal({
         title: '提示',
         showCancel: false,
-        content: '请设置用户姓名'
+        content: '请设置用户名称'
       });
       return false;
     }
   },
-  checkTelephone1: function (param) { 
-    var userName = param.name.trim();
-    var telephone1 = param.phone1.trim();
-    if (telephone1.length <= 0) {
+//验证phone输入是否正确
+checkTelephone: function (param) { 
+    var telephone= param.phone.trim();
+    if (telephone.length <= 0) {
       wx.showModal({
         title: '提示',
         showCancel: false,
-        content: '请输入正确的联系号码1'
+        content: '请输入正确的联系号码'
       });
       return false;
-    } else if (telephone1.length < 1 || telephone1.length > 11) {
+    } else if (telephone.length < 1 || telephone.length > 12) {
       wx.showModal({
         title: '提示',
         showCancel: false,
-        content: '请输入正确的联系号码1'
+        content: '请输入正确的联系号码'
       });
       return false;
     } else {
       return true;
     }
   },
+  //验证identity输入是否正确
   checkIdentity: function (param) {
     var identity = param.identity.trim();
     if (identity.length <= 0) {
@@ -227,8 +351,8 @@ customerSource_request: function () {
       return true;
     }
   },
+  //验证password输入是否正确
   checkPassword: function (param) {
-    var userName = param.name.trim();
     var password = param.password.trim();
     if (password.length <= 0) {
       wx.showModal({
@@ -248,25 +372,61 @@ customerSource_request: function () {
       return true;
     }
   },
+  //验证再次password输入是否正确
+  checkPasswordSecond: function (param) {
+    var password = param.password.trim();
+    var passwordSecond = param.passwordSecond.trim();
+    if (passwordSecond.length <= 0) {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '请第二次输入密码'
+      });
+      return false;
+    }
+    else if (password != passwordSecond) {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '两次密码不匹配'
+      });
+      return false;
+    } else {
+      return true;
+    }
+  },
+  //提交注册表单
   formSubmit: function (e) {
     var param = e.detail.value;
     this.mysubmit(param);
   },
   mysubmit: function (param) {
-    var flag = this.checkUserName(param) && this.checkPassword(param) && this.checkTelephone1(param) && this.checkUserId(param) && this.checkIdentity(param);
     var that = this;
-    if (flag) {
+    
+    if (that.data.editProfileState == false)
+    {
+      var flag = this.checkUserId(param) && this.checkUserName(param) && this.checkIdentity(param) && this.checkTelephone(param) && this.checkPassword(param) && this.checkPasswordSecond(param);
+      if (flag) {
+        this.setregistData1();
+        setTimeout(function () {
+        that.setregistData2();
+        that.registRequest(param);
+        }, 2000);
+      }
+    }
+    
+    else{
       this.setregistData1();
       setTimeout(function () {
-
         that.setregistData2();
-        that.redirectTo(param);
-      }, 2000);
+        that.editProfileRequest(param);
+      }, 2000);   
     }
+
   },
   setregistData1: function () {
     this.setData({
-      registBtnTxt: "注册中",
+      registBtnTxt: "提交中",
       registDisabled: !this.data.registDisabled,
       registBtnBgBgColor: "#999",
       btnLoading: !this.data.btnLoading
@@ -274,49 +434,52 @@ customerSource_request: function () {
   },
   setregistData2: function () {
     this.setData({
-      registBtnTxt: "注册",
+      registBtnTxt: "提交",
       registDisabled: !this.data.registDisabled,
       registBtnBgBgColor: "#0099FF",
       btnLoading: !this.data.btnLoading
     });
   },
-  redirectTo: function (param) {
-    var customerInfo = {
-      userId:"",
-      name: "",
-      password:"",
-      phone1:"",
-      typeCode:"",
-      sourceCode:"",
-      address: {
-        province: null,
-        city: null,
-        county:null,
-        detail:null,
-      }
-    };
+  //提交向后台注册request
+  registRequest: function (param) {
+    var customerInfo = {};
     customerInfo.userId = param.userId;
     customerInfo.name = param.name;
+    customerInfo.identity = param.identity;
     customerInfo.password = param.password;
-    customerInfo.phone1 = param.phone1;
-    customerInfo.typeCode = param.typeCode;
-    customerInfo.sourceCode = param.sourceCode;
-    customerInfo.address.province = param.province;
-    customerInfo.address.city = param.city;
-    customerInfo.address.county = param.county;
-    customerInfo.address.detail = param.detail;
+    customerInfo.phone = param.phone;
+
+    var customerTypeTemp = {};
+    customerTypeTemp.code = param.customerType;
+    customerInfo.customerType = customerTypeTemp;
+
+    var customerSourceTemp = {};
+    customerSourceTemp.code = param.customerSource;
+    customerInfo.customerSource = customerSourceTemp;
+
+    var customerAddressTemp = {};
+    customerAddressTemp.province = param.province;
+    customerAddressTemp.city = param.city;
+    customerAddressTemp.county = param.county;
+    customerAddressTemp.detail = param.detail;
+    customerInfo.address = customerAddressTemp;
+
+    if (param.customerCompany.length>0)
+    {
+      var customerCompanyTemp = {};
+      customerCompanyTemp.name = param.customerCompany;
+      customerInfo.customerCompany = customerCompanyTemp;
+    }
     customerInfo = JSON.stringify(customerInfo);
-    //console.log(customerInfo);
     wx.request({
       url: 'http://118.31.77.228:8006/api/customers', 
       data: customerInfo,
       method: "POST",
       complete: function (res) {
-        console.log(res);
         if (res.statusCode == 201){
-          console.error('网络请求成功')
+          //console.error('网络请求成功')
           wx.showToast({
-            title: '注册成功',
+            title: '提交成功',
             icon: 'success',
             duration: 1500
           });
@@ -326,7 +489,7 @@ customerSource_request: function () {
         if (res == null || res.statusCode == 409) {
           console.error('网络请求失败')
           wx.showModal({
-            title: '用户ID已被注册',
+            title: '该登录名已被注册',
             showCancel: false,
             duration: 1500
           })

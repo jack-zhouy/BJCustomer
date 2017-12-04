@@ -10,7 +10,7 @@
         <view class="input-area">
           <view class="input-log">  
           <image class="userinfo-logIcon" src="{{logIcon}}"></image>  
-            <input id="userId" name="userId" maxlength='40' type="text" placeholder="用户ID" />
+            <input id="userId" name="userId" maxlength='40' type="text" placeholder="登录名" />
           </view>
           <view class="input-log">
             <image class="userinfo-logIcon" src="{{pwdIcon}}"></image>  

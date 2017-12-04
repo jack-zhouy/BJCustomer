@@ -50,7 +50,17 @@
   margin:20rpx;
   font-size:30rpx;
 }
-
+.inputIndexText{
+  margin-top: -10rpx;
+  margin-left:20rpx; 
+  font-size:30rpx;
+}
+.address_text{
+  width:70%;
+  margin-top: -10rpx;
+  margin-left:20rpx; 
+  font-size:30rpx;
+}
 
 
 /*收货地址*/
@@ -129,4 +139,11 @@
   color:black;
   margin-top:-30px;
   margin-left:8px;
+}
+
+.note_text{
+color:red;
+font-size: 30rpx;
+margin-left:-50rpx;
+margin-top:30rpx;
 }

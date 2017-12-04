@@ -8,7 +8,6 @@ function fetchBanner(url, cid="2"){
         "Content-Type": "application/json,application/json"
       },
       success: function(res){
-        //console.log(res.data);
         _this.setData({
             bannerUrlList: res.data
         });

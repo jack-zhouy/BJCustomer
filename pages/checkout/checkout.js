@@ -25,7 +25,6 @@ Page({
       quantity: parseInt(options.quantity),
       total: parseFloat(options.amount) 
     });
-    //that.initpersonCountArray();
   },
   selectAddress: function () {
     wx.chooseAddress({
@@ -52,18 +51,14 @@ Page({
   },
   payment: function () {
     that.data.cartDetail = that.data.carts,
-      console.log("that.data"),
-      console.log(that.data),
     wx.request({
       url: 'http://118.31.77.228:8006/api/goods', //仅为示例，并非真实的接口地址
       data: that.data,
       method:"POST",
       complete: function (res) {
-        console.log(res);
         that.setData({ 
         });
         if (res == null || res.data == null) {
-          console.error('网络请求失败')
           wx.showModal({
           title: '订单创建失败',
           showCancel: false

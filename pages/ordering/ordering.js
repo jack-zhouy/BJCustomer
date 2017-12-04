@@ -22,7 +22,7 @@ Page({
       },
       {
         id: 2,
-        name: '25kg液化气巴西'
+        name: '25kg液化气'
       }
     ],
     index: 0,
@@ -86,31 +86,8 @@ Page({
       time: e.detail.value
     })
   },
-  // //用户名输入框事件
-  // userNameInput:function (e) {
-  //   this.setData({
-  //     userName: e.detail.value
-  //   })
-  // },
-  // userNumInput:function (e) {
-  //   this.setData({
-  //     userNum: e.detail.value
-  //   })
-  // },
-  // userAddInput:function (e) {
-  //   this.setData({
-  //     userAdd: e.detail.value
-  //   })
-  // },
-  // userTelInput:function (e) {
-  //   this.setData({
-  //     userTel: e.detail.value
-  //   })
-  // },
-
   checkUserName: function (param) {
     var inputUserName = param.name.trim();
-    //if (phone.test(inputUserName)) {
     if (inputUserName.length > 0) {
       return true;
     } else {
@@ -180,10 +157,6 @@ Page({
   },
   redirectTo: function (param) {
     //需要将param转换为字符串
-    
-    // wx.redirectTo({
-    //   url: '../main/index?param=' + param//参数只能是字符串形式，不能为json对象
-    // })
     var orderInfo = {
       userId: "",
       name: "",

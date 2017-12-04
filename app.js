@@ -49,8 +49,30 @@ App({
   },
   globalData: {
     userInfo: null,
-    userId: null,
-    loginState: false
+    userId:null,
+    loginState: false,
+
+    // userId: "",
+    // name: "",
+    // identity: "",
+    // password: "",
+    // phone: "",
+    // haveCylinder: false,
+    // customerType: {
+    //   name: ""
+    // },
+    // customerSource: {
+    //   name: ""
+    // },
+    // address: {
+    //   province: null,
+    //   city: null,
+    //   county: null,
+    //   detail: null,
+    // },
+    // customerCompany: {
+    //   name: null
+    // }
   }
 
 })
