@@ -1,0 +1,26 @@
+<!-- <view class="nav-wrap">
+    <view class="nav-item">
+        <block>
+            <view class="nav-child">
+                <view>订单状态</view>
+            </view>
+        </block>
+    </view>
+</view> -->
+
+
+<view>
+  <map class="myMap" longitude="{{position.longitude}}" latitude="{{position.latitude}}" scale="17" markers="{{markers}}" circles="{{circles}}" />
+</view>
+
+<view class="border_box nav_box padding-bottom pt_50">
+    <block>
+        <view class="nav_item">
+            <text class="history-time">送气工姓名：{{orderTrack.courierName}}\r\n</text>
+            <text class="history-list">联系方式：{{orderTrack.phone}}\r\n</text>
+            <text class="history-list">客服电话：95007</text>
+            <button class="btnStyle" bindtap="dealOrder">我要催单</button>
+            <!-- <view class="history-undline"></view> -->
+        </view>
+    </block>
+</view>

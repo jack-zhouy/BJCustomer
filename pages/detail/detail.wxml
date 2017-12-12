@@ -1,0 +1,60 @@
+
+<!-- 概要 -->
+<view class="order-details">
+  <view class="order-synopsis">
+    <view class="order-title"><text>订单编号:{{order.orderSn}}</text></view>
+    <view><text class="order-rating">{{order.recvName}} | {{order.recvPhone}}</text></view>
+    <view class="order-brief">{{order.createTime}}</view>
+    <view class="order-brief">
+      <text>地址:{{deliveryAddress}}</text>
+      <!-- <image class="thumb"  bindtap='showMap' data-address="{{order.recvAddr}}"  src="../../images/address.png"></image> -->
+    </view>
+    <view class="btn-area1">
+    <button style="background-color:white"   bindtap='trackOrder'  loading="{{btnLoading}}"> 订单跟踪 </button>
+    </view>
+
+  </view>
+</view>
+
+<!-- 商品详情 -->
+<view class="order-desc">
+  <view class="title">商品详情</view>
+  	<!-- 商品清单 -->
+		<view class="list"> 
+			<view class="item" wx:for="{{order.orderDetailList}}" wx:key="">
+				<view class="title">{{item.goods.name}}</view>
+				<view class="quantity">{{item.quantity}}</view>
+				<view class="price">{{item.dealPrice}}</view>
+			</view>
+
+    <!-- 配送费 -->
+		<view class="item">
+			<view class="title">总价</view>
+			<view class="price">{{order.orderAmount}}</view>
+		</view>
+	</view>
+</view>
+
+<view class="input-log" >
+  <view class="Title">支付方式:</view>
+  <input disabled="{{true}}" class="IndexText" value="{{payMethod}}"></input>
+</view>
+
+<view class="input-log" >
+  <view class="Title">订单状态:</view>
+  <input disabled="{{true}}" class="IndexText" value="{{orderState}}"></input>
+</view>
+
+<!-- 备注 -->
+<view class="input-log">
+  <view class="Title">订单备注:</view>
+  <input disabled="{{true}}" class="IndexText" value="{{order.comment}}"></input>
+</view>
+
+<view class="btn-area" hidden="{{needToBeHidden}}">
+  <button  disabled="{{registDisabled}}" style="background-color:{{registBtnBgBgColor}}"   formType="submit"  loading="{{btnLoading}}"> 确认收气/评价 </button>
+  <view class="txt-area">
+    <navigator open-type="switchTab" url="../index/index"><text class="forgot-password">回首页                         </text></navigator>
+  </view>
+</view>
+  
