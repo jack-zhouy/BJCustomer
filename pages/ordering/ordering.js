@@ -29,6 +29,8 @@ Page({
     addressBoolean: false,
     address_value:"",
     location : {},
+    //payStatus取值：PSUnpaid:待支付, PSPaied:已支付,PSRefounding:退款中,PSRefounded:已退款"
+    payStatus:"",
 
     //是否立即送气radio数据
     items: [
@@ -39,11 +41,11 @@ Page({
     immediateDeliveryBoolean: true,
     //支付方式radio数据
     payMethodItems: [
-      { name: '在线微信支付', value: '在线微信支付', checked: "true"},
-      { name: '气到付款', value: '气到付款', checked: "false"},
+      { name: '在线微信支付', value: '在线微信支付', checked: 'true'},
+      { name: '气到付款', value: '气到付款', checked: 'false'},
     ], 
     //区别支付方式true:在线微信支付,false:气到付款
-    payMethodBoolean:true,
+    payMethodBoolean:"",
     date:"",
     time:"",
   },
@@ -121,9 +123,12 @@ Page({
   },
 //选择支付方式radio处触发函数
   payMethodRadioChange: function (e) { 
+    var that = this;
+    console.log(e.detail.value);
     this.setData({
       payMethodBoolean: e.detail.value
     })
+    console.log(that.data.payMethodBoolean);
   },
   //选择订单详情选择器触发函数
   bindGoodsTypeCheckChange: function (e) {
@@ -195,22 +200,44 @@ Page({
     this.mysubmit(param);
   },
   mysubmit: function (param) {
-    var flag = this.checkRecvName(param) && this.checkRecvPhone(param)
     var that = this;
-    if (flag)
+    var flag = this.checkRecvName(param) && this.checkRecvPhone(param);
+    //var flag = this.checkRecvName(param) && this.checkRecvPhone(param) && that.data.payMethodBoolean;
+    console.log(flag);
+    var payStatus = "";
+    if(flag)
     {
-      if (that.data.payMethodBoolean == false){
-        this.setregistData1();
-        setTimeout(function () {
-          that.setregistData2();
-          that.NewOrder_request(param);
-        }, 2000);
-      }
-      else{
-       // this.setregistData1();
+      if (that.data.payMethodBoolean == "true")
+      {
+        console.log(" 调用微信支付");
         that.payoff();
       }
+      else
+      {
+        payStatus = "PSUnpaid";
+        console.log("直接提交");
+        this.setregistData1();
+        setTimeout(function () {
+        that.setregistData2();
+        that.NewOrder_request(param, payStatus);
+      }, 2000);
+      }
     }
+    // if (flag =="true"){
+    //   console.log(flag);
+    //   console.log(" 调用微信支付");
+    //   that.payoff();
+    // }
+    // else
+    // {
+    //   console.log(flag);
+    //   console.log("直接提交");
+    //   this.setregistData1();
+    //   setTimeout(function () {
+    //     that.setregistData2();
+    //     that.NewOrder_request(param);
+    //   }, 2000);
+    // }
   },
   setregistData1: function () {
     this.setData({
@@ -239,18 +266,20 @@ Page({
   //   })
   // },
   //请求创建新订单
-  NewOrder_request: function (param) {
+  NewOrder_request: function (param,payState) {
     var that = this;
     var app = getApp();
     var orderInfo = {};
     orderInfo.callInPhone = that.data.phone;
-
-    if (that.data.payMethodBoolean==true)
+    //if (that.data.payMethodBoolean == true)
+    if (that.data.payMethodBoolean == "true")
     {
+      //console.log("is"+that.data.payMethodBoolean);
       orderInfo.payType = "PTOnLine";
     }
     else
     {
+      console.log("that" + that.data.payMethodBoolean);
       orderInfo.payType = "PTOffline";
     }
 
@@ -282,6 +311,9 @@ Page({
 
     orderInfo.orderAmount = that.data.amount;
 
+    //支付状态
+    orderInfo.payStatus = payState;
+
     orderInfo = JSON.stringify(orderInfo);
     console.log(orderInfo);
     wx.request({
@@ -312,7 +344,6 @@ Page({
       }
     })
   },
-
 
   //逆向地址解析获取经纬度
   getLocation: function (address) {
@@ -429,6 +460,7 @@ Page({
   },
   //小程序端启动支付
   requestPayment: function (obj) {
+    var payStatus = "";
     wx.requestPayment({
       'timeStamp': obj.timeStamp,
       'nonceStr': obj.nonceStr,
@@ -441,7 +473,8 @@ Page({
           icon: 'success',
           duration: 1500
         });
-        that.NewOrder_request(param);
+        payStatus = "PSPaied";
+        that.NewOrder_request(param, payStatus);
       },
       'fail': function (res) {
         console.log(res);

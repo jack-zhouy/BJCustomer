@@ -35,15 +35,15 @@ Page({
       });
     } 
     //如果没有登录就跳转到登录页面
-    // if ((!app.globalData.loginState) && (app.globalData.userId == null)) {
-    //   wx.navigateTo({
-    //     url: '../login/login',
-    //   })
-    // } else {
-    //   wx.navigateTo({
-    //     url: '../index/index',
-    //   })
-    // }
+    if ((!app.globalData.loginState) && (app.globalData.userId == null)) {
+      wx.navigateTo({
+        url: '../login/login',
+      })
+    } else {
+      wx.navigateTo({
+        url: '../index/index',
+      })
+    }
   },
   onHide: function () {
     // 页面隐藏
