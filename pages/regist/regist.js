@@ -2,7 +2,7 @@ var util = require("../../utils/util.js");
 var that;
 Page({
   data: {
-    //全局状态信息
+//全局状态信息
     userInfo: {},
     userId: null,
     loginState: false,
@@ -12,7 +12,7 @@ Page({
     registBtnBgBgColor: "#0099FF",
     btnLoading: false,
     registDisabled: false,
-
+//界面控件显示或隐藏控制
     inputUserIdDisable:false,
     needToBeHidden:false,
     needToBeShown:false,
@@ -22,7 +22,7 @@ Page({
     inputDisable:false,
     checkProfileState:false,
     editProfileState:false,
-
+//查询资料显示数据
     userId_value:"",
     name_value:"",
     identity_value:"",
@@ -34,7 +34,7 @@ Page({
     company_name_value:"",
     address_value:"",
     existedCustomerInfo: {},
-    //小图标路径
+//小图标路径
     logIcon0: "../../images/icon_member_selected.png",
     logIcon: "../../images/logIcon.png",
     pwdIcon: "../../images/pwdIcon.png",
@@ -43,24 +43,24 @@ Page({
     logAdd: "../../images/icon_home.png",
     customerSourceIcon: "../../images/default-avatar.png",
     companyIcon: "../../images/icon_home_selected.png",
-    //客户类型、来源选择器数据
+//客户类型、来源选择器数据
     customerTypeIndex: 0,
     customerSourceIndex: 0,
     customerTypeArray: [],
     originalCustomerTypeArray: [],
     customerSourceArray:[],
     originalCustomerSourceArray:[],
-    //地址数据
+//地址数据
     address: false,
     AddressData: {}, 
-    //是否携带钢瓶radio数据
+//是否携带钢瓶radio数据
     items: [
       { name: '是', value: '是', checked:"true"},
       { name: '否', value: '否'},
     ], 
   },
   onLoad: function (options) {
-    // 页面初始化 options为页面跳转所带来的参数
+// 页面初始化 options为页面跳转所带来的参数
     that = this;
     that.customerType_request();
     that.customerSource_request(); 
@@ -77,7 +77,6 @@ Page({
         addSelectNeedToBeShown:true,
         inputDisable:true,
       })
-
     }
     else if (model == 'editProfile') {
       that.checkProfileRequest();
@@ -94,6 +93,7 @@ Page({
     // 页面渲染完成
   },
   onShow: function () {
+    // 页面显示
     var app = getApp();
     if (app.globalData.loginState) {
       that.setData({
@@ -101,9 +101,7 @@ Page({
         userInfo: app.globalData.userInfo,
         userId: app.globalData.userId
       });
-    }
-
-    // 页面显示
+    }  
   },
   onHide: function () {
     // 页面隐藏
@@ -122,11 +120,8 @@ Page({
       data: {
         userId: app.globalData.userId
       },
-     
-      complete: function (res) {
-        
+      complete: function (res) {  
         if (res.statusCode == 200) {
-        
           if (res.data.items[0].haveCylinder == true) {
             hasCylinder = "是"
           }
@@ -144,8 +139,7 @@ Page({
             company_name_value: res.data.items[0].customerCompany.name,
             address_value: res.data.items[0].address.province + res.data.items[0].address.city +
             res.data.items[0].address.county + res.data.items[0].address.detail,
-            hasCylinder_value: hasCylinder,  
-
+            hasCylinder_value: hasCylinder,
           })
         }
       }
@@ -210,15 +204,13 @@ Page({
       }
     });
   },
-
 //请求后台客户类型
 customerType_request:function(){
   var that = this;
   wx.request({
     url: 'http://118.31.77.228:8006/api/CustomerType',
     method: "GET",
-    complete: function (res) {
-      
+    complete: function (res) {  
       if (res.statusCode == 200) {
         var count = res.data.items.length;
         for (var i = 0;i < count;i++)
@@ -241,7 +233,6 @@ customerSource_request: function () {
     method: "GET",
     complete: function (res) {
       if (res.statusCode == 200) {
-        
         var count = res.data.items.length;
         for (var i = 0; i < count; i++) {
           var tempSource = res.data.items[i].name;
@@ -281,7 +272,7 @@ selectAddress: function () {
       }
     })
   },
-  //验证userId输入是否正确
+//验证userId输入是否正确
 checkUserId: function (param) {
     var inputUserId = param.userId.trim();
     if (inputUserId.length > 0) {
@@ -395,7 +386,7 @@ checkTelephone: function (param) {
       return true;
     }
   },
-  //提交注册表单
+  //提交注册信息/修改信息表单
   formSubmit: function (e) {
     var param = e.detail.value;
     this.mysubmit(param);
@@ -413,8 +404,7 @@ checkTelephone: function (param) {
         that.registRequest(param);
         }, 2000);
       }
-    }
-    
+    }  
     else{
       this.setregistData1();
       setTimeout(function () {
@@ -422,7 +412,6 @@ checkTelephone: function (param) {
         that.editProfileRequest(param);
       }, 2000);   
     }
-
   },
   setregistData1: function () {
     this.setData({

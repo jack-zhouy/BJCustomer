@@ -1,6 +1,7 @@
 <view class="content">
     <form bindsubmit="formSubmit">
         <view class="input-area">
+        
           <view class="input-log">  
             <image class="userinfo-logIcon" src="{{logIcon0}}"></image>  
             <view class="pickerTitle">登录名*: </view>
@@ -59,7 +60,7 @@
             <input disabled="{{inputDisable}}" class="inputIndexText" type="text" value="{{checkProfileState==true ? customerType_value : ''}}"/>
           </view>
 
-             <view class="input-log" hidden="{{inputNeedToBeShown}}"> 
+            <view class="input-log" hidden="{{inputNeedToBeShown}}"> 
             <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image> 
             <view class="pickerTitle">客户来源: </view>  
             <input disabled="{{inputDisable}}" class="inputIndexText" type="text" value="{{checkProfileState==true ? customerSource_value : ''}}"/>

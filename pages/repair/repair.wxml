@@ -1,58 +1,62 @@
 <form bindsubmit="form_RepairSubmit">
+  <view class="input-area">
 
-<view class="repair_area">
-  <view style="padding-top:15px;" class="section mySection">
-    <text class="my_text">请仔细填写报修信息</text>
-  </view>
-  
-  <view style="background-color:white" class="section mySection">
-      <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
-    <view class="flex-item flex_text">*姓名</view>
-    <view class="flex-item myInput"> 
-      <input id="userName" name="userName" maxlength='20' type="text" placeholder="您的姓名"/>
-    </view>
-  </view>
+  <view class="input-log">  
+    <view class="pickerTitle my_text">请仔细填写报修信息</view>
+  </view> 
+
+  <view class="input-log">  
+    <view class="pickerTitle margin_style">登录名: </view>
+    <input disabled="{{true}}" class="inputIndexText" type="text" value="{{userId_value}}"/>
+  </view> 
+
+  <view class="input-log">  
+    <view class="pickerTitle margin_style">联系人: </view>
+    <input class="inputIndexText" id="contact" name="contact" type="text"/>
+  </view> 
+
+  <view class="input-log">  
+    <view class="pickerTitle margin_style">联系电话: </view>
+    <input class="inputIndexText" id="phone" name="phone" type="text"/>
+  </view> 
+
+  <view class="input-log" >
+    <view class="pickerTitle margin_style">选择报修问题: </view>
+		<picker mode ="selector" id="repairType" name="repairType" class="pickerIndexText" bindchange="bindrepairTypePickerChange_" value="{{repairTypeArray[repairTypeIndex]}}" range="{{repairTypeArray}}">
+		<view class="subtitle-label">{{repairTypeArray[repairTypeIndex]}}</view>
+		</picker>
   </view>
 
-  <view style="background-color:white"  class="section mySection ">
-    <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
-      <view class="flex-item flex_text">*电话
-    </view>
-      <view class="flex-item myInput"> 
-      <input id="userTel" name="userTel" maxlength='11' type="text" placeholder="您的电话"/>
-      </view>
-    </view>
-  </view>
-
-  <view style="background-color:white" class="section mySection">
-    <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
-      <view class="flex-item mypicker"> 
-        <picker id="repairProblem" name="repairProblem" bindchange="bindPickerChange" value="{{array[index]}}" range="{{array}}">
-          <view>
-           *类型    {{array[index]}}
+  <view class="input-log">
+    <view class="pickerTitle margin_style"> 
+      <picker id="deliveryDate" name="deliveryDate" mode="date" value="{{date}}" start="2017-09-01" end="2017-12-31" bindchange="bindDateChange">
+         <view class="subtitle-label">
+            预约报修日期：{{date}}
           </view>
-        </picker>
-      </view>
+      </picker>
     </view>
   </view>
 
-  <view style="background-color:white;height:240rpx;"  class="section mySection ">
-    <view class="flex-row" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap">
-      <view class="flex-item flex_text">*详情
-      </view>
-      <view class="flex-item myInput"> 
-        <textarea id="note" name="note" maxlength='100' type="text" style="width: 400rpx;height:240rpx;margin-top:-5px;" placeholder="请输入报修详细信息"/>
-      </view>
+  <view class="input-log">
+    <view class="pickerTitle margin_style"> 
+      <picker id="deliveryTime" name="deliveryTime" mode="time" value="{{time}}" start="09:01" end="19:00" bindchange="bindTimeChange">
+         <view class="subtitle-label">
+            预约报修时间：{{time}}
+          </view>
+      </picker>
     </view>
   </view>
-</view>
+
+  <view class="input-log">  
+    <view class="pickerTitle margin_style">留言备注: </view>
+    <input class="inputIndexText" id="note" name="note" maxlength='140' type="text"/>
+  </view>
+
 
   <view style="margin-top:40px;" class="section">
    <button disabled="{{submitDisabled}}" style="background-color:{{submitBtnBgBgColor}};width: 80%;" formType="submit"  loading="{{btnLoading}}"> {{submitBtnTxt}} 
     </button>
-
-
-  
   </view>
-
-  </form>
+  
+ </view>
+</form>

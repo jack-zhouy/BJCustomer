@@ -7,7 +7,6 @@ App({
     secret: 'ec3bbfe9300efa39b561ebac0aac5f2d',
     openid: null
   },
-
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
@@ -19,8 +18,7 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if (res.code) {
-          //发起网络请求
-
+          //发起网络请求 
         } else {
           console.log('获取用户登录态失败！' + res.errMsg)
         }
@@ -50,29 +48,11 @@ App({
   globalData: {
     userInfo: null,
     userId:null,
+    phone:null,
     loginState: false,
-
-    // userId: "",
-    // name: "",
-    // identity: "",
-    // password: "",
-    // phone: "",
-    // haveCylinder: false,
-    // customerType: {
-    //   name: ""
-    // },
-    // customerSource: {
-    //   name: ""
-    // },
-    // address: {
-    //   province: null,
-    //   city: null,
-    //   county: null,
-    //   detail: null,
-    // },
-    // customerCompany: {
-    //   name: null
-    // }
+    //商品类型
+    typecode: "0001",
+    address:{}
   }
 
 })

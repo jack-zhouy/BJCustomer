@@ -1,6 +1,5 @@
 var util = require("../../utils/util.js");
 
-
 Page({
   data: {
     loginBtnTxt: "登 录",
@@ -45,7 +44,6 @@ Page({
   },
   getUserInfo: function (e) {
     var app = getApp();
- 
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
@@ -54,7 +52,6 @@ Page({
   },
   onReady: function () {
     // 页面渲染完成
-
   },
   onShow: function () {
     // 页面显示
@@ -125,10 +122,12 @@ Page({
         if (res.statusCode != 200) {
           that.loginFailed();
         } else {
-          //存储用户信息
+          //存储用户信息   
           var app = getApp();
           app.globalData.loginState = true;
-          app.globalData.userId = userid;
+          app.globalData.userId = res.data.userId;
+          app.globalData.phone = res.data.phone; 
+          app.globalData.address = res.data.address; 
           that.loginSuc();
         }
       },
@@ -164,5 +163,4 @@ Page({
       that.redirectTo("../index/index");
     }, 2000);
   }
-
 })

@@ -1,22 +1,26 @@
-<view>
-    <map class="myMap" longitude="{{position.longitude}}" latitude="{{position.latitude}}" scale="17" markers="{{markers}}" circles="{{circles}}" />
-</view>
-<view class="nav-wrap">
-    <view class="nav-item">
-        <block>
-            <view class="nav-child">
-                <view>订单状态</view>
-            </view>
-        </block>
-    </view>
-</view>
 
-<view class="border_box nav_box padding-bottom pt_50">
-    <block wx:for="{{historyList}}" wx:for-item="historyItem" wx:key="index">
-        <view class="nav_item">
-            <text class="history-time">{{historyItem.time}}"\r\n"</text>
-            <text class="history-list">{{historyItem.decription}}</text>
-            <view class="history-undline"></view>
+<view class="list-item" wx:for="{{ordersList}}" wx:key="id">
+    <view class="list-info" bindtap='showDetail' data-order="{{item}}">
+      <!-- <view class="list-thumb">
+        <image class="thumb" src="../../images/order.png"></image>
+        <icon class="i-play"></icon>
+      </view> -->
+      <view class="list-content">
+        <view class="list-title">
+          <text>订单号：{{item.orderSn}}</text>
         </view>
-    </block>
-</view>
+        <view class="list-brief">
+           <text class="wish">收货人：{{item.recvName}} | </text> 
+          <text>联系方式：{{item.recvPhone}}</text> 
+        </view>
+        <view class="list-brief">{{item.createTime}}</view>
+      </view>
+    </view>
+
+    <view class="list-sale">
+      <button class="ui-btn ui-btn-red" bindtap="dealOrder" data-order="{{item}}">
+        <block>删除</block>
+      </button>
+    </view>
+    
+  </view>

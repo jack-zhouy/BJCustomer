@@ -11,7 +11,10 @@
     "pages/remark/remark",
     "pages/login/login",
     "pages/regist/regist",
-    "pages/member/member"
+    "pages/member/member",
+    "pages/detail/detail",
+    "pages/orderTrack/orderTrack"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -37,7 +40,7 @@
         "pagePath": " ",
         "iconPath": "images/icon3.png",
         "selectedIconPath": "images/icon3s.png",
-        "text": "公司公告"
+        "text": "安全知识"
       },
       {
         "pagePath": "pages/contact/contact",

@@ -129,8 +129,6 @@ Page({
     
   },
   loadCity: function (longitude, latitude) {
-   
-
     var _this = this;
     wx.request({
       url: 'http://api.map.baidu.com/geocoder/v2/?ak=fYFsXh8emmB2WzYKG7HZnK9gW94r7mD8&location=' + latitude + ',' + longitude + '&output=json',
