@@ -5,7 +5,7 @@ const app = getApp();
 var that;
 Page({
   data: {
-    submitBtnTxt: "提交/立即去支付",
+    submitBtnTxt: "提交/立即支付",
     submitBtnBgBgColor: "#0099FF",
     btnLoading: false,
     submitDisabled: false,
@@ -210,7 +210,7 @@ Page({
       if (that.data.payMethodBoolean == "true")
       {
         console.log(" 调用微信支付");
-        that.payoff();
+        that.payoff(param);
       }
       else
       {
@@ -267,9 +267,11 @@ Page({
   // },
   //请求创建新订单
   NewOrder_request: function (param,payState) {
+    console.log("NewOrder_request in");
     var that = this;
     var app = getApp();
     var orderInfo = {};
+    console.log("提交订单");
     orderInfo.callInPhone = that.data.phone;
     //if (that.data.payMethodBoolean == true)
     if (that.data.payMethodBoolean == "true")
@@ -288,8 +290,11 @@ Page({
     var customerTemp = {};
     customerTemp.userId = that.data.userId_value;
     orderInfo.customer = customerTemp;
-
-    orderInfo.reserveTime = that.data.date + " " + that.data.time + ":00";
+    
+    if ((that.data.date.length > 0) && (that.data.time.length > 0) )
+    {
+      orderInfo.reserveTime = that.data.date + " " + that.data.time + ":00";
+    }
 
     orderInfo.recvLongitude = that.data.location.lng;
     orderInfo.recvLatitude = that.data.location.lat;
@@ -326,7 +331,7 @@ Page({
         if (res.statusCode == 201) {
           console.log('提交请求成功')
           wx.showToast({
-            title: '提交成功',
+            title: '提交订单成功',
             icon: 'success',
             duration: 1500
           });
@@ -428,17 +433,17 @@ Page({
   },
 
   //发起微信支付
-  payoff: function (e) {
+  payoff: function (param) {
     var that = this;
     var totalAmount = that.data.amount;
     wx.login({
       success: function (res) {
-        that.payOnline(res.code, totalAmount);
+        that.payOnline(res.code, totalAmount, param);
       }
     });
   },
   //调后台的支付接口
-  payOnline: function (userCode, totalFee) {
+  payOnline: function (userCode, totalFee, param) {
     var that = this;
     wx.request({
       url: 'https://www.yunnanbaijiang.com:8009/api/test/Pay/MicroApp',
@@ -453,13 +458,14 @@ Page({
       },
       success: function (res) {
         console.log(res);
-        that.requestPayment(res.data);
+        that.requestPayment(res.data, param);
 
       }
     })
   },
   //小程序端启动支付
-  requestPayment: function (obj) {
+  requestPayment: function (obj, param) {
+    var that = this;
     var payStatus = "";
     wx.requestPayment({
       'timeStamp': obj.timeStamp,
@@ -468,13 +474,13 @@ Page({
       'signType': obj.signType,
       'paySign': obj.paySign,
       'success': function (res) {
+        payStatus = "PSPaied";
+        that.NewOrder_request(param, payStatus);
         wx.showToast({
           title: '微信支付成功，提交订单',
           icon: 'success',
           duration: 1500
         });
-        payStatus = "PSPaied";
-        that.NewOrder_request(param, payStatus);
       },
       'fail': function (res) {
         console.log(res);

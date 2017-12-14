@@ -6,12 +6,13 @@
     <view><text class="order-rating">{{order.recvName}} | {{order.recvPhone}}</text></view>
     <view class="order-brief">{{order.createTime}}</view>
     <view class="order-brief">
-      <text>地址:{{deliveryAddress}}</text>
+      <text>地址:{{deliveryAddress}}\r\n{{deliveryAddressDetail}}</text>
       <!-- <image class="thumb"  bindtap='showMap' data-address="{{order.recvAddr}}"  src="../../images/address.png"></image> -->
+      <button class="thumb"   bindtap='trackOrder'  loading="{{btnLoading}}"> 订单跟踪 </button>
     </view>
-    <view class="btn-area1">
+    <!-- <view class="btn-area1">
     <button style="background-color:white"   bindtap='trackOrder'  loading="{{btnLoading}}"> 订单跟踪 </button>
-    </view>
+    </view> -->
 
   </view>
 </view>

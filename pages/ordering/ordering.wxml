@@ -3,17 +3,17 @@
   <view class="input-area">
 
     <view class="input-log">  
-      <view class="pickerTitle margin_style">联系人: </view>
+      <view class="pickerTitle margin_style">联系人*: </view>
       <input disabled="{{inputDisable}}" class="inputIndexText" id="recvName" name="recvName" maxlength='20' type="text"/>
     </view>
 
     <view class="input-log">  
-      <view class="pickerTitle margin_style">联系电话: </view>
+      <view class="pickerTitle margin_style">联系电话*: </view>
       <input disabled="{{inputDisable}}" class="inputIndexText" id="recvPhone" name="recvPhone" maxlength='20' type="text"/>
     </view>
 
     <view class="input-log">  
-      <view class="pickerTitle margin_style">订单详情:</view>
+      <view class="pickerTitle margin_style">选择商品*:</view>
       <picker id="goodsType" name="goodsType" class="pickerIndexText"  range="{{goodsTypeArray}}" bindchange='bindGoodsTypeCheckChange'>
       <view class="subtitle-label">{{goodsTypeArray[goodsTypeIndex]}}</view>
       </picker>  
@@ -35,18 +35,18 @@
 
     <view class="input-log" >    
       <view class="pickerTitle margin_style">原始单价: </view>
-      <input disabled="{{inputDisable}}" class="inputIndexText" id="originalPrice" name="originalPrice" maxlength='20' type="text" value="{{item.originalPrice}}"/>    
+      <input disabled="{{true}}" class="inputIndexText" id="originalPrice" name="originalPrice" maxlength='20' type="text" value="{{item.originalPrice}}"/>    
     </view>
 
     <view class="input-log">  
       <view class="pickerTitle margin_style">成交单价: </view>
-      <input disabled="{{inputDisable}}" class="inputIndexText" id="dealPrice" name="dealPrice" maxlength='20' type="text" value="{{item.dealPrice}}"/>
+      <input disabled="{{true}}" class="inputIndexText" id="dealPrice" name="dealPrice" maxlength='20' type="text" value="{{item.dealPrice}}"/>
     </view>   
 </view>
 
     <view class="input-log">  
       <view class="pickerTitle margin_style">订单总价: </view>
-      <input disabled="{{inputDisable}}" class="inputIndexText" id="orderAmount" name="orderAmount" maxlength='20' type="text" value="{{amount}}"/>
+      <input disabled="{{true}}" class="inputIndexText" id="orderAmount" name="orderAmount" maxlength='20' type="text" value="{{amount}}"/>
     </view>
 
     <!-- <view class="input-log">  
@@ -78,12 +78,12 @@
   </view>
 
   <view class="input-log">  
-    <view class="pickerTitle margin_style">送气地址: </view>
+    <view class="pickerTitle margin_style">送气地址*: </view>
     <input class="inputIndexText" id="address" name="address" maxlength='140' type="text" value="{{address_value}}"/>
   </view>
 
   <view class="input-log">  
-    <view class="pickerTitle margin_style">支付方式: </view>
+    <view class="pickerTitle margin_style">支付方式*: </view>
     <radio-group id="payMethod" name="payMethod" class="radio-group radioIndexText" bindchange="payMethodRadioChange">
     <label class="radio" wx:for="{{payMethodItems}}">
         <radio value="{{item.checked}}" />{{item.value}}
@@ -97,6 +97,7 @@
   </view>
         
   <view class="btn-area">
+  <label class="note_text" hidden="{{LabelNeedToBeHidden}}">带*为必填项</label>
     <button  style="background-color:{{submitBtnBgBgColor}}"   formType="submit"  loading="{{btnLoading}}">
     {{submitBtnTxt}} </button>
     <view class="txt-area">

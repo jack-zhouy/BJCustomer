@@ -295,6 +295,6 @@
 }
 .btn-area1 {
   width: 40%;
-  margin-top: 10rpx;
+
   margin-left: -10rpx;
 }

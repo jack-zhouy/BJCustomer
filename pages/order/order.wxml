@@ -16,11 +16,11 @@
         <view class="list-brief">{{item.createTime}}</view>
       </view>
     </view>
-
+<!-- 
     <view class="list-sale">
       <button class="ui-btn ui-btn-red" bindtap="dealOrder" data-order="{{item}}">
         <block>删除</block>
       </button>
-    </view>
+    </view> -->
     
   </view>

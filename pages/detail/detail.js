@@ -11,6 +11,7 @@ Page({
     payMethod:"",
     orderState:"",
     deliveryAddress:"",
+    deliveryAddressDetail:"",
   },
   // 页面初始化
   onLoad: function (options) {
@@ -33,16 +34,31 @@ Page({
     else{
       that.data.payMethod = "气到付款"
     }
-    if (order.orderStatus == 0)
-    {
+    if (order.orderStatus == 0) {
       that.data.orderState = "待配送"
     }
-    that.data.deliveryAddress = order.recvAddr.province + order.recvAddr.city 
-    + order.recvAddr.county + order.recvAddr.detail;
+    else if (order.orderStatus == 1) {
+      that.data.orderState = "派送中"
+    }
+    else if (order.orderStatus == 2) {
+      that.data.orderState = "已签收"
+    }
+    else if (order.orderStatus == 3) {
+      that.data.orderState = "订单结束"
+    }
+    else {
+      that.data.orderState = "作废"
+    }
+
+    that.data.deliveryAddress = order.recvAddr.province + order.recvAddr.city
+      + order.recvAddr.county;
+    that.data.deliveryAddressDetail = order.recvAddr.detail;
+
     that.setData({
       order: order,
       loading: true,
       deliveryAddress: that.data.deliveryAddress,
+      deliveryAddressDetail: that.data.deliveryAddressDetail,
       payMethod: that.data.payMethod,
       orderState: that.data.orderState
     })
