@@ -470,7 +470,14 @@ checkTelephone: function (param) {
           wx.showToast({
             title: '提交成功',
             icon: 'success',
-            duration: 1500
+            duration: 2000,
+            success: function () {
+              setTimeout(function () {
+                wx.switchTab({
+                  url: '../index/index',
+                })
+              }, 1500);
+            }
           });
           return;
         }

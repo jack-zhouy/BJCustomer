@@ -329,20 +329,30 @@ Page({
       complete: function (res) {
         //console.log(res);
         if (res.statusCode == 201) {
-          console.log('提交请求成功')
+          console.log('提交成功')
           wx.showToast({
-            title: '提交订单成功',
+            title: '提交成功',
             icon: 'success',
-            duration: 1500
+            duration: 2000,
+            success: function () {
+              setTimeout(function () {
+                wx.switchTab({
+                  url: '../index/index',
+                })
+              }, 1500);
+            }
+            
           });
           return;
+
         }
-        if (res == null || res.statusCode == 409) {
+        // if (res == null || res.statusCode == 409) 
+        else{
           console.error('提交请求失败')
-          wx.showModal({
-            title: '提交请求失败',
+          wx.showToast({
+            title: '提交失败,请检查输入项',
             showCancel: false,
-            duration: 1500
+            duration: 2000
           })
           return;
         }

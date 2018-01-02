@@ -4,7 +4,7 @@
 		<image src="{{loginState? userInfo.avatarUrl : '../../images/default-avatar.png'}}" class="avatar" />
 	<!-- </view> -->
 		<view class="nickname" wx:if="{{loginState}}">{{userId}}</view>
-    <view class="nickname" wx:if="{{!loginState}}" bindtap="gotoLogin">登录</view>
+    <view class="nickname" wx:if="{{!loginState}}" bindtap="gotoLogin">登录/注册</view>
 </view>
 <!-- 账户 -->
 <view class="account">
