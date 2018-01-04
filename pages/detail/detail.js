@@ -17,7 +17,7 @@ Page({
   onLoad: function (options) {
     // options为页面跳转所带来的参数
     var that = this;
-  var order = JSON.parse(options.order);
+    var order = JSON.parse(options.order);
    // var carts = JSON.parse(order.type);
     //var model = options.model;
     //还没有抢的订单，需要显示抢单按钮
@@ -107,9 +107,18 @@ Page({
     })
   },
 
-  trackOrder:function(){
+  trackOrder:function(e){
+    // wx.navigateTo({
+    //   url: '../orderTrack/orderTrack',
+    // })  
+    var that = this;
+    //var orderSn = e.currentTarget.dataset.order.orderSn;
+    var orderSn = that.data.order.orderSn;
     wx.navigateTo({
-      url: '../orderTrack/orderTrack',
-    })  
+      url: '../orderTrack/orderTrack?orderSn=' + JSON.stringify(orderSn),
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
   }
 })
