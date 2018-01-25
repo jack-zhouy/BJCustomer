@@ -27,13 +27,14 @@ Page({
     //   })
     // }
     console.log(order);
-    if (order.payType == "PTOnLine")
+    if (order.payType.index == 0)
     {
-      that.data.payMethod = "微信支付"
+      that.data.payMethod = "在线支付"
     }
     else{
       that.data.payMethod = "气到付款"
     }
+
     if (order.orderStatus == 0) {
       that.data.orderState = "待配送"
     }

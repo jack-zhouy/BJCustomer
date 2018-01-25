@@ -48,6 +48,8 @@ Page({
     payMethodBoolean:"",
     date:"",
     time:"",
+
+    orderId:"",
   },
   // 页面初始化
   onLoad: function () {
@@ -207,37 +209,32 @@ Page({
     var payStatus = "";
     if(flag)
     {
-      if (that.data.payMethodBoolean == "true")
-      {
-        console.log(" 调用微信支付");
-        that.payoff(param);
-      }
-      else
-      {
-        payStatus = "PSUnpaid";
-        console.log("直接提交");
-        this.setregistData1();
-        setTimeout(function () {
+      // if (that.data.payMethodBoolean == "true")
+      // {
+      //   console.log(" 调用微信支付");
+      //   that.payoff(param);
+      // }
+      // else
+      // {
+      //   payStatus = "PSUnpaid";
+      //   console.log("直接提交");
+      //   this.setregistData1();
+      //   setTimeout(function () {
+      //   that.setregistData2();
+      //   that.NewOrder_request(param, payStatus);
+      // }, 2000);
+      // }
+
+ 
+      this.setregistData1();
+      setTimeout(function () {
         that.setregistData2();
-        that.NewOrder_request(param, payStatus);
+        that.NewOrder_request(param);
       }, 2000);
-      }
+      
+
     }
-    // if (flag =="true"){
-    //   console.log(flag);
-    //   console.log(" 调用微信支付");
-    //   that.payoff();
-    // }
-    // else
-    // {
-    //   console.log(flag);
-    //   console.log("直接提交");
-    //   this.setregistData1();
-    //   setTimeout(function () {
-    //     that.setregistData2();
-    //     that.NewOrder_request(param);
-    //   }, 2000);
-    // }
+
   },
   setregistData1: function () {
     this.setData({
@@ -266,7 +263,7 @@ Page({
   //   })
   // },
   //请求创建新订单
-  NewOrder_request: function (param,payState) {
+  NewOrder_request: function (param) {
     console.log("NewOrder_request in");
     var that = this;
     var app = getApp();
@@ -317,33 +314,46 @@ Page({
     orderInfo.orderAmount = that.data.amount;
 
     //支付状态
-    orderInfo.payStatus = payState;
+    orderInfo.payStatus = "PSUnpaid";
 
     orderInfo = JSON.stringify(orderInfo);
     console.log(orderInfo);
+    var orderId;
     wx.request({
       url: 'http://118.31.77.228:8006/api/Orders', //仅为示例，并非真实的接口地址
       data: orderInfo,
       method: "POST",
 
       complete: function (res) {
-        //console.log(res);
         if (res.statusCode == 201) {
+          console.log(res);
+          orderId = res.header.Location;
+          orderId = orderId.substring(37)
+          that.setData({
+            orderId: orderId,
+          })
+          console.log(that.data.orderId);
           console.log('提交成功')
           wx.showToast({
             title: '提交成功',
             icon: 'success',
             duration: 2000,
             success: function () {
+                    
+            if (that.data.payMethodBoolean == "true"){
+              console.log(" 调用微信支付");
+              that.payoff(that.data.orderId);
+            }
+            else{
               setTimeout(function () {
                 wx.switchTab({
                   url: '../index/index',
                 })
-              }, 1500);
+              }, 1500); 
             }
-            
-          });
-          return;
+          }  
+        });
+        return;
 
         }
         // if (res == null || res.statusCode == 409) 
@@ -443,38 +453,38 @@ Page({
   },
 
   //发起微信支付
-  payoff: function (param) {
+  payoff: function (orderId) {
     var that = this;
     var totalAmount = that.data.amount;
     wx.login({
       success: function (res) {
-        that.payOnline(res.code, totalAmount, param);
+        that.payOnline(res.code, totalAmount, orderId);
       }
     });
   },
   //调后台的支付接口
-  payOnline: function (userCode, totalFee, param) {
+  payOnline: function (userCode, totalFee, orderId) {
     var that = this;
     wx.request({
-      url: 'https://www.yunnanbaijiang.com:8009/api/test/Pay/MicroApp',
+      url: 'https://www.yunnanbaijiang.com:8009/api/pay/microApp',
       method: 'GET',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
       data: {
-        'orderIndex': "0002",
-        'userCode': userCode,
-        'totalFree': totalFee
+        orderIndex: orderId,
+        userCode: userCode,
+        totalFee: totalFee
       },
       success: function (res) {
         console.log(res);
-        that.requestPayment(res.data, param);
+        that.requestPayment(res.data);
 
       }
     })
   },
   //小程序端启动支付
-  requestPayment: function (obj, param) {
+  requestPayment: function (obj) {
     var that = this;
     var payStatus = "";
     wx.requestPayment({
@@ -484,23 +494,59 @@ Page({
       'signType': obj.signType,
       'paySign': obj.paySign,
       'success': function (res) {
-        payStatus = "PSPaied";
-        that.NewOrder_request(param, payStatus);
+        //that.editOrder_request();
         wx.showToast({
-          title: '微信支付成功，提交订单',
+          title: '微信支付成功',
           icon: 'success',
           duration: 1500
         });
+
+        setTimeout(function () {
+          wx.switchTab({
+            url: '../index/index',
+          })
+        }, 2000); 
       },
       'fail': function (res) {
         console.log(res);
         wx.showToast({
-          title: '微信支付失败，请重新提交订单',
+          title: '微信支付失败',
           icon: 'success',
           duration: 1500
         });
+        setTimeout(function () {
+          wx.switchTab({
+            url: '../index/index',
+          })
+        }, 2000); 
       }
     })
-  } 
+  },
+
+  editOrder_request:function () {
+    var that = this;
+    var app = getApp();
+    console.log("修改订单信息");
+    wx.request({
+      url: 'http://118.31.77.228:8006/api/Orders/' + that.data.orderId,
+      data: {
+        payStatus: "PSPaied"
+      },
+      method: 'PUT',
+      success: function (res) {
+        if (res.statusCode == 200) {
+          console.log("修改成功");
+        }
+        else if (res.statusCode == 404) {
+          console.error("修改订单不存在");        
+        }
+      },
+      fail: function () {
+        console.error("修改订单失败");
+      }
+    })
+  
+    
+  }
 
 })
