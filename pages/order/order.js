@@ -11,7 +11,7 @@ Page({
   },
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
-    //this.requestData();
+    this.requestData();
     //模拟加载
     setTimeout(function () {
       wx.hideNavigationBarLoading() //完成停止加载
@@ -19,6 +19,7 @@ Page({
     }, 1500);
   },
 
+//获取的订单
   requestData: function () {
     var that = this
     //查询我可以抢的订单
@@ -45,7 +46,8 @@ Page({
       wx.request({
       url: getApp().GlobalConfig.baseUrl +"/api/Orders", 
       data: {
-        userId: getApp().globalData.userId
+        userId: getApp().globalData.userId,
+        orderBy:"id desc"
       },
       method:'GET',
       success: function(res) {

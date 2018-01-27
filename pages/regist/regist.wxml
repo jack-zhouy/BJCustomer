@@ -99,20 +99,21 @@
             <!-- 地址选择 -->
 	          <view  class="container">
 	        	<!-- 用户尚未添加地址时 -->
-		          <view class="address" bindtap="selectAddress" wx:if="{{!address}}">  
+		          <!-- <view class="address" bindtap="selectAddress" wx:if="{{!address}}">  
 			          <view class="pickerTitle">地址*:</view>
-		          </view>
+		          </view> -->
 		          <!-- 用户已添加过地址 -->
-	          	<view class="item" wx:else>
-			          <view class="bd" bindtap="selectAddress">
+	          	<view class="item" bindtap="selectAddress">
+                <view class="pickerTitle">地址*:</view>
+			          <view class="bd">
                 <view style="margin-top:-10px" class="receiver">
-                  <input id="province" name="province" value="{{AddressData.provinceName}}"/>
-                  <input id="city" name="city" value="{{AddressData.cityName}}"/>
-                  <input id="county" name="county" value="{{AddressData.countyName}}"/>  
+                  <input id="province" name="province" value="{{AddressData.provinceName}}" disabled="true"/>
+                  <input id="city" name="city" value="{{AddressData.cityName}}" disabled="true"/>
+                  <input id="county" name="county" value="{{AddressData.countyName}}" disabled="true"/>  
                 </view>
-                <input id="detail" name="detail" class="detailInfoStyle" value="{{AddressData.detailInfo}}"/>
+                <input id="detail" name="detail" class="detailInfoStyle" value="{{AddressData.detailInfo}}" disabled="true"/>
 			        </view>
-			      
+
 		        </view>
            </view>
         </view> 

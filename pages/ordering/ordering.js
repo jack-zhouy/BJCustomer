@@ -21,7 +21,7 @@ Page({
     cartData: {},
     orderDetailList:[],
     amount: 0,
-    
+    goodsInfo:{},
     userId_value: "",
     goodsTypeCode:"",
     phone:"",
@@ -116,6 +116,8 @@ Page({
           that.setData({
             goodsTypeArray: that.data.goodsTypeArray,
             originalGoodsTypeArray: res.data.items,
+            goodsInfo:res.data.items[0],
+            amount: res.data.items[0].price
           })
           console.log(that.data.originalGoodsTypeArray);
           // console.log(that.data.goodsCodeArray);
@@ -144,7 +146,8 @@ Page({
     
     orderDetail.originalPrice = good.price;
     orderDetail.dealPrice = good.price;
-    orderDetail.quantity = 1;
+    orderDetail.quantity = 0;
+    //orderDetail.quantity = 1;
     orderDetail.subtotal = orderDetail.quantity * orderDetail.dealPrice;
     
     that.data.orderDetailList.push(orderDetail);
@@ -420,6 +423,11 @@ Page({
     var detail = e.currentTarget.dataset.good;
     var index = e.currentTarget.dataset.index;
 
+    // console.log("that.data.orderDetailList[index]");
+    // console.log(that.data.orderDetailList[index]);
+    // console.log("that.data.orderDetailList[index].quantity");
+    // console.log(that.data.orderDetailList[index].quantity);
+
     if (that.data.orderDetailList[index].quantity > 1)
     {
       that.data.orderDetailList[index].quantity--;
@@ -428,9 +436,11 @@ Page({
     else
     {
       that.data.orderDetailList.splice(index, 1);
+      //that.data.amount = that.data.goodsInfo.price
     }
     that.setData({
       orderDetailList: that.data.orderDetailList,
+      //amount: that.data.amount
     })
     that.amount();
     return;
@@ -442,8 +452,8 @@ Page({
     var amount = 0;
     var quantity = 0;
     cartObjects.forEach(function (item, index) {
-      amount += item.quantity * item.dealPrice;
-      quantity += item.quantity;
+        amount += item.quantity * item.dealPrice;
+        quantity += item.quantity;   
     });
     that.setData({
       amount: amount,
