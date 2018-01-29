@@ -19,9 +19,11 @@
 }
 .inputIndexText{
   margin-top: -10rpx;
-  margin-left:20rpx; 
+  margin-left: 20rpx;
   font-size:30rpx;
+
 }
+  /* width: 65% */
 .address_text{
   width:70%;
   margin-top: -10rpx;
@@ -29,6 +31,9 @@
   font-size:30rpx;
 }
 
+.textStyle{
+  margin-top: 10rpx
+}
 
 /*收货地址*/
 .address {

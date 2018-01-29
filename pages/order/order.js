@@ -1,13 +1,16 @@
 Page({
   //数据源
   data: {
-  //全部订单列表
+    //订单状态
+    ordersStatusDescription: ["待派送", "派送中", "已签收", "订单结束","作废"], 
+  //全部订单列表1
     ordersList: [], 
     // loading: false,
     loading: true,
     limit: 6,
     windowHeight: 0,
-    scrollTop: 100
+    scrollTop: 100,
+    orderState:""
   },
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
@@ -22,26 +25,6 @@ Page({
 //获取的订单
   requestData: function () {
     var that = this
-    //查询我可以抢的订单
-    // wx.request({
-    //   url: getApp().GlobalConfig.baseUrl+"/api/orders/mytask", 
-    //   data: {
-    //     userId: getApp().globalData.userId
-    //   },
-    //   method:'GET',
-    //   success: function(res) {
-    //     // 数据从逻辑层发送到视图层，同时改变对应的 this.data 的值
-    //     console.log(res.data);
-    //     that.setData({
-    //       orders: res.data.items,
-    //       loading: true
-    //     })
-    //   },
-    //   fail: function()
-    //   {
-    //      console.log("failed");
-    //   }
-    // })
     //查询所有订单
       wx.request({
       url: getApp().GlobalConfig.baseUrl +"/api/Orders", 
@@ -73,6 +56,7 @@ Page({
         })
       }
     })
+
   },
   // 页面初始化
   onLoad: function () {
@@ -127,6 +111,9 @@ Page({
       success: function (res) { },
       fail: function (res) { },
       complete: function (res) { },
-    })
+    });
+
+
+
   },
 })

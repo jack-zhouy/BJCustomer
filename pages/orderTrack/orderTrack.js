@@ -44,7 +44,7 @@ Page({
     });
 
     that.checkOrderHistory_request();
-    //that.showLocationInfo();
+    that.showLocationInfo();
 
   },
   // 页面显示（一个页面只会调用一次）
@@ -128,7 +128,7 @@ var that = this;
   console.log(that.data.position);
   var tempLatitude = that.data.position.latitude;
   var tempLongitude = that.data.position.longitude;
-  wx.openLocation({
+  wx.getLocation({
       //当前经纬度
       latitude: tempLatitude,
       longitude: tempLongitude,
@@ -141,7 +141,7 @@ var that = this;
         markers: [ {
           id: "1",
           latitude: tempLatitude + 0.002,
-          longitude: tempLatitude + 0.002,
+          longitude: tempLongitude + 0.002,
           iconPath: "../../images/icon/delivery.png",
           width: 50,
           height: 50,
@@ -149,10 +149,10 @@ var that = this;
         }],
         circles: [{
           latitude: tempLatitude,
-          longitude: tempLatitude,
+          longitude: tempLongitude,
           color: '#FF0000DD',
           fillColor: '#7cb5ec88',
-          radius: 100,
+          radius: 50,
           strokeWidth: 2
         }]
       })
@@ -182,6 +182,7 @@ var that = this;
       },
       method: "GET",
       complete: function (res) {
+        console.log(res.data);
         if (res.statusCode == 200) {
           if (res.data.items[0].orderStatus == 0) {
             orderState = "待配送"
@@ -199,16 +200,22 @@ var that = this;
             orderState = "作废"
           }
 
-          position.longitude = res.data.items[0].dispatcher.userPosition.longitude;
-          position.latitude = res.data.items[0].dispatcher.userPosition.latitude;
-          deliverPhonecall = res.data.items[0].dispatcher.mobilePhone
+          // position.longitude = res.data.items[0].dispatcher.userPosition.longitude;
+          // position.latitude = res.data.items[0].dispatcher.userPosition.latitude;
+          if (res.data.items[0].dispatcher!=null)
+          {
+            position.longitude = res.data.items[0].dispatcher.userPosition.longitude;
+            position.latitude = res.data.items[0].dispatcher.userPosition.latitude;
+            //deliverPhonecall = res.data.items[0].dispatcher.mobilePhone
+          }
+         
           
 
           that.setData({
             orderTrackInfo: res.data,
             orderState: orderState,
             position: position,
-            deliverPhonecall: deliverPhonecall
+            // deliverPhonecall: deliverPhonecall
           })
           console.log(that.data.position);
           console.log(that.data.orderTrackInfo);

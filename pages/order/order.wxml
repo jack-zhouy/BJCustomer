@@ -1,5 +1,5 @@
 
-<view class="list-item" wx:for="{{ordersList}}" wx:key="id">
+<view class="list-item" wx:for="{{ordersList}}" wx:key="id" >
     <view class="list-info" bindtap='showDetail' data-order="{{item}}">
       <!-- <view class="list-thumb">
         <image class="thumb" src="../../images/order.png"></image>
@@ -9,18 +9,20 @@
         <view class="list-title">
           <text>订单号：{{item.orderSn}}</text>
         </view>
+
         <view class="list-brief">
-           <text class="wish">收货人：{{item.recvName}} | </text> 
-          <text>联系方式：{{item.recvPhone}}</text> 
+          <text class="wish">收货人：{{item.recvName}} | </text> 
+          <text class="wish">联系方式：{{item.recvPhone}}</text> 
         </view>
+
         <view class="list-brief">{{item.createTime}}</view>
-      </view>
+      </view>  
     </view>
-<!-- 
+ 
     <view class="list-sale">
-      <button class="ui-btn ui-btn-red" bindtap="dealOrder" data-order="{{item}}">
-        <block>删除</block>
-      </button>
-    </view> -->
-    
+       <button class="ui-btn ui-btn-red" > 
+        <block>{{ordersStatusDescription[item.orderStatus]}}</block>
+       </button> 
+    </view> 
+     
   </view>

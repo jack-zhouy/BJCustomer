@@ -33,6 +33,8 @@ Page({
     customerSource_value:"",
     company_name_value:"",
     address_value:"",
+    address_value1: "",
+    address_value2: "",
     existedCustomerInfo: {},
 //小图标路径
     logIcon0: "../../images/icon_member_selected.png",
@@ -139,6 +141,9 @@ Page({
             company_name_value: res.data.items[0].customerCompany.name,
             address_value: res.data.items[0].address.province + res.data.items[0].address.city +
             res.data.items[0].address.county + res.data.items[0].address.detail,
+            address_value1: res.data.items[0].address.province + res.data.items[0].address.city +
+            res.data.items[0].address.county,
+            address_value2:res.data.items[0].address.detail,
             hasCylinder_value: hasCylinder,
           })
         }

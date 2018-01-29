@@ -4,25 +4,25 @@
         
           <view class="input-log">  
             <image class="userinfo-logIcon" src="{{logIcon0}}"></image>  
-            <view class="pickerTitle">登录名*: </view>
+            <text class="pickerTitle">登录名*: </text>
             <input disabled="{{inputUserIdDisable}}" class="inputIndexText" id="userId" name="userId" maxlength='20' type="text" value="{{checkProfileState==true? userId_value : ''}}"/>
           </view>  
 
           <view class="input-log">  
             <image class="userinfo-logIcon" src="{{logIcon}}"></image>  
-            <view class="pickerTitle">用户名称*: </view>
+            <text class="pickerTitle">用户名*: </text>
             <input disabled="{{inputDisable}}" class="inputIndexText" id="name" name="name" maxlength='20' type="text" value="{{checkProfileState==true? name_value : ''}}"/>
           </view>  
 
           <view class="input-log">  
             <image class="userinfo-logIcon" src="{{logIcon}}"></image>  
-            <view class="pickerTitle">身份证号*: </view>
+            <text class="pickerTitle">身份证号*: </text>
             <input disabled="{{inputDisable}}" class="inputIndexText" id="identity" name="identity" maxlength='18' type="text" value="{{checkProfileState==true? identity_value : ''}}"/>
           </view>  
 
           <view class="input-log">  
             <image class="userinfo-logIcon" src="{{logTel}}"></image> 
-            <view class="pickerTitle">手机号*: </view> 
+            <text class="pickerTitle">手机号*: </text> 
             <input disabled="{{inputDisable}}" class="inputIndexText" id="phone" name="phone" maxlength='12' type="text" value="{{checkProfileState==true? phone_value : ''}}"/>
           </view>
 
@@ -50,7 +50,7 @@
 
           <view class="input-log" hidden="{{inputNeedToBeShown}}"> 
             <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image> 
-            <view class="pickerTitle">是否携带钢瓶: </view>  
+            <view class="pickerTitle">是否携带燃气钢瓶: </view>  
             <input disabled="{{inputDisable}}" class="inputIndexText" type="text" value="{{checkProfileState==true ? hasCylinder_value : ''}}"/>
           </view>
 
@@ -88,34 +88,37 @@
             <input disabled="{{inputDisable}}" class="inputIndexText" id="customerCompany" name="customerCompany" maxlength='30' type="text" value="{{checkProfileState==true? company_name_value : ''}}"/>
           </view> 
 
- <view class="input-log" hidden="{{inputNeedToBeShown}}">  
+          <view class="input-log" hidden="{{inputNeedToBeShown}}">  
             <image class="userinfo-logIcon" src="/images/location.png"></image>
-            <view class="pickerTitle">地址: </view>    
-            <input disabled="{{inputDisable}}" class="address_text"  maxlength='140' type="text" value="{{checkProfileState==true? address_value : ''}}"/>
+            <view class="pickerTitle">地址: </view>  
+            <text disabled="{{inputDisable}}" class='inputIndexText textStyle'>{{address_value1}}\r\n{{address_value2}}</text>  
+
+            <!-- <input disabled="{{inputDisable}}" class="address_text"  maxlength='140' type="text" value="{{checkProfileState==true? address_value : ''}}"/> -->
           </view> 
 
           <view class="input-log" hidden="{{addSelectNeedToBeShown}}">  
-            <image class="userinfo-logIcon" src="/images/location.png"></image> 
+            <image class="userinfo-logIcon" src="/images/location.png"  bindtap="selectAddress"></image> 
             <!-- 地址选择 -->
-	          <view  class="container">
+	          <!-- <view  class="container"> -->
 	        	<!-- 用户尚未添加地址时 -->
 		          <!-- <view class="address" bindtap="selectAddress" wx:if="{{!address}}">  
 			          <view class="pickerTitle">地址*:</view>
 		          </view> -->
 		          <!-- 用户已添加过地址 -->
-	          	<view class="item" bindtap="selectAddress">
+	          
                 <view class="pickerTitle">地址*:</view>
-			          <view class="bd">
-                <view style="margin-top:-10px" class="receiver">
+                <text disabled="{{inputDisable}}" class='inputIndexText textStyle'>{{AddressData.provinceName}}{{AddressData.cityName}}{{AddressData.countyName}}\r\n{{AddressData.detailInfo}}</text>  
+			          <!-- <view class="bd">
+                <view class="receiver">
                   <input id="province" name="province" value="{{AddressData.provinceName}}" disabled="true"/>
                   <input id="city" name="city" value="{{AddressData.cityName}}" disabled="true"/>
                   <input id="county" name="county" value="{{AddressData.countyName}}" disabled="true"/>  
                 </view>
                 <input id="detail" name="detail" class="detailInfoStyle" value="{{AddressData.detailInfo}}" disabled="true"/>
-			        </view>
+			        </view> -->
 
-		        </view>
-           </view>
+		        
+           <!-- </view> -->
         </view> 
 
         <view class="btn-area" hidden="{{needToBeHidden}}">

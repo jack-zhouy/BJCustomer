@@ -46,16 +46,21 @@
   <input disabled="{{true}}" class="IndexText" value="{{orderState}}"></input>
 </view>
 
+<view class="input-log" >
+  <view class="Title">送气时间:</view>
+  <input disabled="{{true}}" class="IndexText" value="{{order.reserveTime}}"></input>
+</view>
+
 <!-- 备注 -->
 <view class="input-log">
   <view class="Title">订单备注:</view>
   <input disabled="{{true}}" class="IndexText" value="{{order.comment}}"></input>
 </view>
 
-<view class="btn-area" hidden="{{needToBeHidden}}">
-  <button  disabled="{{registDisabled}}" style="background-color:{{registBtnBgBgColor}}"   formType="submit"  loading="{{btnLoading}}"> 确认收气/评价 </button>
+<!-- <view class="btn-area" hidden="{{needToBeHidden}}">
+  <button  disabled="{{registDisabled}}" style="background-color:{{registBtnBgBgColor}}"   formType="submit"  loading="{{btnLoading}}"> 评价 </button>
   <view class="txt-area">
     <navigator open-type="switchTab" url="../index/index"><text class="forgot-password">回首页                         </text></navigator>
   </view>
-</view>
+</view> -->
   
