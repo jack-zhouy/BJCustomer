@@ -434,5 +434,5 @@ navigator:hover{
 }
 
 input{font-size: 32rpx}
-button{font-size: 36rpx}
+button{font-size: 30rpx}
 text{font-size: 28rpx}

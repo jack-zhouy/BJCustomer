@@ -111,3 +111,6 @@
   top: 50%;
   width: 90rpx;
 }
+.fontSize{
+  font-size: 18px;
+}

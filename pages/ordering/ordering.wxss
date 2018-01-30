@@ -1,4 +1,8 @@
 @import "../regist/regist.wxss";
+.margin-top-adjust{
+  margin-top: 10rpx;
+}
+
 .margin_style{
   margin-left: 30rpx;
 }
@@ -126,8 +130,8 @@ margin-top:30rpx;
 
 /*加号*/
 .symbol {
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 30px;
 	margin: 0 10px;
 }
 

@@ -200,13 +200,11 @@ var that = this;
             orderState = "作废"
           }
 
-          // position.longitude = res.data.items[0].dispatcher.userPosition.longitude;
-          // position.latitude = res.data.items[0].dispatcher.userPosition.latitude;
           if (res.data.items[0].dispatcher!=null)
           {
             position.longitude = res.data.items[0].dispatcher.userPosition.longitude;
             position.latitude = res.data.items[0].dispatcher.userPosition.latitude;
-            //deliverPhonecall = res.data.items[0].dispatcher.mobilePhone
+            deliverPhonecall = res.data.items[0].dispatcher.mobilePhone
           }
          
           
@@ -215,7 +213,7 @@ var that = this;
             orderTrackInfo: res.data,
             orderState: orderState,
             position: position,
-            // deliverPhonecall: deliverPhonecall
+            deliverPhonecall: deliverPhonecall
           })
           console.log(that.data.position);
           console.log(that.data.orderTrackInfo);

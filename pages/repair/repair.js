@@ -29,8 +29,6 @@ Page({
     var app = getApp();
     if (app.globalData.loginState) {
       that.setData({
-        //loginState: true,
-        //userInfo: app.globalData.userInfo,
         userId_value: app.globalData.userId
       });
     } 

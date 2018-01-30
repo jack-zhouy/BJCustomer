@@ -50,7 +50,7 @@
 
           <view class="input-log" hidden="{{inputNeedToBeShown}}"> 
             <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image> 
-            <view class="pickerTitle">是否携带燃气钢瓶: </view>  
+            <view class="pickerTitle">是否携带钢瓶: </view>  
             <input disabled="{{inputDisable}}" class="inputIndexText" type="text" value="{{checkProfileState==true ? hasCylinder_value : ''}}"/>
           </view>
 

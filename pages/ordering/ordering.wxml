@@ -44,7 +44,8 @@
 
     <view class="input-log">  
       <view class="pickerTitle margin_style">订单总价: </view>
-      <input disabled="{{true}}" class="inputIndexText" id="orderAmount" name="orderAmount" maxlength='20' type="text" value="{{amount}}"/>
+      <!-- <input disabled="{{true}}" class="inputIndexText" id="orderAmount" name="orderAmount" maxlength='20' type="text" value="{{amount}}"/> -->
+      <view class="inputIndexText price margin-top-adjust" id="orderAmount" name="orderAmount">{{amount}}</view>
     </view>
 
   <view class="input-log">  

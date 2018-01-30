@@ -43,12 +43,12 @@ Page({
       {
         "title": "我要报修",
         "picurl": "../../images/icon/baoxiu.jpg",
-        "gotoUrl": "../repair/repair",
+        // "gotoUrl": "../repair/repair",
       },
       {
         "title": "我要优惠",
         "picurl": "../../images/icon/youhui.jpg",
-        "gotoUrl": "../discount/discount",
+        //"gotoUrl": "../discount/discount",
       },
 
     ],

@@ -2,7 +2,7 @@ Page({
   //数据源
   data: {
     //订单状态
-    ordersStatusDescription: ["待派送", "派送中", "已签收", "订单结束","作废"], 
+    ordersStatusDescription: ["待派送", "派送中", "已签收", "已结束","作废"], 
   //全部订单列表1
     ordersList: [], 
     // loading: false,
@@ -56,7 +56,6 @@ Page({
         })
       }
     })
-
   },
   // 页面初始化
   onLoad: function () {
@@ -92,16 +91,6 @@ Page({
   onUnload: function () {
 
   },
-  // 订单处理
-  // dealOrder: function (e) {
-  //   var order = e.currentTarget.dataset.order;
-  //   wx.navigateTo({
-  //     url: '../deliver/deliver?order=' + JSON.stringify(order),
-  //     success: function (res) { },
-  //     fail: function (res) { },
-  //     complete: function (res) { },
-  //   })
-  // },
   showDetail: function (e) {
     var order = e.currentTarget.dataset.order;
     //url: '../detail/detail?order=' + JSON.stringify(order) + '&model=private',
@@ -112,8 +101,41 @@ Page({
       fail: function (res) { },
       complete: function (res) { },
     });
-
-
-
   },
+
+  // //获取的订单
+  // checkOrderStatus: function () {
+  //   var that = this
+  //   //查询所有订单
+  //   wx.request({
+  //     url: getApp().GlobalConfig.baseUrl + "/api/Orders",
+  //     data: {
+  //       orderSn: getApp().globalData.userId,
+  //       orderBy: "id desc"
+  //     },
+  //     method: 'GET',
+  //     success: function (res) {
+  //       // 数据从逻辑层发送到视图层，同时改变对应的 this.data 的值
+  //       console.log(res.data);
+  //       that.setData({
+  //         ordersList: res.data.items,
+  //         loading: true
+  //       })
+  //       console.log("ordersList:");
+  //       console.log(that.data.ordersList);
+  //     },
+  //     fail: function () {
+  //       console.log("failed");
+  //     }
+  //   })
+  //   // 获取系统信息
+  //   wx.getSystemInfo({
+  //     success: (res) => {
+  //       that.setData({
+  //         windowHeight: res.windowHeight
+  //       })
+  //     }
+  //   })
+  // },
+
 })

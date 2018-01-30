@@ -171,6 +171,7 @@ Page({
         deliveryTimeType: deliveryTimeType
       })
     }
+    console.log(that.data.deliveryTimeType);
   },
 
   //选择订单详情选择器触发函数
@@ -316,10 +317,17 @@ Page({
     customerTemp.userId = that.data.userId_value;
     orderInfo.customer = customerTemp;
     
-    if ((that.data.date.length > 0) && (that.data.time.length > 0) )
+    if (that.data.deliveryTimeType == "立即送气")
     {
-      orderInfo.reserveTime = that.data.date + " " + that.data.time + ":00";
+      orderInfo.reserveTime = that.data.reserveDate + " " + that.data.reserveTime + ":00";
     }
+    else if (that.data.deliveryTimeType == "预约送气")
+    {
+      //if ((that.data.date.length > 0) || (that.data.time.length > 0)) {
+        orderInfo.reserveTime = that.data.date + " " + that.data.time + ":00";
+      //}
+    }
+
 
     orderInfo.recvLongitude = that.data.location.lng;
     orderInfo.recvLatitude = that.data.location.lat;

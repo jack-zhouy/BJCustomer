@@ -28,13 +28,13 @@
 }
 .history-time
 {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
 	font-size: 11pt;
   margin-left: 20px;
 }
 .history-list
 {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
 	font-size: 11pt;
 	color: #66CD00;
   margin-left: 20px;
