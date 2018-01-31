@@ -224,7 +224,7 @@ Page({
       content: '请选择支付方式'
     });
     return false;
-  }
+    }
   },
   //验证收货人姓名输入
   checkRecvName: function (param) {
@@ -576,8 +576,6 @@ Page({
 //数量增加
    add_new: function (e) {
      var that = this;
-
-     console.log(e.currentTarget.dataset.good);
     // 所点商品id
     var good = e.currentTarget.dataset.good;
     var goodId = e.currentTarget.dataset.good.id;
@@ -593,7 +591,6 @@ Page({
     });
     // 转换成购物车数据为数组
     that.cartToArray(good);
-    console.log(that.data.cartData);
   },
   //数量减少
   subtract_new: function (e) {
@@ -656,12 +653,6 @@ Page({
     });
     // 因为请求网络是异步的，因此汇总在此，上同
     that.amount();
-
-    console.log(cartObjects);
-
-    console.log(that.data.orderDetailList);
   },
-
-
 
 })

@@ -8,13 +8,13 @@
     "pages/repair/repair",
     "pages/discount/discount",
     "pages/store/store",
-    "pages/checkout/checkout",
     "pages/remark/remark",
     "pages/login/login",
     "pages/regist/regist",
     "pages/member/member",
     "pages/detail/detail",
-    "pages/orderTrack/orderTrack"
+    "pages/orderTrack/orderTrack",
+    "pages/checkMybottle/checkMybottle"
     
   ],
   "window": {

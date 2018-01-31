@@ -13,19 +13,11 @@ Page({
     deliveryAddress:"",
     deliveryAddressDetail:"",
   },
-  // 页面初始化
+
   onLoad: function (options) {
-    // options为页面跳转所带来的参数
     var that = this;
     var order = JSON.parse(options.order);
-   // var carts = JSON.parse(order.type);
-    //var model = options.model;
-    //还没有抢的订单，需要显示抢单按钮
-    // if (model == 'public') {
-    //   that.setData({
-    //     showGrab: true,
-    //   })
-    // }
+
     console.log(order);
     if (order.payType.index == 0)
     {
@@ -66,7 +58,7 @@ Page({
     console.log(that.data.payMethod);
     console.log(that.data.orderState);
   },
-  // 页面初次渲染完成（每次打开页面都会调用一次）
+
   onReady: function () {
   },
   showMap: function (e) {
@@ -109,11 +101,7 @@ Page({
   },
 
   trackOrder:function(e){
-    // wx.navigateTo({
-    //   url: '../orderTrack/orderTrack',
-    // })  
     var that = this;
-    //var orderSn = e.currentTarget.dataset.order.orderSn;
     var orderSn = that.data.order.orderSn;
     wx.navigateTo({
       url: '../orderTrack/orderTrack?orderSn=' + JSON.stringify(orderSn),

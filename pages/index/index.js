@@ -6,10 +6,10 @@ var user_login_state = getApp().globalData.loginState;
 Page({
   data:{
     logoSrc: '',
-    avatarUrl: '',//头像
-    nickName: '',//微信昵称
-    openid: '',//openid
-    timer: '',//expires_in
+    avatarUrl: '',
+    nickName: '',
+    openid: '',
+    timer: '',
     city:'',
     swiper:{
       "autoplay": true,
@@ -43,12 +43,12 @@ Page({
       {
         "title": "我要报修",
         "picurl": "../../images/icon/baoxiu.jpg",
-        // "gotoUrl": "../repair/repair",
+ 
       },
       {
         "title": "我要优惠",
         "picurl": "../../images/icon/youhui.jpg",
-        //"gotoUrl": "../discount/discount",
+
       },
 
     ],
@@ -113,17 +113,13 @@ Page({
     });
   },
   onReady:function(){
-    // 页面渲染完成
     wx.hideNavigationBarLoading();
   },
   onShow:function(){
-    // 页面显示
   },
   onHide:function(){
-    // 页面隐藏
   },
   onUnload:function(){
-    // 页面关闭
   },
   onPullDownRefresh: function(){
     

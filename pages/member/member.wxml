@@ -23,17 +23,17 @@
 </view>
 <!-- 列表 -->
 <view class="listview" >
-	<!-- <view class="item">
-		<image class="hd" src="../../images/address.png"/>
-		<navigator class="bd" url="../../address/list/list" open-type="navigate" hover-class="none">历史订单             </navigator>
-	</view> -->
 	<view class="item" bindtap='navigateToCheckProfile'>
 		<image class="hd" src="../../images/category.png" />
 		<navigator class="bd" open-type="navigate" hover-class="none">查看资料</navigator>
 	</view>
-  	<view class="item" bindtap='navigateToEditProfile'>
+  <view class="item" bindtap='navigateToEditProfile'>
 		<image class="hd" src="../../images/setting.png" />
 		<navigator class="bd" open-type="navigate" hover-class="none">修改资料</navigator>
+	</view>
+  <view class="item" bindtap='navigateToCheckMybottle'>
+		<image class="hd" src="../../images/setting.png" />
+		<navigator class="bd" open-type="navigate" hover-class="none">我的气瓶</navigator>
 	</view>
 	<view class="item">
 		<image class="hd" src="../../images/food.png" />

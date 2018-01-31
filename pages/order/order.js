@@ -93,7 +93,6 @@ Page({
   },
   showDetail: function (e) {
     var order = e.currentTarget.dataset.order;
-    //url: '../detail/detail?order=' + JSON.stringify(order) + '&model=private',
     console.log(order);
     wx.navigateTo({
       url: '../detail/detail?order=' + JSON.stringify(order),
@@ -102,40 +101,5 @@ Page({
       complete: function (res) { },
     });
   },
-
-  // //获取的订单
-  // checkOrderStatus: function () {
-  //   var that = this
-  //   //查询所有订单
-  //   wx.request({
-  //     url: getApp().GlobalConfig.baseUrl + "/api/Orders",
-  //     data: {
-  //       orderSn: getApp().globalData.userId,
-  //       orderBy: "id desc"
-  //     },
-  //     method: 'GET',
-  //     success: function (res) {
-  //       // 数据从逻辑层发送到视图层，同时改变对应的 this.data 的值
-  //       console.log(res.data);
-  //       that.setData({
-  //         ordersList: res.data.items,
-  //         loading: true
-  //       })
-  //       console.log("ordersList:");
-  //       console.log(that.data.ordersList);
-  //     },
-  //     fail: function () {
-  //       console.log("failed");
-  //     }
-  //   })
-  //   // 获取系统信息
-  //   wx.getSystemInfo({
-  //     success: (res) => {
-  //       that.setData({
-  //         windowHeight: res.windowHeight
-  //       })
-  //     }
-  //   })
-  // },
 
 })
