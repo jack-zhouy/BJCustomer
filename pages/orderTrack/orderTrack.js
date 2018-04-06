@@ -176,7 +176,8 @@ var that = this;
     var position={};
     var deliverPhonecall="";
     wx.request({
-      url: 'http://118.31.77.228:8006/api/Orders',
+      
+      url: getApp().GlobalConfig.baseUrl + "/api/Orders",
       data: {
         orderSn: that.data.orderSn
       },

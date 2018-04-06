@@ -121,7 +121,7 @@ Page({
     console.log("请求后台商品信息");
     var that = this;
     wx.request({
-      url: 'http://118.31.77.228:8006/api/Goods',
+      url: getApp().GlobalConfig.baseUrl + "/api/Goods",
       data: {
         typeCode: "0001"
       },
@@ -375,7 +375,7 @@ Page({
     console.log(orderInfo);
     var orderId;
     wx.request({
-      url: 'http://118.31.77.228:8006/api/Orders', //仅为示例，并非真实的接口地址
+      url: getApp().GlobalConfig.baseUrl + "/api/Orders", //仅为示例，并非真实的接口地址
       data: orderInfo,
       method: "POST",
 
@@ -491,7 +491,8 @@ Page({
   payOnline: function (userCode, totalFee, orderId) {
     var that = this;
     wx.request({
-      url: 'https://www.yunnanbaijiang.com:8009/api/pay/microApp',
+      url: getApp().GlobalConfig.baseUrl + "/api/pay/microApp",
+     // url: 'https://www.yunnanbaijiang.com:8009/api/pay/microApp',
       method: 'GET',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -553,7 +554,7 @@ Page({
     var app = getApp();
     console.log("修改订单信息");
     wx.request({
-      url: 'http://118.31.77.228:8006/api/Orders/' + that.data.orderId,
+      url: getApp().GlobalConfig.baseUrl + "/api/Orders" + that.data.orderId,
       data: {
         payStatus: "PSPaied"
       },

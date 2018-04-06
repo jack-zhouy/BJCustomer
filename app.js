@@ -2,11 +2,14 @@
 
 App({
   GlobalConfig: {
-    baseUrl: 'http://118.31.77.228:8006',
+    baseUrl: 'https://120.78.241.67',
     appid: 'wxb137ebfa3dc90901',
     secret: 'ec3bbfe9300efa39b561ebac0aac5f2d',
     openid: null
   },
+  //baseUrl: ' https://www.yunnanbaijiang.com',
+  // baseUrl: 'http://118.31.77.228:8006',
+  // baseUrl: 'http://120.78.241.67',
   getUserInfoEx: function () {
     wx.getUserInfo({
       success: res => {

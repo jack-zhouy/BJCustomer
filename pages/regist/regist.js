@@ -117,7 +117,8 @@ Page({
     var app = getApp();
     var hasCylinder;
     wx.request({
-      url: 'http://118.31.77.228:8006/api/customers',
+      url: getApp().GlobalConfig.baseUrl + "/api/customers",
+      //url: 'http://118.31.77.228:8006/api/customers',
       method: "GET",
       data: {
         userId: app.globalData.userId
@@ -194,7 +195,7 @@ Page({
     editCustomerInfo = JSON.stringify(editCustomerInfo);
 
     wx.request({  
-      url: 'http://118.31.77.228:8006/api/customers/' + that.data.userId + '?userId=' + that.data.userId,
+      url: getApp().GlobalConfig.baseUrl + "/api/customers" + that.data.userId + '?userId=' + that.data.userId,
       method: "PUT",
       data: editCustomerInfo,
       complete: function (res) {
@@ -213,7 +214,7 @@ Page({
 customerType_request:function(){
   var that = this;
   wx.request({
-    url: 'http://118.31.77.228:8006/api/CustomerType',
+    url: getApp().GlobalConfig.baseUrl + "/api/CustomerType",
     method: "GET",
     complete: function (res) {  
       if (res.statusCode == 200) {
@@ -234,7 +235,7 @@ customerType_request:function(){
 //请求后台客户来源
 customerSource_request: function () {
   wx.request({
-    url: 'http://118.31.77.228:8006/api/CustomerSource',
+    url: getApp().GlobalConfig.baseUrl + "/api/CustomerSource",
     method: "GET",
     complete: function (res) {
       if (res.statusCode == 200) {
@@ -436,6 +437,7 @@ checkTelephone: function (param) {
   },
   //提交向后台注册request
   registRequest: function (param) {
+    var that = this;
     var customerInfo = {};
     customerInfo.userId = param.userId;
     customerInfo.name = param.name;
@@ -452,11 +454,16 @@ checkTelephone: function (param) {
     customerInfo.customerSource = customerSourceTemp;
 
     var customerAddressTemp = {};
-    customerAddressTemp.province = param.province;
-    customerAddressTemp.city = param.city;
-    customerAddressTemp.county = param.county;
-    customerAddressTemp.detail = param.detail;
+    // customerAddressTemp.province = param.province;
+    // customerAddressTemp.city = param.city;
+    // customerAddressTemp.county = param.county;
+    // customerAddressTemp.detail = param.detail;
+    customerAddressTemp.province = that.data.AddressData.provinceName;
+    customerAddressTemp.city = that.data.AddressData.cityName;
+    customerAddressTemp.county = that.data.AddressData.countyName;
+    customerAddressTemp.detail = that.data.AddressData.detailInfo;
     customerInfo.address = customerAddressTemp;
+    
 
     if (param.customerCompany.length>0)
     {
@@ -465,8 +472,10 @@ checkTelephone: function (param) {
       customerInfo.customerCompany = customerCompanyTemp;
     }
     customerInfo = JSON.stringify(customerInfo);
+    console.info(customerInfo);
+    
     wx.request({
-      url: 'http://118.31.77.228:8006/api/customers', 
+      url: getApp().GlobalConfig.baseUrl + "/api/customers",
       data: customerInfo,
       method: "POST",
       complete: function (res) {

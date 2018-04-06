@@ -23,7 +23,8 @@ Page({
   requestData: function (a) {
     var that = this
     wx.request({
-      url: 'http://118.31.77.228:8006/api/goods', //仅为示例，并非真实的接口地址
+      url: getApp().GlobalConfig.baseUrl + "/api/goods",
+//仅为示例，并非真实的接口地址
       data: {},
       header: {
         'Content-Type': 'application/json'
