@@ -8,18 +8,15 @@
 </view>
 <!-- 账户 -->
 <view class="account">
-	<view class="item">
-		<view class="value balance">0.00</view>
-		<view class="caption">余额</view>
+	<view class="item">	
+    <view class="caption fontColor" bindtap='checkMyTickets'>我的气票</view>
 	</view>
 	<view class="item">
-		<view class="value coupon">0</view>
-		<view class="caption">优惠</view>
+		<view class="caption fontColor">我的优惠</view>
 	</view>
-	<view class="item">
-		<view class="value credit">0</view>
-		<view class="caption">积分</view>
-	</view>
+	 <view class="item">
+		<view class="caption fontColor">我的积分</view>
+	</view> 
 </view>
 <!-- 列表 -->
 <view class="listview" >
@@ -34,10 +31,10 @@
   <view class="item" bindtap='navigateToCheckMybottle'>
 		<image class="hd" src="../../images/setting.png" />
 		<navigator class="bd" open-type="navigate" hover-class="none">我的气瓶</navigator>
-	</view>
-	<view class="item">
+	</view> 
+	<view class="item" bindtap='navigateToComplaint'>
 		<image class="hd" src="../../images/food.png" />
-		<navigator class="bd" url="../../food/list/list" open-type="navigate" hover-class="none">投诉通道</navigator>
+		<navigator class="bd"  open-type="navigate" hover-class="none">投诉建议</navigator>
 	</view>
 </view>
 <!-- 退出登录 -->

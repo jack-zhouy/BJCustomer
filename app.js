@@ -72,7 +72,9 @@ App({
     loginState: false,
     //商品类型
     typecode: "0001",
-    address:{}
+    address:{},
+    //结算类型
+    settlementTypeCode:null
   }
 
 })

@@ -75,16 +75,18 @@
 
 
   <view class="input-log">  
-    <view class="pickerTitle margin_style">支付方式*: </view>
-    <radio-group id="payMethod" name="payMethod" class="radio-group radioIndexText" bindchange="payMethodRadioChange">
+    <view class="pickerTitle margin_style">支付方式: </view>
+    <!-- <radio-group id="payMethod" name="payMethod" class="radio-group radioIndexText" bindchange="payMethodRadioChange">
     <label class="radio" wx:for="{{payMethodItems}}">
         <radio value="{{item.checked}}" />{{item.value}}
     </label>
-    </radio-group>
+    </radio-group> -->
+    <label class="radioIndexText">气到付款</label>
+
   </view>
 
   <view class="input-log">  
-    <view class="pickerTitle margin_style">送气地址*: </view>
+    <view class="pickerTitle margin_style">送气地址: </view>
     <text class="textStyle">{{address_value1}}\r\n{{address_value2}}</text>
   </view>
 

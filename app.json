@@ -14,7 +14,8 @@
     "pages/member/member",
     "pages/detail/detail",
     "pages/orderTrack/orderTrack",
-    "pages/checkMybottle/checkMybottle"
+    "pages/checkMybottle/checkMybottle",
+    "pages/complaint/complaint"
     
   ],
   "window": {

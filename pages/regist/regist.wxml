@@ -54,17 +54,23 @@
             <input disabled="{{inputDisable}}" class="inputIndexText" type="text" value="{{checkProfileState==true ? hasCylinder_value : ''}}"/>
           </view>
 
-           <view class="input-log" hidden="{{inputNeedToBeShown}}"> 
+          <view class="input-log" hidden="{{inputNeedToBeShown}}"> 
             <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image> 
             <view class="pickerTitle">客户类型: </view>  
             <input disabled="{{inputDisable}}" class="inputIndexText" type="text" value="{{checkProfileState==true ? customerType_value : ''}}"/>
           </view>
 
-            <view class="input-log" hidden="{{inputNeedToBeShown}}"> 
+          <view class="input-log" hidden="{{inputNeedToBeShown}}"> 
             <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image> 
             <view class="pickerTitle">客户来源: </view>  
             <input disabled="{{inputDisable}}" class="inputIndexText" type="text" value="{{checkProfileState==true ? customerSource_value : ''}}"/>
-          </view>   
+          </view>  
+
+          <view class="input-log" hidden="{{inputNeedToBeShown}}"> 
+            <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image> 
+            <view class="pickerTitle">结算类型: </view>  
+            <input disabled="{{inputDisable}}" class="inputIndexText" type="text" value="{{checkProfileState==true ? settlementType_value : ''}}"/>
+          </view>  
           
           <view class="input-log" hidden="{{needToBeShown}}">
           <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image>  
@@ -79,6 +85,14 @@
             <view class="pickerTitle"> 客户来源: </view>
 				    <picker mode ="selector" id="customerSource" name="customerSource" class="pickerIndexText" bindchange="bindPickerChange" value="{{originalCustomerSourceArray[customerSourceIndex].code}}" range="{{customerSourceArray}}">
 					  <view class="subtitle-label">{{customerSourceArray[customerSourceIndex]}}</view>
+			    	</picker>
+          </view>
+        
+          <view class="input-log" hidden="{{needToBeShown}}">
+          <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image>  
+            <view class="pickerTitle"> 结算类型: </view>
+				    <picker mode ="selector" id="settlementType" name="settlementType" class="pickerIndexText" bindchange="bindPickerChange2"  value="{{originalSettlementTypeArray[settlementTypeIndex].code}}" range="{{settlementTypeArray}}">
+					  <view class="subtitle-label">{{settlementTypeArray[settlementTypeIndex]}}</view>
 			    	</picker>
           </view>
 

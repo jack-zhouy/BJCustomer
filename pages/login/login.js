@@ -128,8 +128,11 @@ Page({
           app.globalData.userId = res.data.userId;
           app.globalData.phone = res.data.phone; 
           app.globalData.address = res.data.address; 
+          app.globalData.settlementTypeCode = res.data.settlementType.code;
           that.loginSuc();
+         
         }
+        
       },
       fail: function () {
         that.loginFailed();

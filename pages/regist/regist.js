@@ -31,6 +31,7 @@ Page({
     hasCylinder_value:"",
     customerType_value:"",
     customerSource_value:"",
+    settlementType_value:"",
     company_name_value:"",
     address_value:"",
     address_value1: "",
@@ -47,11 +48,16 @@ Page({
     companyIcon: "../../images/icon_home_selected.png",
 //客户类型、来源选择器数据
     customerTypeIndex: 0,
-    customerSourceIndex: 0,
     customerTypeArray: [],
     originalCustomerTypeArray: [],
+    
+    customerSourceIndex: 0,
     customerSourceArray:[],
     originalCustomerSourceArray:[],
+
+    settlementTypeIndex: 0,
+    settlementTypeArray: [],
+    originalSettlementTypeArray: [],
 //地址数据
     address: false,
     AddressData: {}, 
@@ -66,6 +72,7 @@ Page({
     that = this;
     that.customerType_request();
     that.customerSource_request(); 
+    that.settlementType_request();
 //判断是查看资料还是修改资料模式
     var model = options.model;
     if (model == 'checkProfile') {
@@ -124,6 +131,7 @@ Page({
         userId: app.globalData.userId
       },
       complete: function (res) {  
+        console.info(res.data.items[0]);
         if (res.statusCode == 200) {
           if (res.data.items[0].haveCylinder == true) {
             hasCylinder = "是"
@@ -139,6 +147,9 @@ Page({
             phone_value: res.data.items[0].phone,
             customerType_value: res.data.items[0].customerType.name,
             customerSource_value: res.data.items[0].customerSource.name,
+            
+            settlementType_value: res.data.items[0].settlementType.name,
+
             company_name_value: res.data.items[0].customerCompany.name,
             address_value: res.data.items[0].address.province + res.data.items[0].address.city +
             res.data.items[0].address.county + res.data.items[0].address.detail,
@@ -179,6 +190,11 @@ Page({
       customerSourceTemp.code = param.customerSource;
       editCustomerInfo.customerSource = customerSourceTemp;
     }   
+    if (param.settlementType.length > 0) {
+      var settlementTypeTemp = {};
+      settlementTypeTemp.code = param.settlementType;
+      editCustomerInfo.settlementType = settlementTypeTemp;
+    } 
     if (param.province!=null){
       var customerAddressTemp = {};
       customerAddressTemp.province = param.province;
@@ -195,7 +211,7 @@ Page({
     editCustomerInfo = JSON.stringify(editCustomerInfo);
 
     wx.request({  
-      url: getApp().GlobalConfig.baseUrl + "/api/customers" + that.data.userId + '?userId=' + that.data.userId,
+      url: getApp().GlobalConfig.baseUrl + "/api/customers/" + that.data.userId + '?userId=' + that.data.userId,
       method: "PUT",
       data: editCustomerInfo,
       complete: function (res) {
@@ -252,21 +268,48 @@ customerSource_request: function () {
     }
   });
 },
+//请求后台结算类型
+settlementType_request: function () {
+  wx.request({
+    url: getApp().GlobalConfig.baseUrl + "/api/SettlementType",
+    method: "GET",
+    complete: function (res) {
+      if (res.statusCode == 200) {
+        var count = res.data.items.length;
+        for (var i = 0; i < count; i++) {
+          var tempSource = res.data.items[i].name;
+          that.data.settlementTypeArray.push(tempSource);
+        }
+        that.setData({
+          settlementTypeArray: that.data.settlementTypeArray,
+          originalSettlementTypeArray: res.data.items
+        })
+        console.info(that.data.originalSettlementTypeArray);
+      }
+    }
+  });
+},
 //监听radio事件
 radioChange: function (e) {
 },
-// 监听picker事件
+// 监听客户类型picker事件
 bindPickerChange: function (e) {
  this.setData({
    customerSourceIndex: e.detail.value
   })
 },
-// 监听picker事件
+// 监听客户来源picker事件
 bindPickerChange1: function (e) {
     this.setData({
       customerTypeIndex: e.detail.value
     })
-  },
+},
+// 监听结算类型picker事件
+bindPickerChange2: function (e) {
+  this.setData({
+    settlementTypeIndex: e.detail.value
+  })
+},
 //获取地址信息
 selectAddress: function () {
     wx.chooseAddress({
@@ -452,6 +495,10 @@ checkTelephone: function (param) {
     var customerSourceTemp = {};
     customerSourceTemp.code = param.customerSource;
     customerInfo.customerSource = customerSourceTemp;
+
+    var settlementTypeTemp = {};
+    settlementTypeTemp.code = param.settlementType;
+    customerInfo.settlementType = settlementTypeTemp;
 
     var customerAddressTemp = {};
     // customerAddressTemp.province = param.province;

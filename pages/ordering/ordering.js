@@ -262,7 +262,7 @@ Page({
   },
   mysubmit: function (param) {
     var that = this;
-    var flag = this.checkRecvName(param) && this.checkRecvPhone(param) && this.checkChoosePayMethod();
+    var flag = this.checkRecvName(param) && this.checkRecvPhone(param) ;
     //var flag = this.checkRecvName(param) && this.checkRecvPhone(param) && that.data.payMethodBoolean;
     console.log(flag);
     var payStatus = "";
@@ -302,14 +302,16 @@ Page({
     console.log("提交订单");
     orderInfo.callInPhone = that.data.phone;
     
-    if (that.data.payMethodBoolean == "true")
-    {
-      orderInfo.payType = "PTOnLine";
-    }
-    else
-    {
-      orderInfo.payType = "PTOffline";
-    }
+    // if (that.data.payMethodBoolean == "true")
+    // {
+    //   orderInfo.payType = "PTOnLine";
+    // }
+    // else
+    // {
+    //   orderInfo.payType = "PTOffline";
+    // }
+    //气到付款
+    //orderInfo.payType = "PTOffline";
 
     orderInfo.accessType = "ATWeixin";
 
@@ -369,7 +371,7 @@ Page({
     orderInfo.orderAmount = that.data.amount;
 
     //支付状态
-    orderInfo.payStatus = "PSUnpaid";
+    //orderInfo.payStatus = "PSUnpaid";
 
     orderInfo = JSON.stringify(orderInfo);
     console.log(orderInfo);
@@ -395,17 +397,17 @@ Page({
             duration: 2000,
             success: function () {
                     
-            if (that.data.payMethodBoolean == "true"){
-              console.log(" 调用微信支付");
-              that.payoff(that.data.orderId);
-            }
-            else{
+            // if (that.data.payMethodBoolean == "true"){
+            //   console.log(" 调用微信支付");
+            //   that.payoff(that.data.orderId);
+            // }
+            // else{
               setTimeout(function () {
                 wx.switchTab({
                   url: '../index/index',
                 })
               }, 1500); 
-            }
+            //}
           }  
         });
         return;

@@ -21,7 +21,6 @@
   margin-top: -10rpx;
   margin-left: 20rpx;
   font-size:30rpx;
-
 }
   /* width: 65% */
 .address_text{

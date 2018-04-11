@@ -43,55 +43,56 @@ Page({
       {
         "title": "我要报修",
         "picurl": "../../images/icon/baoxiu.jpg",
+        "gotoUrl": "../repair/repair",
  
       },
-      {
-        "title": "我要优惠",
-        "picurl": "../../images/icon/youhui.jpg",
+      // {
+      //   "title": "我要优惠",
+      //   "picurl": "../../images/icon/youhui.jpg",
 
-      },
+      // },
 
     ],
     classList: [
-      {
-        "title": "百江商城",
-        "picurl": "../../images/icon/gas.jpg",
-        "gotoUrl": "../store/store",
-      },
-      {
-        "title": "电影",
-        "picurl": "../../images/icon/film.jpg",
-        "gotoUrl": ""
-      },
-      {
-        "title": "外卖",
-        "picurl": "../../images/icon/food.jpg",
-        "gotoUrl": "",
-      },
-      {
-        "title": "火车订票",
-        "picurl": "../../images/icon/train.jpg",
-        "gotoUrl": ""
-      },
-      {
-        "title": "生活缴费",
-        "picurl": "../../images/icon/water.jpg",
-      },
-      {
-        "title": "医院挂号",
-        "picurl": "../../images/icon/hospital.jpg",
-        "gotoUrl": ""
-      },
-      {
-        "title": "手机充值",
-        "picurl": "../../images/icon/phone.jpg",
-        "gotoUrl": ""
-      },
-      {
-        "title": "共享单车",
-        "picurl": "../../images/icon/bike.jpg",
-        "gotoUrl": ""
-      }
+      // {
+      //   "title": "百江商城",
+      //   "picurl": "../../images/icon/gas.jpg",
+      //   "gotoUrl": "../store/store",
+      // },
+      // {
+      //   "title": "电影",
+      //   "picurl": "../../images/icon/film.jpg",
+      //   "gotoUrl": ""
+      // },
+      // {
+      //   "title": "外卖",
+      //   "picurl": "../../images/icon/food.jpg",
+      //   "gotoUrl": "",
+      // },
+      // {
+      //   "title": "火车订票",
+      //   "picurl": "../../images/icon/train.jpg",
+      //   "gotoUrl": ""
+      // },
+      // {
+      //   "title": "生活缴费",
+      //   "picurl": "../../images/icon/water.jpg",
+      // },
+      // {
+      //   "title": "医院挂号",
+      //   "picurl": "../../images/icon/hospital.jpg",
+      //   "gotoUrl": ""
+      // },
+      // {
+      //   "title": "手机充值",
+      //   "picurl": "../../images/icon/phone.jpg",
+      //   "gotoUrl": ""
+      // },
+      // {
+      //   "title": "共享单车",
+      //   "picurl": "../../images/icon/bike.jpg",
+      //   "gotoUrl": ""
+      // }
     ]
   },
   onLoad:function(options){

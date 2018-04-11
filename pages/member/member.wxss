@@ -92,8 +92,11 @@
 /*标签*/
 .account .item .caption {
 	margin-top: -10px;
-	color: #666;
+
 	font-size: 14px;
+}
+.fontColor{
+  	color: #ff5f3e;
 }
 /*.账户信息*/
 
