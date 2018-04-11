@@ -152,37 +152,76 @@ Page({
         })  
       }
       else {
-//查询气票客户名下的气票
-      var textList=[];
-        wx.request({
-          url: getApp().GlobalConfig.baseUrl + "/api/Ticket",
-          //url: 'http://118.31.77.228:8006/api/customers',
-          method: "GET",
-          data: {
-            customerUserId: app.globalData.userId
-          },
-          complete: function (res) {
-            console.info(res.data.items.length);
-            if (res.statusCode == 200) {
-              for (var i = 0; i < res.data.items.length; i++){
-                textList[i] = "编号：" + res.data.items[i].ticketSn + " 规格:" + res.data.items[i].specName
-              }
-              wx.showActionSheet({
-                itemList: textList,
-                success: function (res) {
-                  console.log(res.tapIndex)
-                },
-                fail: function (res) {
-                  console.log(res.errMsg)
-                }
-              })  
-            }
-          }
-        });
-
-      }
-      
+        wx.navigateTo({
+          url: '../ticketCoupon/ticketCoupon?' + '&model=checkTicket',
+          success: function (res) { },
+          fail: function (res) { },
+          complete: function (res) { },
+        })
+      }   
     }
   },
-  
+
+//我的优惠券
+checkMyCoupons: function () {
+  var app = getApp();
+  if ((!app.globalData.loginState) && (app.globalData.userId == null)) {
+    wx.navigateTo({
+      url: '../login/login',
+    })
+  } else {
+      wx.navigateTo({
+        url: '../ticketCoupon/ticketCoupon?' + '&model=checkCoupon',
+        success: function (res) { },
+        fail: function (res) { },
+        complete: function (res) { },
+      })
+  }
+},
+
+//我的账户
+checkMyAccount: function () {
+  var app = getApp();
+  if ((!app.globalData.loginState) && (app.globalData.userId == null)) {
+    wx.navigateTo({
+      url: '../login/login',
+    })
+  } else {
+    if (app.globalData.settlementTypeCode == "00003") {
+      wx.showModal({
+        title: '提示',
+        content: '气票客户不存在赊销',
+      })
+    }
+    else {
+      //查询普通客户和月结客户名下的欠款
+      wx.request({
+        url: getApp().GlobalConfig.baseUrl + "/api/CustomerCredit",
+        method: "GET",
+        data: {
+          userId: app.globalData.userId
+        },
+        complete: function (res) {
+          console.info(res.data);
+          if (res.statusCode == 200) {
+            if (res.data.items.amount == null)
+            {
+              wx.showModal({
+                title: '提示',
+                content: '当前欠款为0',
+              })
+            }
+            else
+            {
+              wx.showModal({
+                title: '提示',
+                content: '当前欠款为：' + res.data.items.amount + '元',
+              })
+            }
+          }
+        }
+      });
+    }
+  }
+}, 
 })

@@ -384,12 +384,12 @@ Page({
       complete: function (res) {
         if (res.statusCode == 201) {
           console.log(res);
-          orderId = res.header.Location;
-          orderId = orderId.substring(37)
-          that.setData({
-            orderId: orderId,
-          })
-          console.log(that.data.orderId);
+          // orderId = res.header.Location;
+          // orderId = orderId.substring(37)
+          // that.setData({
+          //   orderId: orderId,
+          // })
+          // console.log(that.data.orderId);
           console.log('提交成功')
           wx.showToast({
             title: '提交成功',
