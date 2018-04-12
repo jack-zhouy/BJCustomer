@@ -1,0 +1,22 @@
+<view class="list-item" wx:for="{{bottleList}}" wx:key="id">
+
+    <view class="list-info" data-order="{{item}}">
+      <view class="list-thumb">
+        <image class="bottleThumb" src="../../images/bottom.jpg"></image>
+        <icon class="i-play"></icon>
+      </view>
+
+      <view >
+
+        <view class="list-brief">
+          <text>钢瓶编号：{{item.number}}</text>
+        </view>
+
+        <view class="list-brief">
+          <text class="wish">规格：{{item.spec.name}} | </text>
+          <text class="wish">状态:{{item.serviceStatus.name}}</text>
+        </view>
+
+      </view>
+  </view>
+</view>

@@ -1,0 +1,19 @@
+<view class="list-item" wx:for="{{ticketsList}}" wx:key="id" >
+    <view class="list-info"  data-order="{{item}}">
+      <view class="list-content">
+        <view class="list-title">
+          <text hidden="{{ticketHide}}">气票编号：{{item.ticketSn}}</text>
+          <text hidden="{{couponHide}}">优惠券编号：{{item.id}}</text>
+        </view>
+
+        <view class="list-brief">
+          <text class="wish">规格：{{item.specName}} | </text> 
+          <text hidden="{{ticketHide}}" class="wish">使用状态：{{item.ticketStatus.name}}</text> 
+          <text hidden="{{couponHide}}" class="wish">使用状态：{{item.couponStatus.name}}</text> 
+        </view>
+
+        <view class="list-brief">有效期起始：{{item.startDate}}</view>
+        <view class="list-brief">有效期结束：{{item.endDate}}</view>
+      </view>  
+    </view>
+  </view>

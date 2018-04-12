@@ -1,0 +1,6 @@
+@import "../order/order.wxss";
+
+.bottleThumb{
+  width: 100rpx;
+  height: 100rpx;
+}
