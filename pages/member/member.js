@@ -128,11 +128,15 @@ Page({
         url: '../login/login',
       })
     } else {
-      wx.navigateTo({
-        url: '../complaint/complaint',
-        success: function (res) { },
-        fail: function (res) { },
-        complete: function (res) { },
+      // wx.navigateTo({
+      //   url: '../complaint/complaint',
+      //   success: function (res) { },
+      //   fail: function (res) { },
+      //   complete: function (res) { },
+      // })
+      var _this = this;
+      wx.makePhoneCall({
+        phoneNumber: '95007' //仅为示例，并非真实的电话号码
       })
     }
   },
@@ -169,13 +173,22 @@ checkMyCoupons: function () {
     wx.navigateTo({
       url: '../login/login',
     })
-  } else {
+  } 
+  else {
+    if (app.globalData.settlementTypeCode != "00003") {
+      wx.showModal({
+        title: '提示',
+        content: '非气票客户\r\n不存在优惠券。',
+      })
+    }
+    else {
       wx.navigateTo({
         url: '../ticketCoupon/ticketCoupon?' + '&model=checkCoupon',
         success: function (res) { },
         fail: function (res) { },
         complete: function (res) { },
       })
+    }
   }
 },
 

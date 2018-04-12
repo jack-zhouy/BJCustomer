@@ -5,10 +5,10 @@
     <view class="pickerTitle my_text">请仔细填写报修信息</view>
   </view> 
 
-  <view class="input-log">  
+  <!-- <view class="input-log">  
     <view class="pickerTitle margin_style">登录名: </view>
     <input disabled="{{true}}" class="inputIndexText" type="text" value="{{userId_value}}"/>
-  </view> 
+  </view>  -->
 
   <view class="input-log">  
     <view class="pickerTitle margin_style">联系人: </view>
@@ -48,7 +48,7 @@
   </view>
 
   <view class="input-log">  
-    <view class="pickerTitle margin_style">留言备注: </view>
+    <view class="pickerTitle margin_style">报修内容: </view>
     <input class="inputIndexText" id="note" name="note" maxlength='140' type="text"/>
   </view>
 

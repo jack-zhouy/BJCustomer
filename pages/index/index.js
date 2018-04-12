@@ -51,7 +51,6 @@ Page({
       //   "picurl": "../../images/icon/youhui.jpg",
 
       // },
-
     ],
     classList: [
       // {

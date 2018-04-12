@@ -12,7 +12,7 @@
     <view class="caption fontColor" bindtap='checkMyTickets'>我的气票</view>
 	</view>
 	<view class="item">
-		<view class="caption fontColor" bindtap='checkMyCoupons'>我的优惠</view>
+		<view class="caption fontColor" bindtap='checkMyCoupons'>我的优惠券</view>
 	</view>
 	 <view class="item">
 		<view class="caption fontColor" bindtap='checkMyAccount'>我的账号</view>
