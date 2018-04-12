@@ -32,9 +32,13 @@
 		<image class="hd" src="../../images/setting.png" />
 		<navigator class="bd" open-type="navigate" hover-class="none">我的气瓶</navigator>
 	</view> 
+  <view class="item" bindtap='navigateToCheckMyMend'>
+		<image class="hd" src="../../images/setting.png" />
+		<navigator class="bd" open-type="navigate" hover-class="none">我的保修单</navigator>
+	</view>
 	<view class="item" bindtap='navigateToComplaint'>
-		<image class="hd" src="../../images/food.png" />
-		<navigator class="bd"  open-type="navigate" hover-class="none">投诉建议</navigator>
+		<image class="hd" src="../../images/telephone.png" />
+		<navigator class="bd"  open-type="navigate" hover-class="none">一键投诉建议热线</navigator>
 	</view>
 </view>
 <!-- 退出登录 -->

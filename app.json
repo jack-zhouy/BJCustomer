@@ -14,8 +14,8 @@
     "pages/detail/detail",
     "pages/orderTrack/orderTrack",
     "pages/checkMybottle/checkMybottle",
-    "pages/complaint/complaint",
-    "pages/ticketCoupon/ticketCoupon"
+    "pages/ticketCoupon/ticketCoupon",
+    "pages/mends/mends"
     
   ],
   "window": {

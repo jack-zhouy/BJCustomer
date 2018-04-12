@@ -5,3 +5,9 @@
 .my_text{
   margin-left: 220rpx; 
 }
+.noteText{
+color:red;
+font-size: 30rpx;
+margin-top:10rpx;
+margin-left: 30rpx;
+}

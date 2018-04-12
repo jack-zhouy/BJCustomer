@@ -1,3 +1,4 @@
+var util = require("../../utils/util.js");
 //获取应用实例
 const app = getApp();
 var that;
@@ -8,18 +9,35 @@ Page({
     btnLoading: false,
     submitDisabled: false,
 
-    userId_value:"",
-
-    repairTypeArray: ['瓶身漏气', '角阀漏气', '减压阀/中压阀漏气', '接头漏气', '接头漏气', 
-    '胶管漏气', '灶具漏气', '不明原因漏气', '红火/黑火', '灶打不着火', '灶具火小', '灶具堵塞',
-     '角阀关不紧', '更换配件', '瓶口滑丝', '免费更换配件', '气出不来'],
-     repairTypeIndex: 0,
+     //报修类型
+     mendTypeIndex: 0,
+     mendTypeArray: [],
+     originalMendTypeArray: [],
+     deliverTimeTypes: [
+       "立即报修",
+       "预约报修"
+     ],
+     deliveryTimeType: "",
+     timePickerShow: false,
+     date: "",
+     time: "",
+     reserveDate: "",
+     reserveTime: "",
   },
   // 页面初始化
   onLoad: function () {
     that = this;
-    //console.log("ok");
-    // this.requestData();
+    var currentDate = util.formatTime(new Date());
+    that.data.reserveDate = currentDate.substring(0, 4) + '-' + currentDate.substring(5, 7) + '-' + currentDate.substring(8, 10);
+    that.data.reserveTime = String(parseInt(currentDate.substring(11, 13)) + 1) + ':' + currentDate.substring(14, 16);
+
+    that.setData({
+      reserveDate: that.data.reserveDate,
+      reserveTime: that.data.reserveTime,
+      date: that.data.reserveDate,
+      time: that.data.reserveTime,
+    });
+    this.requestMendType();
   },
   // 页面初次渲染完成（每次打开页面都会调用一次）
   onReady: function () {
@@ -49,25 +67,62 @@ Page({
   onUnload: function () {
     // 页面关闭
   },
+  //查询报修类型
+  requestMendType:function(){
+    var that = this;
+    wx.request({
+      url: getApp().GlobalConfig.baseUrl + "/api/MendTypes",
+      method: "GET",
+      complete: function (res) {
+        if (res.statusCode == 200) {
+          var count = res.data.items.length;
+          for (var i = 0; i < count; i++) {
+            var tempType = res.data.items[i].name;
+            that.data.mendTypeArray.push(tempType);
+          }
+          that.setData({
+            mendTypeArray: that.data.mendTypeArray,
+            originalMendTypeArray: res.data.items
+          })
+          console.log(that.data.originalMendTypeArray);
+        }
+      }
+    });
+  },
+
+  //预约送气/立即送气picker触发函数
+  deliverTimeTypesChange: function (e) {
+    var that = this;
+    var index = e.detail.value;
+    var deliveryTimeType = this.data.deliverTimeTypes[index];
+    if (index == 0) {
+      this.setData({
+        timePickerShow: false,
+        deliveryTimeType: deliveryTimeType
+      })
+    } else {
+      this.setData({
+        timePickerShow: true,
+        deliveryTimeType: deliveryTimeType
+      })
+    }
+  },
   bindDateChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       date: e.detail.value
     })
   },
   bindTimeChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       time: e.detail.value
     })
   },
   bindrepairTypePickerChange_: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      repairTypeIndex: e.detail.value
+      mendTypeIndex: e.detail.value
     })
   },
-  checkPhone: function (param) {
+  checkRecvName: function (param) {
     var phone = param.phone.trim();
     if (phone.length > 0) {
       return true;
@@ -75,9 +130,29 @@ Page({
       wx.showModal({
         title: '提示',
         showCancel: false,
-        content: '请输入正确的联系电话'
+        content: '请输入联系人'
       });
       return false;
+    }
+  },
+  checkPhone: function (param) {
+    var telephone = param.phone.trim();
+    if (telephone.length <= 0) {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '请输入正确的联系号码'
+      });
+      return false;
+    } else if (telephone.length < 1 || telephone.length > 12) {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '请输入正确的联系号码'
+      });
+      return false;
+    } else {
+      return true;
     }
   },
 
@@ -86,7 +161,7 @@ Page({
     this.mysubmit(param);
   },
   mysubmit: function (param) {
-    var flag = this.checkPhone(param);
+    var flag = this.checkPhone(param) && this.checkRecvName(param);
     var that = this;
     if (flag) {
       this.setregistData1();
@@ -97,7 +172,7 @@ Page({
           duration: 1500
         });
         that.setregistData2();
-        that.redirectTo(param);
+        that.createNewMend(param);
       }, 2000);
     }
   },
@@ -120,27 +195,76 @@ Page({
     });
   },
 
-  redirectTo: function (param) {
-    //需要将param转换为字符串
-    param = JSON.stringify(param);
-    // wx.redirectTo({
-    //   url: '../main/index?param=' + param//参数只能是字符串形式，不能为json对象
-    // })
-    console.log("param");
-    console.log(param);
-    wx.request({
-      url: getApp().GlobalConfig.baseUrl + "/api/goods",
-       //仅为示例，并非真实的接口地址
-      data: param,
-      method: "POST",
+  createNewMend: function (param) {
+    var that = this;
+    var app = getApp();
+    var mendInfo = {};
+    var customerTemp = {};
+    customerTemp.userId = app.globalData.userId;
+    mendInfo.customer = customerTemp;
 
+    mendInfo.recvName = param.contact;
+    mendInfo.recvPhone = param.phone;
+
+    var mendTypeTemp = {};
+    mendTypeTemp.code = param.mendType;
+    mendInfo.mendType = mendTypeTemp;
+
+    var customerAddressTemp = {};
+    customerAddressTemp.province = app.globalData.address.province;
+    customerAddressTemp.city = app.globalData.address.city;
+    customerAddressTemp.county = app.globalData.address.county;
+    customerAddressTemp.detail = app.globalData.address.detail;
+    mendInfo.recvAddr = customerAddressTemp;
+
+    if (that.data.deliveryTimeType == "立即报修") {
+      mendInfo.reserveTime = that.data.reserveDate + " " + that.data.reserveTime + ":00";
+    }
+    else if (that.data.deliveryTimeType == "预约报修") {
+      mendInfo.reserveTime = that.data.date + " " + that.data.time + ":00";
+    }
+    mendInfo.detail = param.note;
+
+    mendInfo = JSON.stringify(mendInfo);
+    console.info(mendInfo);
+
+    wx.request({
+      url: getApp().GlobalConfig.baseUrl + "/api/Mend",
+       //仅为示例，并非真实的接口地址
+      data: mendInfo,
+      method: "POST",
       complete: function (res) {
-        console.log(res);
-        if (res == null || res.data == null) {
-          console.error('网络请求失败')
+        if (res.statusCode == 201) {
+          //console.error('网络请求成功')
+          wx.showToast({
+            title: '保修单提交成功',
+            icon: 'success',
+            duration: 2000,
+            success: function () {
+              setTimeout(function () {
+                wx.switchTab({
+                  url: '../index/index',
+                })
+              }, 1500);
+            }
+          });
+          return;
+        }
+        else if (res.statusCode == 409) {
+          console.error('该报单已存在')
           wx.showModal({
-            title: '提交失败',
-            showCancel: false
+            title: '该报单已存在',
+            showCancel: false,
+            duration: 1500
+          })
+          return;
+        }
+        else if (res.statusCode == 406) {
+          console.error('参数错误')
+          wx.showModal({
+            title: '保修单提交失败，请查看输入项',
+            showCancel: false,
+            duration: 1500
           })
           return;
         }

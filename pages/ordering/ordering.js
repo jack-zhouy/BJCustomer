@@ -69,9 +69,9 @@ Page({
       date: that.data.reserveDate,
       time: that.data.reserveTime,
     });
-    console.log(currentDate);
-    console.log(that.data.reserveDate);
-    console.log(that.data.reserveTime);
+    // console.log(currentDate);
+    // console.log(that.data.reserveDate);
+    // console.log(that.data.reserveTime);
     that.goodsType_request();
   },
   // 页面初次渲染完成（每次打开页面都会调用一次）
@@ -325,9 +325,7 @@ Page({
     }
     else if (that.data.deliveryTimeType == "预约送气")
     {
-      //if ((that.data.date.length > 0) || (that.data.time.length > 0)) {
-        orderInfo.reserveTime = that.data.date + " " + that.data.time + ":00";
-      //}
+      orderInfo.reserveTime = that.data.date + " " + that.data.time + ":00";
     }
 
 

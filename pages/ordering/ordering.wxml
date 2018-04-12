@@ -97,7 +97,7 @@
         
   <view class="btn-area">
     <label class="note_text" hidden="{{LabelNeedToBeHidden}}">带*为必填选项</label>
-    <button  style="background-color:{{submitBtnBgBgColor}}" formType="submit"  loading="{{btnLoading}}">
+    <button disabled="{{submitDisabled}}" style="background-color:{{submitBtnBgBgColor}}" formType="submit"  loading="{{btnLoading}}">
     {{submitBtnTxt}} </button>
     <view class="txt-area">
       <navigator open-type="switchTab" url="../index/index"><text class="forgot-password">回首页</text>

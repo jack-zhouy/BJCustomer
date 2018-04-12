@@ -118,6 +118,23 @@ Page({
       })
     }
   },
+//转到我的保修单
+  navigateToCheckMyMend: function () {
+    var app = getApp();
+    //如果没有登录就跳转到登录页面
+    if ((!app.globalData.loginState) && (app.globalData.userId == null)) {
+      wx.navigateTo({
+        url: '../login/login',
+      })
+    } else {
+      wx.navigateTo({
+        url: '../mends/mends',
+        success: function (res) { },
+        fail: function (res) { },
+        complete: function (res) { },
+      })
+    }
+  },
 
   //跳转到投诉建议
   navigateToComplaint:function(){
@@ -128,12 +145,6 @@ Page({
         url: '../login/login',
       })
     } else {
-      // wx.navigateTo({
-      //   url: '../complaint/complaint',
-      //   success: function (res) { },
-      //   fail: function (res) { },
-      //   complete: function (res) { },
-      // })
       var _this = this;
       wx.makePhoneCall({
         phoneNumber: '95007' //仅为示例，并非真实的电话号码

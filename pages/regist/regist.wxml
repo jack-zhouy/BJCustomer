@@ -136,7 +136,7 @@
         </view> 
 
         <view class="btn-area" hidden="{{needToBeHidden}}">
-             <label class="note_text" hidden="{{LabelNeedToBeHidden}}">带*为必填项</label>
+            <label class="note_text" hidden="{{LabelNeedToBeHidden}}">带*为必填项</label>
             <button  disabled="{{registDisabled}}" style="background-color:{{registBtnBgBgColor}}"   formType="submit"  loading="{{btnLoading}}"> {{registBtnTxt}} </button>
             <view class="txt-area">
                  <navigator open-type="switchTab" url="../index/index"><text class="forgot-password">回首页                         </text></navigator>
