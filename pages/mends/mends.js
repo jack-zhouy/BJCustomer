@@ -5,6 +5,7 @@ Page({
     currentTab: 0,
     mendsList:[],
     len:0,
+    resultShow:true,
   },
 
   onLoad: function () {
@@ -37,6 +38,15 @@ Page({
     // 页面关闭
 
   },
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    this.searchMyMendPTSuspending();
+    //模拟加载
+    setTimeout(function () {
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+    }, 1500);
+  },
   //点击切换
   clickTab: function (e) {
     var that = this;
@@ -50,14 +60,23 @@ Page({
       if (that.data.currentTab==0)
       {
         that.searchMyMendPTSuspending();
+        that.setData({
+          resultShow: true
+        })
       }
       else if (that.data.currentTab == 1)
       {
         that.searchMyMendPTHandling();
+        that.setData({
+          resultShow: true
+        })
       }
       else if (that.data.currentTab == 2)
       {
         that.searchMyMendPTSolved();
+        that.setData({
+          resultShow:false
+        })
       }
     }
   },
