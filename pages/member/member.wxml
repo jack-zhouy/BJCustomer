@@ -34,7 +34,7 @@
 	</view> 
   <view class="item" bindtap='navigateToCheckMyMend'>
 		<image class="hd" src="../../images/setting.png" />
-		<navigator class="bd" open-type="navigate" hover-class="none">我的保修单</navigator>
+		<navigator class="bd" open-type="navigate" hover-class="none">我的报修单</navigator>
 	</view>
 	<view class="item" bindtap='navigateToComplaint'>
 		<image class="hd" src="../../images/telephone.png" />
