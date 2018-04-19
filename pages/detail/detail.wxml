@@ -34,7 +34,8 @@
 
 <view class="input-log" >
   <view class="Title">支付方式:</view>
-  <input disabled="{{true}}" class="IndexText" value="{{payMethod}}"></input>
+  <!-- <input disabled="{{true}}" class="IndexText" >{{order.payType.name}}</input> -->
+   <input disabled="{{true}}" class="IndexText" value="{{payMethod}}"></input> 
 </view>
 
 <view class="input-log" >

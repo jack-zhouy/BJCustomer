@@ -19,14 +19,14 @@ Page({
     var order = JSON.parse(options.order);
 
     console.log(order);
-    if (order.payType.index == 0)
-    {
-      that.data.payMethod = "在线支付"
-    }
-    else{
-      that.data.payMethod = "气到付款"
-    }
-
+    // if (order.payType.index == 0)
+    // {
+    //   that.data.payMethod = "在线支付"
+    // }
+    // else{
+    //   that.data.payMethod = "气到付款"
+    // }
+    that.data.payMethod = order.payType.name;
     if (order.orderStatus == 0) {
       that.data.orderState = "待配送"
     }
