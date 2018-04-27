@@ -11,3 +11,10 @@ font-size: 30rpx;
 margin-top:10rpx;
 margin-left: 30rpx;
 }
+
+.textArea_style{
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+  width: 70%;
+  height: 150rpx
+}

@@ -16,7 +16,10 @@
         </view>
 
         <view class="list-brief">报修类型：{{item.mendType.name}}</view>
-        <view class="list-brief">报修内容：{{item.mendType.note}}</view>
+       
+      
+        <textArea class="textArea_style">报修内容：{{item.detail}}</textArea>
+        
         <view hidden="{{resultShow}}" class="list-brief">处理结果：{{item.resloveInfo}}</view>
 
       </view>  

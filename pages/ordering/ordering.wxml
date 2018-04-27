@@ -20,7 +20,7 @@
 			<!-- food list -->
 			<!-- 主图 -->
 			<view class="food-hd">
-				<image class="thumb" mode="aspectFill" src="../../images/bottom.jpg" />
+				<image class="thumb" mode="aspectFill" src="../../images/我的气瓶.png" />
 			</view>
 			<view class="food-bd">
 				<view class="title">{{item.name}}</view>
@@ -67,7 +67,7 @@
 
   <view class="input-log" wx:if="{{timePickerShow}}">
     <view class="pickerTitle margin_style">
-      <picker id="deliveryTime" name="deliveryTime" mode="time" value="{{time}}" start="{{reserveTime}}" end="23:59" bindchange="bindTimeChange">
+      <picker id="deliveryTime" name="deliveryTime" mode="time" value="{{time}}" start="00：00" end="23:59" bindchange="bindTimeChange">
          <view class='subtitle-label'>预约送气时间：{{time}}</view>
       </picker>
     </view>
@@ -92,7 +92,7 @@
 
   <view class="input-log">  
     <view class="pickerTitle margin_style">订单备注: </view>
-    <input class="inputIndexText" id="comment" name="comment" maxlength='140' type="text" />
+    <textarea class="inputIndexText textArea_style" id="comment" name="comment" type="text" ></textarea>
   </view>
         
   <view class="btn-area">

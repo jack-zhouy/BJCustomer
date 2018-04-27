@@ -95,9 +95,11 @@
 
 .slide{
   width: 100%;
+
 }
 .slide-image{
   width: 100%;
+
 }
 
 

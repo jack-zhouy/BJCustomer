@@ -20,3 +20,10 @@
 swiper{
   text-align: center;
 }
+
+.textArea_style{
+  font-size: 12px;
+  color:#8a869e;
+  height: 80rpx;
+  width: 700rpx;
+}

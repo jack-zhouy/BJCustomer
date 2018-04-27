@@ -45,7 +45,7 @@
 
   <view class="input-log" wx:if="{{timePickerShow}}">
     <view class="pickerTitle margin_style">
-      <picker id="deliveryTime" name="deliveryTime" mode="time" value="{{time}}" start="{{reserveTime}}" end="23:59" bindchange="bindTimeChange">
+      <picker id="deliveryTime" name="deliveryTime" mode="time" value="{{time}}" start="00：00" end="23:59" bindchange="bindTimeChange">
          <view class='subtitle-label'>预约报修时间：{{time}}</view>
       </picker>
     </view>
@@ -54,7 +54,7 @@
 
   <view class="input-log">  
     <view class="pickerTitle margin_style">报修内容*: </view>
-    <input class="inputIndexText" id="note" name="note" maxlength='140' type="text"/>
+    <textarea class="inputIndexText textArea_style" id="detail" name="detail" type="text" ></textarea>
   </view>
 
   <label class="noteText">带*为必填项</label>

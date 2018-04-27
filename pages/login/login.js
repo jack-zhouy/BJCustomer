@@ -7,8 +7,8 @@ Page({
     btnLoading: false,
     disabled: false,
     //小图标路径
-    pwdIcon: "../../images/pwdIcon.png",
-    logIcon: "../../images/logIcon.png",
+    pwdIcon: "../../images/密码.png",
+    logIcon: "../../images/登录名.png",
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')

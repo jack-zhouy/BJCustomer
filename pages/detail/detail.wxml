@@ -6,7 +6,8 @@
     <view><text class="order-rating">{{order.recvName}} | {{order.recvPhone}}</text></view>
     <view class="order-brief">{{order.createTime}}</view>
     <view class="order-brief">
-      <text>地址:{{deliveryAddress}}\r\n{{deliveryAddressDetail}}</text>
+     <!-- <textarea class='textArea_style'>地址:{{deliveryAddress}}</textarea>  -->
+        <text>地址:{{deliveryAddress}}\r\n{{deliveryAddressDetail}}</text>  
       <button class="thumb"   bindtap='trackOrder'  loading="{{btnLoading}}"> 订单跟踪 </button>
     </view>
 
@@ -51,8 +52,9 @@
 <!-- 备注 -->
 <view class="input-log">
   <view class="Title">订单备注:</view>
-  <input disabled="{{true}}" class="IndexText" value="{{order.comment}}"></input>
+  <textarea disabled="{{true}}" class="IndexText textArea_style" value="{{order.comment}}"></textarea>
 </view>
+
 
 <!-- <view class="btn-area" hidden="{{needToBeHidden}}">
   <button  disabled="{{registDisabled}}" style="background-color:{{registBtnBgBgColor}}"   formType="submit"  loading="{{btnLoading}}"> 评价 </button>

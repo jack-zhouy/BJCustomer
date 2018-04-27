@@ -7,6 +7,8 @@
     <view class="nickname" wx:if="{{!loginState}}" bindtap="gotoLogin">登录/注册</view>
 </view>
 <!-- 账户 -->
+		<!-- <view class="value balance">0</view>
+		<view class="caption">日完成</view> -->
 <view class="account">
 	<view class="item">	
     <view class="caption fontColor" bindtap='checkMyTickets'>我的气票</view>
@@ -15,29 +17,29 @@
 		<view class="caption fontColor" bindtap='checkMyCoupons'>我的优惠券</view>
 	</view>
 	 <view class="item">
-		<view class="caption fontColor" bindtap='checkMyAccount'>我的账号</view>
+		<view class="caption fontColor" bindtap='checkMyAccount'>我的余额</view>
 	</view> 
 </view>
 <!-- 列表 -->
 <view class="listview" >
 	<view class="item" bindtap='navigateToCheckProfile'>
-		<image class="hd" src="../../images/category.png" />
+		<image class="hd" src="../../images/查看资料.png" />
 		<navigator class="bd" open-type="navigate" hover-class="none">查看资料</navigator>
 	</view>
   <view class="item" bindtap='navigateToEditProfile'>
-		<image class="hd" src="../../images/setting.png" />
+		<image class="hd" src="../../images/修改资料.png" />
 		<navigator class="bd" open-type="navigate" hover-class="none">修改资料</navigator>
 	</view>
   <view class="item" bindtap='navigateToCheckMybottle'>
-		<image class="hd" src="../../images/setting.png" />
+		<image class="hd" src="../../images/我的气瓶.png" />
 		<navigator class="bd" open-type="navigate" hover-class="none">我的气瓶</navigator>
 	</view> 
   <view class="item" bindtap='navigateToCheckMyMend'>
-		<image class="hd" src="../../images/setting.png" />
+		<image class="hd" src="../../images/报修.png" />
 		<navigator class="bd" open-type="navigate" hover-class="none">我的报修单</navigator>
 	</view>
 	<view class="item" bindtap='navigateToComplaint'>
-		<image class="hd" src="../../images/telephone.png" />
+		<image class="hd" src="../../images/电话.png" />
 		<navigator class="bd"  open-type="navigate" hover-class="none">一键投诉建议热线</navigator>
 	</view>
 </view>

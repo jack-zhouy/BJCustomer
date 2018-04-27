@@ -9,19 +9,19 @@
           </view>  
 
           <view class="input-log">  
-            <image class="userinfo-logIcon" src="{{logIcon}}"></image>  
-            <text class="pickerTitle">用户名*: </text>
+            <image class="userinfo-logIcon" src="{{logIcon1}}"></image>  
+            <text class="pickerTitle">姓名*: </text>
             <input disabled="{{inputDisable}}" class="inputIndexText" id="name" name="name" maxlength='20' type="text" value="{{checkProfileState==true? name_value : ''}}"/>
           </view>  
 
           <view class="input-log">  
-            <image class="userinfo-logIcon" src="{{logIcon}}"></image>  
+            <image class="userinfo-logIcon" src="{{idIcon}}"></image>  
             <text class="pickerTitle">身份证号*: </text>
             <input disabled="{{inputDisable}}" class="inputIndexText" id="identity" name="identity" maxlength='18' type="text" value="{{checkProfileState==true? identity_value : ''}}"/>
           </view>  
 
           <view class="input-log">  
-            <image class="userinfo-logIcon" src="{{logTel}}"></image> 
+            <image class="userinfo-logIcon" src="{{telIcon}}"></image> 
             <text class="pickerTitle">手机号*: </text> 
             <input disabled="{{inputDisable}}" class="inputIndexText" id="phone" name="phone" maxlength='12' type="text" value="{{checkProfileState==true? phone_value : ''}}"/>
           </view>
@@ -39,7 +39,7 @@
           </view>
 
           <view class="input-log" hidden="{{needToBeShown}}">  
-          <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image>  
+          <image class="userinfo-logIcon" src="{{bottleCheck}}"></image>  
           <view class="pickerTitle"> 是否携带钢瓶*: </view>
             <radio-group id="haveCylinder" name="haveCylinder" class="radio-group radioIndexText" bindchange="radioChange">
               <label class="radio" wx:for="{{items}}">
@@ -49,31 +49,31 @@
           </view>
 
           <view class="input-log" hidden="{{inputNeedToBeShown}}"> 
-            <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image> 
+            <image class="userinfo-logIcon" src="{{bottleCheck}}"></image> 
             <view class="pickerTitle">是否携带钢瓶: </view>  
             <input disabled="{{inputDisable}}" class="inputIndexText" type="text" value="{{checkProfileState==true ? hasCylinder_value : ''}}"/>
           </view>
 
           <view class="input-log" hidden="{{inputNeedToBeShown}}"> 
-            <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image> 
+            <image class="userinfo-logIcon" src="{{customerTypeIcon}}"></image> 
             <view class="pickerTitle">客户类型: </view>  
             <input disabled="{{inputDisable}}" class="inputIndexText" type="text" value="{{checkProfileState==true ? customerType_value : ''}}"/>
           </view>
 
           <view class="input-log" hidden="{{inputNeedToBeShown}}"> 
-            <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image> 
+            <image class="userinfo-logIcon" src="{{customerResourceIcon}}"></image> 
             <view class="pickerTitle">客户来源: </view>  
             <input disabled="{{inputDisable}}" class="inputIndexText" type="text" value="{{checkProfileState==true ? customerSource_value : ''}}"/>
           </view>  
 
           <view class="input-log" hidden="{{inputNeedToBeShown}}"> 
-            <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image> 
+            <image class="userinfo-logIcon" src="{{settlementIcon}}"></image> 
             <view class="pickerTitle">结算类型: </view>  
             <input disabled="{{inputDisable}}" class="inputIndexText" type="text" value="{{checkProfileState==true ? settlementType_value : ''}}"/>
           </view>  
           
           <view class="input-log" hidden="{{needToBeShown}}">
-          <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image>  
+          <image class="userinfo-logIcon" src="{{customerTypeIcon}}"></image>  
             <view class="pickerTitle"> 客户类型: </view>
 				    <picker mode ="selector" id="customerType" name="customerType" class="pickerIndexText" bindchange="bindPickerChange1"  value="{{originalCustomerTypeArray[customerTypeIndex].code}}" range="{{customerTypeArray}}">
 					  <view class="subtitle-label">{{customerTypeArray[customerTypeIndex]}}</view>
@@ -81,7 +81,7 @@
           </view>
 
           <view class="input-log" hidden="{{needToBeShown}}">
-          <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image>  
+          <image class="userinfo-logIcon" src="{{customerResourceIcon}}"></image>  
             <view class="pickerTitle"> 客户来源: </view>
 				    <picker mode ="selector" id="customerSource" name="customerSource" class="pickerIndexText" bindchange="bindPickerChange" value="{{originalCustomerSourceArray[customerSourceIndex].code}}" range="{{customerSourceArray}}">
 					  <view class="subtitle-label">{{customerSourceArray[customerSourceIndex]}}</view>
@@ -89,11 +89,11 @@
           </view>
         
           <view class="input-log" hidden="{{needToBeShown}}">
-          <image class="userinfo-logIcon" src="{{customerSourceIcon}}"></image>  
+          <image class="userinfo-logIcon" src="{{settlementIcon}}"></image>  
             <view class="pickerTitle"> 结算类型: </view>
-				    <picker mode ="selector" id="settlementType" name="settlementType" class="pickerIndexText" bindchange="bindPickerChange2"  value="{{originalSettlementTypeArray[settlementTypeIndex].code}}" range="{{settlementTypeArray}}">
-					  <view class="subtitle-label">{{settlementTypeArray[settlementTypeIndex]}}</view>
-			    	</picker>
+				    <!-- <picker mode ="selector" id="settlementType" name="settlementType" class="pickerIndexText" bindchange="bindPickerChange2"  value="{{originalSettlementTypeArray[settlementTypeIndex].code}}" range="{{settlementTypeArray}}"> -->
+				    <input class="inputIndexText"  disabled="{{true}}" maxlength='20' type="text" value="普通用户"/>
+			    	<!-- </picker> -->
           </view>
 
           <view class="input-log" >  
@@ -103,7 +103,7 @@
           </view> 
 
           <view class="input-log" hidden="{{inputNeedToBeShown}}">  
-            <image class="userinfo-logIcon" src="/images/location.png"></image>
+            <image class="userinfo-logIcon" src="{{logAdd}}"></image>
             <view class="pickerTitle">地址: </view>  
             <text disabled="{{inputDisable}}" class='inputIndexText textStyle'>{{address_value1}}\r\n{{address_value2}}</text>  
 
@@ -111,7 +111,7 @@
           </view> 
 
           <view class="input-log" hidden="{{addSelectNeedToBeShown}}">  
-            <image class="userinfo-logIcon" src="/images/location.png"  bindtap="selectAddress"></image> 
+            <image class="userinfo-logIcon" src="{{logAdd}}"  bindtap="selectAddress"></image> 
             <!-- 地址选择 -->
 	          <!-- <view  class="container"> -->
 	        	<!-- 用户尚未添加地址时 -->
@@ -138,7 +138,7 @@
         <view class="btn-area" hidden="{{needToBeHidden}}">
             <label class="note_text" hidden="{{LabelNeedToBeHidden}}">带*为必填项</label>
             <button  disabled="{{registDisabled}}" style="background-color:{{registBtnBgBgColor}}"   formType="submit"  loading="{{btnLoading}}"> {{registBtnTxt}} </button>
-            <view class="txt-area">
+            <view class="txt-area" hidden="{{needToBeShown}}">
                  <navigator open-type="switchTab" url="../index/index"><text class="forgot-password">回首页                         </text></navigator>
                  <navigator redirect url="../login/login"><text class="register">登录账号
                  </text></navigator>

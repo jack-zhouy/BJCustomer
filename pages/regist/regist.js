@@ -38,14 +38,19 @@ Page({
     address_value2: "",
     existedCustomerInfo: {},
 //小图标路径
-    logIcon0: "../../images/icon_member_selected.png",
-    logIcon: "../../images/logIcon.png",
-    pwdIcon: "../../images/pwdIcon.png",
+    logIcon0: "../../images/登录名.png",
+    logIcon1: "../../images/用户名.png",
+    idIcon: "../../images/身份证号.png",
+    telIcon: "../../images/电话.png",
+    bottleCheck: "../../images/是否携带钢瓶.png",
+    pwdIcon: "../../images/密码.png",
+    customerTypeIcon: "../../images/客户类型.png",
+    customerResourceIcon: "../../images/客户来源.png",
+    settlementIcon: "../../images/结算类型.png",
     verifiIcon:"../../images/verifiIcon.png",
     logTel: "../../images/telephone.png",
-    logAdd: "../../images/icon_home.png",
-    customerSourceIcon: "../../images/default-avatar.png",
-    companyIcon: "../../images/icon_home_selected.png",
+    logAdd: "../../images/定位.png",
+    companyIcon: "../../images/公司.png",
 //客户类型、来源选择器数据
     customerTypeIndex: 0,
     customerTypeArray: [],
@@ -495,9 +500,9 @@ checkTelephone: function (param) {
     var customerSourceTemp = {};
     customerSourceTemp.code = param.customerSource;
     customerInfo.customerSource = customerSourceTemp;
-
+//只能注册普通用户
     var settlementTypeTemp = {};
-    settlementTypeTemp.code = param.settlementType;
+    settlementTypeTemp.code = "00001";
     customerInfo.settlementType = settlementTypeTemp;
 
     var customerAddressTemp = {};

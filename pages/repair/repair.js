@@ -223,7 +223,7 @@ Page({
     else if (that.data.deliveryTimeType == "预约报修") {
       mendInfo.reserveTime = that.data.date + " " + that.data.time + ":00";
     }
-    mendInfo.detail = param.note;
+    mendInfo.detail = param.detail;
 
     mendInfo = JSON.stringify(mendInfo);
     console.info(mendInfo);

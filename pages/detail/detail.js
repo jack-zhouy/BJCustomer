@@ -26,7 +26,11 @@ Page({
     // else{
     //   that.data.payMethod = "气到付款"
     // }
-    that.data.payMethod = order.payType.name;
+    if (order.payType!=null)
+    {
+      that.data.payMethod = order.payType.name;
+    }
+
     if (order.orderStatus == 0) {
       that.data.orderState = "待配送"
     }
@@ -43,8 +47,10 @@ Page({
       that.data.orderState = "作废"
     }
 
+    // that.data.deliveryAddress = order.recvAddr.province + order.recvAddr.city
+    //   + order.recvAddr.county + order.recvAddr.detail;
     that.data.deliveryAddress = order.recvAddr.province + order.recvAddr.city
-      + order.recvAddr.county;
+      + order.recvAddr.county ;
     that.data.deliveryAddressDetail = order.recvAddr.detail;
 
     that.setData({

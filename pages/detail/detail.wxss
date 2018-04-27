@@ -1,5 +1,10 @@
 @import "../login/login.wxss";
 /* DETAIL */
+.textArea_style{
+  height: 50rpx;
+  width: 700rpx;
+}
+
 .order-details{
   display: flex;
   position: relative;
@@ -297,4 +302,12 @@
   width: 40%;
 
   margin-left: -10rpx;
+}
+
+
+.textArea_style{
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+  width: 70%;
+  height: 150rpx
 }

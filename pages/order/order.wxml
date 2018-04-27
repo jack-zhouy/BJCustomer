@@ -20,9 +20,9 @@
     </view>
  
     <view class="list-sale">
-       <button class="ui-btn ui-btn-red" > 
-        <block>{{ordersStatusDescription[item.orderStatus]}}</block>
-       </button> 
+        <button class="ui-btn ui-btn-red" disabled='true'>  
+        <block class="ui-btn ui-btn-red">{{ordersStatusDescription[item.orderStatus]}}</block>
+        </button>  
     </view> 
      
   </view>

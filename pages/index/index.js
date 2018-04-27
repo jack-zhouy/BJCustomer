@@ -18,15 +18,11 @@ Page({
     lunboList: [
       {
       "title": "advert1",
-      "picurl": "../../images/advert/company3.jpg",
+      "picurl": "../../images/advert/baijiang1.jpg",
     },
     {
       "title": "advert2",
-      "picurl": "../../images/advert/company2.jpg",
-    },
-    {
-      "title": "advert3",
-      "picurl": "../../images/advert/company1.jpg",
+      "picurl": "../../images/advert/baijiang2.jpg",
     },],
     bannerUrlList: [],
     navList: [
