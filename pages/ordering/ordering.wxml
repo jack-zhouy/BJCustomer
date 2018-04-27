@@ -92,7 +92,7 @@
 
   <view class="input-log">  
     <view class="pickerTitle margin_style">订单备注: </view>
-    <textarea class="inputIndexText textArea_style" id="comment" name="comment" type="text" ></textarea>
+    <textarea class="inputIndexText textArea_style" maxlength="100" id="comment" name="comment" type="text" ></textarea>
   </view>
         
   <view class="btn-area">
