@@ -20,7 +20,8 @@
       
         <textArea class="textArea_style">报修内容：{{item.detail}}</textArea>
         
-        <view hidden="{{resultShow}}" class="list-brief">处理结果：{{item.resloveInfo}}</view>
+        <textArea hidden="{{resultShow}}" class="textArea_style">处理结果：{{item.resloveInfo}}</textArea>
+        <!-- <view hidden="{{resultShow}}" class="list-brief">处理结果：{{item.resloveInfo}}</view> -->
 
       </view>  
     </view>
