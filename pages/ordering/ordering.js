@@ -123,7 +123,8 @@ Page({
     wx.request({
       url: getApp().GlobalConfig.baseUrl + "/api/Goods",
       data: {
-        typeCode: "0001"
+        typeCode: "0001",
+        status:0,
       },
       method: "GET",
       complete: function (res) {
