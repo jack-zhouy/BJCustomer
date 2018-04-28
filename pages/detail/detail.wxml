@@ -50,7 +50,7 @@
 </view>
 
 <!-- 备注 -->
-<view class="input-log">
+<view class="input-log1">
   <view class="Title">订单备注:</view>
   <textarea disabled="{{true}}"  class="IndexText textArea_style" value="{{order.comment}}"></textarea>
 </view>
