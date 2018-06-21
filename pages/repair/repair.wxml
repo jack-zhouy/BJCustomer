@@ -5,19 +5,14 @@
     <view class="pickerTitle my_text">请仔细填写报修信息</view>
   </view> 
 
-  <!-- <view class="input-log">  
-    <view class="pickerTitle margin_style">登录名: </view>
-    <input disabled="{{true}}" class="inputIndexText" type="text" value="{{userId_value}}"/>
-  </view>  -->
-
   <view class="input-log">  
-    <view class="pickerTitle margin_style">联系人*: </view>
-    <input class="inputIndexText" id="contact" name="contact" type="text"/>
+    <view class="pickerTitle margin_style">联系人: </view>
+    <input class="inputIndexText" id="contact" name="contact" type="text" placeholder='{{name}}'/>
   </view> 
 
   <view class="input-log">  
-    <view class="pickerTitle margin_style">联系电话*: </view>
-    <input class="inputIndexText" id="phone" name="phone" type="text"/>
+    <view class="pickerTitle margin_style">联系电话: </view>
+    <input class="inputIndexText" id="phone" name="phone" type="text" placeholder='{{phone}}'/>
   </view> 
 
   <view class="input-log" >

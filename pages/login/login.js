@@ -126,6 +126,7 @@ Page({
           var app = getApp();
           app.globalData.loginState = true;
           app.globalData.userId = res.data.userId;
+          app.globalData.name = res.data.name;
           app.globalData.phone = res.data.phone; 
           app.globalData.address = res.data.address; 
           app.globalData.settlementTypeCode = res.data.settlementType.code;

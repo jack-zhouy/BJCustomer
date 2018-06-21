@@ -3,18 +3,19 @@
   <view class="input-area">
 
     <view class="input-log">  
-      <view class="pickerTitle margin_style">联系人*: </view>
-      <input disabled="{{inputDisable}}" class="inputIndexText" id="recvName" name="recvName" maxlength='20' type="text"/>
+      <view class="pickerTitle margin_style">联系人: </view>
+       <input disabled="{{inputDisable}}" class="inputIndexText" id="recvName" name="recvName" maxlength='20' type="text" placeholder="{{name}}"/> 
     </view>
 
     <view class="input-log">  
-      <view class="pickerTitle margin_style">联系电话*: </view>
-      <input disabled="{{inputDisable}}" class="inputIndexText" id="recvPhone" name="recvPhone" maxlength='20' type="text"/>
+      <view class="pickerTitle margin_style">联系电话: </view>
+      <input disabled="{{inputDisable}}" class="inputIndexText" id="recvPhone" name="recvPhone" maxlength='20' type="text" placeholder="{{phone}}"/> 
     </view>
 
 
 	<!-- 菜品列表 -->
 	<view class="food-container title1">选择商品*
+   <label class="radioIndexText" style='color:red' hidden="{{warning_boolean}}">抱歉，不存在您地址所在区域的商品！</label>
 		<!-- 菜品单品 -->
 		<view class="food-item" wx:for="{{originalGoodsTypeArray}}" wx:key="">
 			<!-- food list -->
@@ -55,7 +56,6 @@
       </picker>
     </view>
   </view>
-
 
    <view class="input-log" wx:if="{{timePickerShow}}">
      <view class="pickerTitle margin_style">

@@ -289,7 +289,7 @@ settlementType_request: function () {
           settlementTypeArray: that.data.settlementTypeArray,
           originalSettlementTypeArray: res.data.items
         })
-        console.info(that.data.originalSettlementTypeArray);
+        
       }
     }
   });
@@ -440,6 +440,24 @@ checkTelephone: function (param) {
       return true;
     }
   },
+  //验证地址是否有
+  checkAddress: function () {
+    var that = this;
+    var exp = that.data.AddressData.provinceName;
+   // console.info(exp);
+    if (typeof (exp) == "undefined") {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '请输入正确的地址信息'
+      });
+      return false;
+    }
+    else {
+      return true;
+    }
+  },
+
   //提交注册信息/修改信息表单
   formSubmit: function (e) {
     var param = e.detail.value;
@@ -450,7 +468,8 @@ checkTelephone: function (param) {
     
     if (that.data.editProfileState == false)
     {
-      var flag = this.checkUserId(param) && this.checkUserName(param) && this.checkIdentity(param) && this.checkTelephone(param) && this.checkPassword(param) && this.checkPasswordSecond(param);
+      var flag = this.checkUserId(param) && this.checkUserName(param) && this.checkIdentity(param) 
+      && this.checkTelephone(param) && this.checkPassword(param) && this.checkPasswordSecond(param) && this.checkAddress();
       if (flag) {
         this.setregistData1();
         setTimeout(function () {
@@ -547,11 +566,18 @@ checkTelephone: function (param) {
           });
           return;
         }
-
-        if (res == null || res.statusCode == 409) {
-          console.error('网络请求失败')
+        if (res == null || res.statusCode == 406) {
           wx.showModal({
-            title: '该登录名已被注册',
+            title: '注册失败，请输入全部必填项',
+            showCancel: false,
+            duration: 1500
+          })
+          return;
+        }
+        if (res == null || res.statusCode == 409) {
+          //console.error('网络请求失败')
+          wx.showModal({
+            title: '注册失败，该登录名已被注册',
             showCancel: false,
             duration: 1500
           })

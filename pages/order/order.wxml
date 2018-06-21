@@ -26,3 +26,9 @@
     </view> 
      
   </view>
+
+<view hidden="{{len > 0 ? true : false}}">
+    <view class="list-info">
+      <text>暂无订单</text>
+    </view>
+</view>

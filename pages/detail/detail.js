@@ -61,8 +61,7 @@ Page({
       payMethod: that.data.payMethod,
       orderState: that.data.orderState
     })
-    console.log(that.data.payMethod);
-    console.log(that.data.orderState);
+
   },
 
   onReady: function () {

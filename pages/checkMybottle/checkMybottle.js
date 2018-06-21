@@ -7,7 +7,8 @@ Page({
     limit: 6,
     windowHeight: 0,
     scrollTop: 100,
-    bottleStatus: ""
+    bottleStatus: "",
+    len:0,
   },
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
@@ -31,13 +32,13 @@ Page({
       method: 'GET',
       success: function (res) {
         // 数据从逻辑层发送到视图层，同时改变对应的 this.data 的值
-        console.log(res.data);
+        
         that.setData({
           bottleList: res.data.items,
-          loading: true
+          loading: true,
+          len: res.data.items.length,
         })
-        console.log("bottleList:");
-        console.log(that.data.bottleList);
+
       },
       fail: function () {
         console.error("failed");

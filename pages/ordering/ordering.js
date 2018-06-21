@@ -25,6 +25,7 @@ Page({
     userId_value: "",
     goodsTypeCode:"",
     phone:"",
+    name:"",
     index: 0,
     addressBoolean: false,
     address_value:"",
@@ -34,6 +35,8 @@ Page({
     payStatus:"",
     cartData: {},
     cartObjects: [],
+
+    warning_boolean: true,
 
     //支付方式radio数据
     payMethodItems: [
@@ -69,9 +72,7 @@ Page({
       date: that.data.reserveDate,
       time: that.data.reserveTime,
     });
-    // console.log(currentDate);
-    // console.log(that.data.reserveDate);
-    // console.log(that.data.reserveTime);
+
     that.goodsType_request();
   },
   // 页面初次渲染完成（每次打开页面都会调用一次）
@@ -79,6 +80,7 @@ Page({
   },
   // 页面显示（一个页面只会调用一次）
   onShow: function () {
+    var that = this;
     var app = getApp();
     //console.log(app.globalData);
     if (app.globalData.loginState) {
@@ -88,6 +90,7 @@ Page({
         userId_value: app.globalData.userId,
         //goodsTypeCode: app.globalData.typeCode,
         phone: app.globalData.phone,
+        name: app.globalData.name,
         address_value: app.globalData.address.province + app.globalData.address.city +
         app.globalData.address.county + app.globalData.address.detail,
         address_value1: app.globalData.address.province + app.globalData.address.city + 
@@ -118,19 +121,28 @@ Page({
   },
   //请求后台商品信息
   goodsType_request: function () {
-    console.log("请求后台商品信息");
     var that = this;
+    var app = getApp();
+  
     wx.request({
       url: getApp().GlobalConfig.baseUrl + "/api/Goods",
       data: {
         typeCode: "0001",
         status:0,
+        province: app.globalData.address.province,
+        city: app.globalData.address.city,
+        county: app.globalData.address.county
       },
       method: "GET",
       complete: function (res) {
         if (res.statusCode == 200) {
-          console.log(res.data);
           var count = res.data.items.length;
+          if (count == 0)
+          {
+            that.setData({
+              warning_boolean:false,
+            })
+          }
           for (var i = 0; i < count; i++) {
             var tempSource = res.data.items[i].name;
             that.data.goodsTypeArray.push(tempSource);
@@ -139,10 +151,8 @@ Page({
             goodsTypeArray: that.data.goodsTypeArray,
             originalGoodsTypeArray: res.data.items,
             goodsInfo:res.data.items[0],
-            //amount: res.data.items[0].price
           })
-          console.log(that.data.originalGoodsTypeArray);
-          console.log(that.data.goodsTypeArray);
+
         }
       }
     });
@@ -150,11 +160,9 @@ Page({
 //选择支付方式radio触发函数
   payMethodRadioChange: function (e) { 
     var that = this;
-    console.log(e.detail.value);
     this.setData({
       payMethodBoolean: e.detail.value
     })
-    console.log(that.data.payMethodBoolean);
   },
   //预约送气/立即送气picker触发函数
   deliverTimeTypesChange: function (e) {
@@ -172,7 +180,6 @@ Page({
         deliveryTimeType: deliveryTimeType
       })
     }
-    console.log(that.data.deliveryTimeType);
   },
 
   //选择订单详情选择器触发函数
@@ -188,12 +195,10 @@ Page({
     orderDetail.originalPrice = good.price;
     orderDetail.dealPrice = good.price;
     orderDetail.quantity = 0;
-    //orderDetail.quantity = 1;
     orderDetail.subtotal = orderDetail.quantity * orderDetail.dealPrice;
     
     that.data.orderDetailList.push(orderDetail);
-    // console.log(orderDetail);
-    console.log(that.data.orderDetailList);
+
     that.setData({
       orderDetailList: that.data.orderDetailList,
       amount: orderDetail.subtotal
@@ -211,10 +216,10 @@ Page({
       time: e.detail.value
     })
   },
-  //验证是否选择支付方式
-  checkChoosePayMethod: function (){
-    //var payMethod = param.payMethod.trim();
-    if (that.data.payMethodBoolean.length > 0)
+  //验证是否选择商品
+  checkChooseGoods: function (){
+    var that = this;
+    if (that.data.cartObjects.length > 0)
     {
       return true;
     }
@@ -222,7 +227,7 @@ Page({
     wx.showModal({
       title: '提示',
       showCancel: false,
-      content: '请选择支付方式'
+      content: '请选择商品'
     });
     return false;
     }
@@ -255,17 +260,30 @@ Page({
       return false;
     }
   },
+  //验证是否选择报修时间
+  checkTime: function () {
+    var that = this;
+    if (that.data.deliveryTimeType.length == 0) {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '请选择报修时间'
+      });
+      return false;
+    } else {
+      return true;
+    }
+  },
   //提交订气表单
   form_OrderSubmit: function (e) {
-    console.log("form_OrderSubmit");
     var param = e.detail.value;
     this.mysubmit(param);
   },
   mysubmit: function (param) {
     var that = this;
-    var flag = this.checkRecvName(param) && this.checkRecvPhone(param) ;
-    //var flag = this.checkRecvName(param) && this.checkRecvPhone(param) && that.data.payMethodBoolean;
-    console.log(flag);
+    // var flag = this.checkRecvName(param) && this.checkRecvPhone(param) 
+    //   && this.checkChooseGoods() && this.checkTime() ;
+    var flag = this.checkChooseGoods() && this.checkTime();
     var payStatus = "";
     if(flag)
     {
@@ -296,24 +314,11 @@ Page({
   },
   //请求创建新订单
   NewOrder_request: function (param) {
-    console.log("NewOrder_request in");
     var that = this;
     var app = getApp();
     var orderInfo = {};
-    console.log("提交订单");
     orderInfo.callInPhone = that.data.phone;
     
-    // if (that.data.payMethodBoolean == "true")
-    // {
-    //   orderInfo.payType = "PTOnLine";
-    // }
-    // else
-    // {
-    //   orderInfo.payType = "PTOffline";
-    // }
-    //气到付款
-    //orderInfo.payType = "PTOffline";
-
     orderInfo.accessType = "ATWeixin";
 
     var customerTemp = {};
@@ -329,7 +334,6 @@ Page({
       orderInfo.reserveTime = that.data.date + " " + that.data.time + ":00";
     }
 
-
     orderInfo.recvLongitude = that.data.location.lng;
     orderInfo.recvLatitude = that.data.location.lat;
 
@@ -340,14 +344,31 @@ Page({
     customerAddressTemp.detail = app.globalData.address.detail;
     orderInfo.recvAddr = customerAddressTemp;
 
-    orderInfo.recvName = param.recvName;
-    orderInfo.recvPhone = param.recvPhone;
+    // orderInfo.recvName = param.recvName;
+    // orderInfo.recvPhone = param.recvPhone;
+    if (param.recvName.length == 0)
+    {
+      orderInfo.recvName = app.globalData.name;
+    }
+    else
+    {
+      orderInfo.recvName = param.recvName;
+    }
 
+    if (param.recvPhone.length == 0)
+    {
+      orderInfo.recvPhone = app.globalData.phone;
+    }
+    else
+    {
+      orderInfo.recvPhone = param.recvPhone;
+    }
+
+ 
     if (param.comment.length > 0){
       orderInfo.comment = param.comment;
     }
-
-    
+ 
     //将购物车的数据转换成订单详情
     orderInfo.orderDetailList = [];
 
@@ -364,7 +385,7 @@ Page({
           orderDetail.subtotal = orderDetail.quantity * orderDetail.dealPrice;
           orderInfo.orderDetailList.push(orderDetail);
         }
-    console.log(orderInfo.orderDetailList );
+
     //end
 
     orderInfo.orderAmount = that.data.amount;
@@ -382,13 +403,6 @@ Page({
 
       complete: function (res) {
         if (res.statusCode == 201) {
-          console.log(res);
-          // orderId = res.header.Location;
-          // orderId = orderId.substring(37)
-          // that.setData({
-          //   orderId: orderId,
-          // })
-          // console.log(that.data.orderId);
           console.log('提交成功')
           wx.showToast({
             title: '提交成功',
@@ -437,7 +451,6 @@ Page({
       },
       success: function (res) {
         // success
-        console.log(res.data);
         var strLocation = res.data.geocodes[0].location;
         var searchedAddress = res.data.geocodes[0].formatted_address;
         var location = {};
@@ -460,12 +473,10 @@ Page({
   //计算订单总价
   amount: function () {
     var that = this;
-    //var cartObjects = that.data.orderDetailList;
     var cartObjects = that.data.cartObjects;
     var amount = 0;
     var quantity = 0;
     cartObjects.forEach(function (item, index) {
-        //amount += item.quantity * item.dealPrice;
         amount += item.quantity * item.good.price;
         quantity += item.quantity;   
     });
@@ -473,9 +484,6 @@ Page({
       amount: amount,
       quantity: quantity
     });
-    console.log(that.data.amount);
-    console.log(that.data.quantity);
-
   },
 
   //发起微信支付
@@ -504,9 +512,7 @@ Page({
         totalFee: totalFee
       },
       success: function (res) {
-        console.log(res);
         that.requestPayment(res.data);
-
       }
     })
   },
@@ -535,7 +541,7 @@ Page({
         }, 2000); 
       },
       'fail': function (res) {
-        console.log(res);
+
         wx.showModal({
           title: '提示',
           showCancel: false,
@@ -646,7 +652,6 @@ Page({
     // 添加商品到数组
     var cart = {};
     cart.good = good;
-    console.log(good);
     cart.quantity = cartData[good.id];
     cartObjects.push(cart);
     that.setData({

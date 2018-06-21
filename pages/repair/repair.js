@@ -9,6 +9,9 @@ Page({
     btnLoading: false,
     submitDisabled: false,
 
+    phone: "",
+    name: "",
+
      //报修类型
      mendTypeIndex: 0,
      mendTypeArray: [],
@@ -47,7 +50,9 @@ Page({
     var app = getApp();
     if (app.globalData.loginState) {
       that.setData({
-        userId_value: app.globalData.userId
+        userId_value: app.globalData.userId,
+        phone: app.globalData.phone,
+        name: app.globalData.name,
       });
     } 
     //如果没有登录就跳转到登录页面
@@ -84,7 +89,7 @@ Page({
             mendTypeArray: that.data.mendTypeArray,
             originalMendTypeArray: res.data.items
           })
-          console.log(that.data.originalMendTypeArray);
+         
         }
       }
     });
@@ -155,13 +160,43 @@ Page({
       return true;
     }
   },
-
+//验证是否选择报修时间
+checkTime:function(){
+  var that = this;
+  if (that.data.deliveryTimeType.length == 0)
+  {
+    wx.showModal({
+      title: '提示',
+      showCancel: false,
+      content: '请选择报修时间'
+    });
+    return false;
+  } else {
+    return true;
+  }
+},
+//验证报修内容是否输入
+checkDetail: function (param) {
+  var detail = param.detail.trim();
+  if (detail.length > 0) {
+    return true;
+  } else {
+    wx.showModal({
+      title: '提示',
+      showCancel: false,
+      content: '请描述报修内容'
+    });
+    return false;
+  }
+},
   form_RepairSubmit: function (e) {
     var param = e.detail.value;
     this.mysubmit(param);
   },
   mysubmit: function (param) {
-    var flag = this.checkPhone(param) && this.checkRecvName(param);
+    var flag = this.checkTime() && this.checkDetail(param);
+    // var flag = this.checkPhone(param) && this.checkRecvName(param)
+    //   && this.checkTime() && this.checkDetail(param);
     var that = this;
     if (flag) {
       this.setregistData1();
@@ -203,8 +238,23 @@ Page({
     customerTemp.userId = app.globalData.userId;
     mendInfo.customer = customerTemp;
 
-    mendInfo.recvName = param.contact;
-    mendInfo.recvPhone = param.phone;
+    // mendInfo.recvName = param.contact;
+    // mendInfo.recvPhone = param.phone;
+
+    if (param.contact.length == 0) {
+      mendInfo.recvName = app.globalData.name;
+    }
+    else {
+      mendInfo.recvName = param.contact;
+    }
+
+    if (param.phone.length == 0) {
+      mendInfo.recvPhone = app.globalData.phone;
+    }
+    else {
+      mendInfo.recvPhone = param.phone;
+    }
+
 
     var mendTypeTemp = {};
     mendTypeTemp.code = param.mendType;
@@ -237,7 +287,7 @@ Page({
         if (res.statusCode == 201) {
           //console.error('网络请求成功')
           wx.showToast({
-            title: '保修单提交成功',
+            title: '报修单提交成功',
             icon: 'success',
             duration: 2000,
             success: function () {
@@ -262,7 +312,7 @@ Page({
         else if (res.statusCode == 406) {
           console.error('参数错误')
           wx.showModal({
-            title: '保修单提交失败，请查看输入项',
+            title: '报修单提交失败，请查看输入项',
             showCancel: false,
             duration: 1500
           })

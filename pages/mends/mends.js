@@ -56,7 +56,7 @@ Page({
       that.setData({
         currentTab: e.target.dataset.current
       })
-      console.log(that.data.currentTab);
+      
       if (that.data.currentTab==0)
       {
         that.searchMyMendPTSuspending();
@@ -93,15 +93,12 @@ Page({
     },
     complete: function (res) {
       if (res.statusCode == 200) {
-        console.log(res.data);
+
         that.setData({
           mendsList: res.data.items,
           len: res.data.items.length,
           loading: true
         })
-        console.log("mendsList:");
-        console.log(that.data.mendsList);
-        console.log(that.data.len);
       }
       else {
         console.log(res.statusCode);
@@ -123,15 +120,13 @@ Page({
     },
     complete: function (res) {
       if (res.statusCode == 200) {
-        console.log(res.data);
+  
         that.setData({
           mendsList: res.data.items,
           len: res.data.items.length,
           loading: true
         })
-        console.log("mendsList:");
-        console.log(that.data.mendsList);
-        console.log(that.data.len);
+
       }
       else {
         console.log(res.statusCode);
@@ -152,15 +147,12 @@ Page({
       },
       complete: function (res) {
         if (res.statusCode == 200) {
-          console.log(res.data);
+     
           that.setData({
             mendsList: res.data.items,
             len: res.data.items.length,
             loading: true
           })
-          console.log("mendsList:");
-          console.log(that.data.mendsList);
-          console.log(that.data.len);
         }
         else {
           console.log(res.statusCode);

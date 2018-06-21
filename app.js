@@ -2,14 +2,13 @@
 
 App({
   GlobalConfig: {
-    baseUrl: 'https://120.78.241.67',
+    baseUrl: 'http://47.106.71.160',
     appid: 'wxb137ebfa3dc90901',
     secret: 'ec3bbfe9300efa39b561ebac0aac5f2d',
     openid: null
-  },
-  //baseUrl: ' https://www.yunnanbaijiang.com',
-  // baseUrl: 'http://118.31.77.228:8006',
-  // baseUrl: 'http://120.78.241.67',
+  }, 
+
+  //baseUrl: 'https://120.78.241.67',
   getUserInfoEx: function () {
     wx.getUserInfo({
       success: res => {
@@ -68,6 +67,7 @@ App({
   globalData: {
     userInfo: null,
     userId:null,
+    name:null,
     phone:null,
     loginState: false,
     //商品类型

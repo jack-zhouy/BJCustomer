@@ -83,13 +83,11 @@ Page({
       },
       complete: function (res) {
         if (res.statusCode == 200) {
-          console.log(res.data);
+      
           that.setData({
             ticketsList: res.data.items,
             loading: true
           })
-          console.log("ticketsList:");
-          console.log(that.data.ticketsList);
         }
         else
         {
@@ -111,13 +109,12 @@ Page({
       },
       complete: function (res) {
         if (res.statusCode == 200) {
-          console.log(res.data);
+         
           that.setData({
             ticketsList: res.data.items,
             loading: true
           })
-          console.log("ticketsList:");
-          console.log(that.data.ticketsList);
+
         }
         else {
           console.log(res.statusCode);

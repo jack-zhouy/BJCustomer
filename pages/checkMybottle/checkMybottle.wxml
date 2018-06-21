@@ -20,3 +20,9 @@
       </view>
   </view>
 </view>
+
+<view hidden="{{len > 0 ? true : false}}">
+    <view class="list-info">
+      <text>暂无记录</text>
+    </view>
+</view>

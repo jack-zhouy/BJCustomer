@@ -226,12 +226,9 @@ checkMyAccount: function () {
           userId: app.globalData.userId
         },
         complete: function (res) {
-          console.info(res.data);
-          if (res.statusCode == 200) {
-              // wx.showModal({
-              //   title: '提示',
-              //   content: '当前欠款为：' + res.data.items[0].amount + '元',
-              // })
+          
+          if (res.statusCode == 200) 
+          {
             if (res.data.items == 0)
             {
               wx.showModal({
@@ -241,7 +238,6 @@ checkMyAccount: function () {
             }
             else
             {
-              //console.log(res.data.items[0].amount);
               wx.showModal({
                 title: '提示',
                 content: '当前欠款为：' + res.data.items[0].amount + '元',
