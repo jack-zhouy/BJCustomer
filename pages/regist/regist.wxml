@@ -5,40 +5,40 @@
           <view class="input-log">  
             <image class="userinfo-logIcon" src="{{logIcon0}}"></image>  
             <text class="pickerTitle">登录名*: </text>
-            <input disabled="{{inputUserIdDisable}}" class="inputIndexText" id="userId" name="userId" maxlength='20' type="text" value="{{checkProfileState==true? userId_value : ''}}"/>
+            <input disabled="{{inputUserIdDisable}}" class="inputIndexText" id="userId" name="userId" maxlength='20' type="text" value="{{checkProfileState==true? userId_value : ''}}" adjust-position="{{false}}"/>
           </view>  
 
-          <view class="input-log">  
+          <view class="input-log" hidden="{{!needToBeShown}}">  
             <image class="userinfo-logIcon" src="{{logIcon1}}"></image>  
             <text class="pickerTitle">姓名*: </text>
             <input disabled="{{inputDisable}}" class="inputIndexText" id="name" name="name" maxlength='20' type="text" value="{{checkProfileState==true? name_value : ''}}"/>
           </view>  
-
-          <view class="input-log">  
+ 
+          <view class="input-log" hidden="{{!needToBeShown}}">  
             <image class="userinfo-logIcon" src="{{idIcon}}"></image>  
             <text class="pickerTitle">身份证号*: </text>
-            <input disabled="{{inputDisable}}" class="inputIndexText" id="identity" name="identity" maxlength='18' type="text" value="{{checkProfileState==true? identity_value : ''}}"/>
+            <input disabled="{{inputDisable}}" class="inputIndexText" id="identity" name="identity" maxlength='18' type="text" value="{{checkProfileState==true?      identity_value : ''}}"/>
           </view>  
 
-          <view class="input-log">  
+          <view class="input-log" hidden="{{!needToBeShown}}">  
             <image class="userinfo-logIcon" src="{{telIcon}}"></image> 
             <text class="pickerTitle">手机号*: </text> 
             <input disabled="{{inputDisable}}" class="inputIndexText" id="phone" name="phone" maxlength='12' type="text" value="{{checkProfileState==true? phone_value : ''}}"/>
           </view>
 
-          <view class="input-log" hidden="{{needToBeHidden}}">  
+          <view class="input-log">  
             <image class="userinfo-logIcon" src="{{pwdIcon}}"></image> 
             <view class="pickerTitle">密码*: </view>  
-            <input class="inputIndexText" id="password" name="password" maxlength='20' type="password"/>
+            <input disabled="{{inputDisable}}" class="inputIndexText" id="password" name="password" maxlength='20' type="password"/>
           </view>
 
-          <view class="input-log" hidden="{{needToBeHidden}}">  
+          <view class="input-log" hidden="{{secPass}}">  
             <image class="userinfo-logIcon" src="{{pwdIcon}}"></image> 
             <view class="pickerTitle">再次输入密码*: </view>  
-            <input class="inputIndexText" id="passwordSecond" name="passwordSecond" maxlength='20' type="password"/>
+            <input disabled="{{inputDisable}}" class="inputIndexText" id="passwordSecond" name="passwordSecond" maxlength='20' type="password"/>
           </view>
 
-          <view class="input-log" hidden="{{needToBeShown}}">  
+          <view class="input-log" hidden="{{radioHidden}}">  
           <image class="userinfo-logIcon" src="{{bottleCheck}}"></image>  
           <view class="pickerTitle"> 是否携带钢瓶*: </view>
             <radio-group id="haveCylinder" name="haveCylinder" class="radio-group radioIndexText" bindchange="radioChange">
@@ -48,91 +48,69 @@
             </radio-group>
           </view>
 
-          <view class="input-log" hidden="{{inputNeedToBeShown}}"> 
+       
+<!-- 查看资料 -->
+        <view class="input-log" hidden="{{inputNeedToBeShown}}"> 
             <image class="userinfo-logIcon" src="{{bottleCheck}}"></image> 
             <view class="pickerTitle">是否携带钢瓶: </view>  
             <input disabled="{{inputDisable}}" class="inputIndexText" type="text" value="{{checkProfileState==true ? hasCylinder_value : ''}}"/>
-          </view>
+          </view> 
 
-          <view class="input-log" hidden="{{inputNeedToBeShown}}"> 
+          <view class="input-log" hidden="{{inputNeedToBeShown}}">  
             <image class="userinfo-logIcon" src="{{customerTypeIcon}}"></image> 
             <view class="pickerTitle">客户类型: </view>  
             <input disabled="{{inputDisable}}" class="inputIndexText" type="text" value="{{checkProfileState==true ? customerType_value : ''}}"/>
           </view>
 
-          <view class="input-log" hidden="{{inputNeedToBeShown}}"> 
+        <view class="input-log" hidden="{{inputNeedToBeShown}}">  
             <image class="userinfo-logIcon" src="{{customerResourceIcon}}"></image> 
             <view class="pickerTitle">客户来源: </view>  
             <input disabled="{{inputDisable}}" class="inputIndexText" type="text" value="{{checkProfileState==true ? customerSource_value : ''}}"/>
-          </view>  
-
-          <view class="input-log" hidden="{{inputNeedToBeShown}}"> 
-            <image class="userinfo-logIcon" src="{{settlementIcon}}"></image> 
-            <view class="pickerTitle">结算类型: </view>  
-            <input disabled="{{inputDisable}}" class="inputIndexText" type="text" value="{{checkProfileState==true ? settlementType_value : ''}}"/>
-          </view>  
+        </view>   
           
-          <view class="input-log" hidden="{{needToBeShown}}">
+        <view class="input-log" hidden="{{inputNeedToBeShown}}">
+          <image class="userinfo-logIcon" src="{{settlementIcon}}"></image>  
+          <view class="pickerTitle"> 结算类型: </view>
+				  <input class="inputIndexText" id="settlementType" name="settlementType" disabled="{{true}}" maxlength='20' type="text" value="普通用户"/> 
+          </view>  
+<!-- 查看资料 -->
+
+
+        <view class="input-log" hidden="{{customerShown}}">
           <image class="userinfo-logIcon" src="{{customerTypeIcon}}"></image>  
             <view class="pickerTitle"> 客户类型: </view>
 				    <picker mode ="selector" id="customerType" name="customerType" class="pickerIndexText" bindchange="bindPickerChange1"  value="{{originalCustomerTypeArray[customerTypeIndex].code}}" range="{{customerTypeArray}}">
 					  <view class="subtitle-label">{{customerTypeArray[customerTypeIndex]}}</view>
 			    	</picker>
-          </view>
+        </view>
 
-          <view class="input-log" hidden="{{needToBeShown}}">
+        <view class="input-log" hidden="{{customerShown}}">
           <image class="userinfo-logIcon" src="{{customerResourceIcon}}"></image>  
             <view class="pickerTitle"> 客户来源: </view>
 				    <picker mode ="selector" id="customerSource" name="customerSource" class="pickerIndexText" bindchange="bindPickerChange" value="{{originalCustomerSourceArray[customerSourceIndex].code}}" range="{{customerSourceArray}}">
 					  <view class="subtitle-label">{{customerSourceArray[customerSourceIndex]}}</view>
 			    	</picker>
-          </view>
+        </view>
         
-          <view class="input-log" hidden="{{needToBeShown}}">
-          <image class="userinfo-logIcon" src="{{settlementIcon}}"></image>  
-            <view class="pickerTitle"> 结算类型: </view>
-				    <!-- <picker mode ="selector" id="settlementType" name="settlementType" class="pickerIndexText" bindchange="bindPickerChange2"  value="{{originalSettlementTypeArray[settlementTypeIndex].code}}" range="{{settlementTypeArray}}"> -->
-				    <input class="inputIndexText"  disabled="{{true}}" maxlength='20' type="text" value="普通用户"/>
-			    	<!-- </picker> -->
-          </view>
 
-          <view class="input-log" >  
+
+        <view class="input-log" hidden="{{!needToBeShown}}">  
             <image class="userinfo-logIcon" src="{{companyIcon}}"></image>
             <view class="pickerTitle">客户公司: </view>    
             <input disabled="{{inputDisable}}" class="inputIndexText" id="customerCompany" name="customerCompany" maxlength='30' type="text" value="{{checkProfileState==true? company_name_value : ''}}"/>
-          </view> 
-
-          <view class="input-log" hidden="{{inputNeedToBeShown}}">  
+        </view> 
+<!-- 查看资料 -->
+        <view class="input-log" hidden="{{inputNeedToBeShown}}">  
             <image class="userinfo-logIcon" src="{{logAdd}}"></image>
             <view class="pickerTitle">地址: </view>  
-            <text disabled="{{inputDisable}}" class='inputIndexText textStyle'>{{address_value1}}\r\n{{address_value2}}</text>  
+            <text disabled="{{inputDisable}}" class='inputIndexText textStyle'>{{address_value1}}\r\n{{address_value2}}            </text>  
+        </view> 
+<!-- 查看资料 -->
 
-            <!-- <input disabled="{{inputDisable}}" class="address_text"  maxlength='140' type="text" value="{{checkProfileState==true? address_value : ''}}"/> -->
-          </view> 
-
-          <view class="input-log" hidden="{{addSelectNeedToBeShown}}">  
+        <view class="input-log" hidden="{{addSelectNeedToBeShown}}">  
             <image class="userinfo-logIcon" src="{{logAdd}}"  bindtap="selectAddress"></image> 
-            <!-- 地址选择 -->
-	          <!-- <view  class="container"> -->
-	        	<!-- 用户尚未添加地址时 -->
-		          <!-- <view class="address" bindtap="selectAddress" wx:if="{{!address}}">  
-			          <view class="pickerTitle">地址*:</view>
-		          </view> -->
-		          <!-- 用户已添加过地址 -->
-	          
                 <view class="pickerTitle">地址*:</view>
                 <text disabled="{{inputDisable}}" class='inputIndexText textStyle'>{{AddressData.provinceName}}{{AddressData.cityName}}{{AddressData.countyName}}\r\n{{AddressData.detailInfo}}</text>  
-			          <!-- <view class="bd">
-                <view class="receiver">
-                  <input id="province" name="province" value="{{AddressData.provinceName}}" disabled="true"/>
-                  <input id="city" name="city" value="{{AddressData.cityName}}" disabled="true"/>
-                  <input id="county" name="county" value="{{AddressData.countyName}}" disabled="true"/>  
-                </view>
-                <input id="detail" name="detail" class="detailInfoStyle" value="{{AddressData.detailInfo}}" disabled="true"/>
-			        </view> -->
-
-		        
-           <!-- </view> -->
         </view> 
 
         <view class="btn-area" hidden="{{needToBeHidden}}">

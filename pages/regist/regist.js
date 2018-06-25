@@ -22,6 +22,10 @@ Page({
     inputDisable:false,
     checkProfileState:false,
     editProfileState:false,
+
+    secPass:false,
+    customerShown:true,
+    radioHidden: true,
 //查询资料显示数据
     userId_value:"",
     name_value:"",
@@ -90,6 +94,8 @@ Page({
         inputNeedToBeShown:false,
         addSelectNeedToBeShown:true,
         inputDisable:true,
+        secPass:true,
+       
       })
     }
     else if (model == 'editProfile') {
@@ -100,6 +106,8 @@ Page({
         editProfileState:true,
         LabelNeedToBeHidden:true,
         needToBeShown: true,
+        customerShown:false,
+        radioHidden: false,
       })
     }
   },
