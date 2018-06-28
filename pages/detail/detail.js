@@ -9,6 +9,7 @@ Page({
     loading: false,
     showGrab: false,
     payMethod:"",
+    payStatus:"",
     orderState:"",
     deliveryAddress:"",
     deliveryAddressDetail:"",
@@ -19,6 +20,9 @@ Page({
     var order = JSON.parse(options.order);
 
     console.log(order);
+    if (order.payStatus != null){
+      that.data.payStatus = order.payStatus.name;
+    }
     // if (order.payType.index == 0)
     // {
     //   that.data.payMethod = "在线支付"
@@ -54,6 +58,7 @@ Page({
     that.data.deliveryAddressDetail = order.recvAddr.detail;
 
     that.setData({
+      payStatus: that.data.payStatus,
       order: order,
       loading: true,
       deliveryAddress: that.data.deliveryAddress,

@@ -20,7 +20,7 @@ Page({
        "立即报修",
        "预约报修"
      ],
-     deliveryTimeType: "",
+     deliveryTimeType: "立即报修",
      timePickerShow: false,
      date: "",
      time: "",

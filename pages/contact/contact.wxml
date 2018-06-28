@@ -17,7 +17,7 @@
             <view class="btn">
                 <view class="btn_outer" bindtap="makePhoneCall">
                     <view class="btn_inner">
-                        <image src="../../images/icon/tel.png" class="btn_img" />
+                        <image src="../../images/telephone.png" class="btn_img" />
                     </view>
                 </view>
 
@@ -27,10 +27,9 @@
         <view class="contact_text cfff">
             <text>
                 百江燃气|伴你同行
-                招商合作:13913015340
-                客服微信:13913015340
+                联系电话:0871-63182547
                 公众平台:百江订气
-                服务地址:云南省昆明市xx街道
+                服务地址:云南省昆明市盘龙区龙泉路与沣源路口公交车站对面
             </text>
         </view>
     </view>

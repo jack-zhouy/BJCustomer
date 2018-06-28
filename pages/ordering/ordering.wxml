@@ -21,7 +21,7 @@
 			<!-- food list -->
 			<!-- 主图 -->
 			<view class="food-hd">
-				<image class="thumb" mode="aspectFill" src="../../images/我的气瓶.png" />
+				<image class="thumb" mode="aspectFill" src="../../images/myBottle.png" />
 			</view>
 			<view class="food-bd">
 				<view class="title">{{item.name}}</view>
@@ -52,7 +52,7 @@
   <view class="input-log">  
     <view class="pickerTitle margin_style">
       <picker range="{{deliverTimeTypes}}" bindchange='deliverTimeTypesChange'>   
-        <view class='subtitle-label'>送气时间*: {{deliveryTimeType}}</view>
+        <view class='subtitle-label'>送气时间: {{deliveryTimeType}}</view>
       </picker>
     </view>
   </view>

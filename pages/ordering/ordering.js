@@ -50,7 +50,7 @@ Page({
       "立即送气",
       "预约送气"
     ],
-    deliveryTimeType: "",
+    deliveryTimeType: "立即送气",
     timePickerShow:false,
     date:"",
     time:"",

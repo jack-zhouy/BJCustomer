@@ -13,14 +13,27 @@
         </swiper>
       </view>
       <view class="border_box nav_box padding-bottom pt_50">
-        <block wx:for="{{navList}}" wx:for-item="navItem" wx:key="index">
+        <!-- <block wx:for="{{navList}}" wx:for-item="navItem" wx:key="index">
           <view class="nav_item">
             <navigator url="{{navItem.gotoUrl}}" open-type="navigate">
               <image src="{{navItem.picurl}}"></image>
               <text class="pt_20">{{navItem.title}}</text>
             </navigator>
           </view>
-        </block>
+        </block> -->
+
+        <block wx:for="{{navList}}" wx:for-item="navItem" wx:key="index">
+          <view class="nav_item">
+            <navigator url="{{navItem.gotoUrl}}" open-type="navigate" wx:if="{{loginState}}">
+              <image src="{{navItem.picurl}}"></image>
+              <text class="pt_20">{{navItem.title}}</text>
+            </navigator>
+            <navigator url="../login/login" open-type="navigate" wx:if="{{!loginState}}">
+              <image src="{{navItem.picurl}}"></image>
+              <text class="pt_20">{{navItem.title}}</text>
+            </navigator>
+          </view>
+      </block>
       </view>
        <view class=" nav_box padding-bottom pt_50">
         <block wx:for="{{classList}}" wx:for-item="classItem" wx:key="index">

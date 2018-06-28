@@ -23,23 +23,23 @@
 <!-- 列表 -->
 <view class="listview" >
 	<view class="item" bindtap='navigateToCheckProfile'>
-		<image class="hd" src="../../images/查看资料.png" />
+		<image class="hd" src="../../images/checkFile.png" />
 		<navigator class="bd" open-type="navigate" hover-class="none">查看资料</navigator>
 	</view>
   <view class="item" bindtap='navigateToEditProfile'>
-		<image class="hd" src="../../images/修改资料.png" />
-		<navigator class="bd" open-type="navigate" hover-class="none">修改资料</navigator>
+		<image class="hd" src="../../images/editFile.png" />
+		<navigator class="bd" open-type="navigate" hover-class="none">完善修改资料</navigator>
 	</view>
   <view class="item" bindtap='navigateToCheckMybottle'>
-		<image class="hd" src="../../images/我的气瓶.png" />
+		<image class="hd" src="../../images/myBottle.png" />
 		<navigator class="bd" open-type="navigate" hover-class="none">我的气瓶</navigator>
 	</view> 
   <view class="item" bindtap='navigateToCheckMyMend'>
-		<image class="hd" src="../../images/报修.png" />
+		<image class="hd" src="../../images/repair.png" />
 		<navigator class="bd" open-type="navigate" hover-class="none">我的报修单</navigator>
 	</view>
 	<view class="item" bindtap='navigateToComplaint'>
-		<image class="hd" src="../../images/电话.png" />
+		<image class="hd" src="../../images/tel.png" />
 		<navigator class="bd"  open-type="navigate" hover-class="none">一键投诉建议热线</navigator>
 	</view>
 </view>

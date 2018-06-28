@@ -29,6 +29,7 @@ Page({
 //查询资料显示数据
     userId_value:"",
     name_value:"",
+    password_value:"",
     identity_value:"",
     phone_value:"",
     password_value:"",
@@ -42,19 +43,19 @@ Page({
     address_value2: "",
     existedCustomerInfo: {},
 //小图标路径
-    logIcon0: "../../images/登录名.png",
-    logIcon1: "../../images/用户名.png",
-    idIcon: "../../images/身份证号.png",
-    telIcon: "../../images/电话.png",
-    bottleCheck: "../../images/是否携带钢瓶.png",
-    pwdIcon: "../../images/密码.png",
-    customerTypeIcon: "../../images/客户类型.png",
-    customerResourceIcon: "../../images/客户来源.png",
-    settlementIcon: "../../images/结算类型.png",
+    logIcon0: "../../images/loginName.png",
+    logIcon1: "../../images/userName.png",
+    idIcon: "../../images/IDNum.png",
+    telIcon: "../../images/tel.png",
+    bottleCheck: "../../images/bottleCheck.png",
+    pwdIcon: "../../images/password.png",
+    customerTypeIcon: "../../images/customerType.png",
+    customerResourceIcon: "../../images/customerResource.png",
+    settlementIcon: "../../images/settlementType.png",
     verifiIcon:"../../images/verifiIcon.png",
     logTel: "../../images/telephone.png",
-    logAdd: "../../images/定位.png",
-    companyIcon: "../../images/公司.png",
+    logAdd: "../../images/locaton.png",
+    companyIcon: "../../images/company.png",
 //客户类型、来源选择器数据
     customerTypeIndex: 0,
     customerTypeArray: [],
@@ -72,9 +73,10 @@ Page({
     AddressData: {}, 
 //是否携带钢瓶radio数据
     items: [
-      { name: '是', value: '是', checked:"true"},
+      { name: '是', value: '是', checked: "true" },
       { name: '否', value: '否'},
     ], 
+    hasCylinder: true,
   },
   onLoad: function (options) {
 // 页面初始化 options为页面跳转所带来的参数
@@ -153,9 +155,28 @@ Page({
             hasCylinder = "否"
           };
 
+          for (var i = 0; i < that.data.customerTypeArray.length; i++)
+          {
+            if (res.data.items[0].customerType.name == that.data.customerTypeArray[i])
+            {
+              that.setData({
+                customerTypeIndex : i
+              })
+            }
+          }
+
+          for (var i = 0; i < that.data.customerSourceArray.length; i++) {
+            if (res.data.items[0].customerSource.name == that.data.customerSourceArray[i]) {
+              that.setData({
+                customerSourceIndex: i
+              })
+            }
+          }
+
           that.setData({
             userId_value: res.data.items[0].userId,
             name_value: res.data.items[0].name,
+            password_value: res.data.items[0].password,
             identity_value: res.data.items[0].identity,
             phone_value: res.data.items[0].phone,
             customerType_value: res.data.items[0].customerType.name,
@@ -203,11 +224,18 @@ Page({
       customerSourceTemp.code = param.customerSource;
       editCustomerInfo.customerSource = customerSourceTemp;
     }   
-    if (param.settlementType.length > 0) {
-      var settlementTypeTemp = {};
-      settlementTypeTemp.code = param.settlementType;
-      editCustomerInfo.settlementType = settlementTypeTemp;
-    } 
+    // if (param.settlementType.length > 0) {
+    //   var settlementTypeTemp = {};
+    //   settlementTypeTemp.code = param.settlementType;
+    //   editCustomerInfo.settlementType = settlementTypeTemp;
+    // } 
+
+    editCustomerInfo.haveCylinder = that.data.hasCylinder;
+
+    var settlementTypeTemp = {};
+    settlementTypeTemp.code = "00001";
+    editCustomerInfo.settlementType = settlementTypeTemp;
+
     if (param.province!=null){
       var customerAddressTemp = {};
       customerAddressTemp.province = param.province;
@@ -222,18 +250,25 @@ Page({
       editCustomerInfo.customerCompany = customerCompanyTemp;
     }
     editCustomerInfo = JSON.stringify(editCustomerInfo);
+    console.info(editCustomerInfo);
 
     wx.request({  
       url: getApp().GlobalConfig.baseUrl + "/api/customers/" + that.data.userId + '?userId=' + that.data.userId,
       method: "PUT",
       data: editCustomerInfo,
       complete: function (res) {
-        
         if (res.statusCode == 200) {
           wx.showToast({
             title: '提交成功',
             icon: 'success',
-            duration: 1500
+            duration: 1500,
+            success: function () {
+              setTimeout(function () {
+                wx.switchTab({
+                  url: '../index/index',
+                })
+              }, 1500);
+            },
           });
         }
       }
@@ -297,13 +332,27 @@ settlementType_request: function () {
           settlementTypeArray: that.data.settlementTypeArray,
           originalSettlementTypeArray: res.data.items
         })
-        
+        console.info(res.data.items);
       }
     }
   });
 },
 //监听radio事件
 radioChange: function (e) {
+  var that = this;
+  // console.info(e.detail.value);
+  if (e.detail.value){
+    this.setData({
+      hasCylinder: true
+    })
+  }
+  else
+  {
+    this.setData({
+      hasCylinder: false
+    })
+  }
+  console.info(that.data.hasCylinder)
 },
 // 监听客户类型picker事件
 bindPickerChange: function (e) {
@@ -466,7 +515,7 @@ checkTelephone: function (param) {
     }
   },
 
-  //提交注册信息/修改信息表单
+  //提交注册信息表单
   formSubmit: function (e) {
     var param = e.detail.value;
     this.mysubmit(param);
@@ -476,7 +525,7 @@ checkTelephone: function (param) {
     
     if (that.data.editProfileState == false)
     {
-      var flag = this.checkUserId(param) && this.checkUserName(param) && this.checkIdentity(param) 
+      var flag = this.checkUserId(param) && this.checkUserName(param)
       && this.checkTelephone(param) && this.checkPassword(param) && this.checkPasswordSecond(param) && this.checkAddress();
       if (flag) {
         this.setregistData1();
@@ -516,9 +565,18 @@ checkTelephone: function (param) {
     var customerInfo = {};
     customerInfo.userId = param.userId;
     customerInfo.name = param.name;
-    customerInfo.identity = param.identity;
+    if (param.identity.length > 0){
+      customerInfo.identity = param.identity;
+    }
+    else
+    {
+      customerInfo.identity = "未提交";
+    }
+    
     customerInfo.password = param.password;
     customerInfo.phone = param.phone;
+
+    customerInfo.haveCylinder = false;
 
     var customerTypeTemp = {};
     customerTypeTemp.code = param.customerType;
@@ -559,7 +617,6 @@ checkTelephone: function (param) {
       method: "POST",
       complete: function (res) {
         if (res.statusCode == 201){
-          //console.error('网络请求成功')
           wx.showToast({
             title: '提交成功',
             icon: 'success',

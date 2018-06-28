@@ -19,8 +19,8 @@
     padding-top: 72rpx;
 }
 .btn_img{
-    width: 41rpx;
-    height: 39rpx;
+    width: 70rpx;
+    height: 70rpx;
     display: block;
     margin: auto;
 }

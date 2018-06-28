@@ -4,43 +4,43 @@
         
           <view class="input-log">  
             <image class="userinfo-logIcon" src="{{logIcon0}}"></image>  
-            <text class="pickerTitle">登录名*: </text>
-            <input disabled="{{inputUserIdDisable}}" class="inputIndexText" id="userId" name="userId" maxlength='20' type="text" value="{{checkProfileState==true? userId_value : ''}}" adjust-position="{{false}}"/>
+            <text class="pickerTitle">登录名: </text>
+            <input disabled="{{inputUserIdDisable}}" class="inputIndexText" id="userId" name="userId" maxlength='20' type="text" value="{{checkProfileState==true? userId_value : ''}}" adjust-position="{{false}}" auto-focus="{{true}}"/>
           </view>  
 
-          <view class="input-log" hidden="{{!needToBeShown}}">  
+          <view class="input-log" >  
             <image class="userinfo-logIcon" src="{{logIcon1}}"></image>  
-            <text class="pickerTitle">姓名*: </text>
+            <text class="pickerTitle">姓名: </text>
             <input disabled="{{inputDisable}}" class="inputIndexText" id="name" name="name" maxlength='20' type="text" value="{{checkProfileState==true? name_value : ''}}"/>
           </view>  
  
           <view class="input-log" hidden="{{!needToBeShown}}">  
             <image class="userinfo-logIcon" src="{{idIcon}}"></image>  
-            <text class="pickerTitle">身份证号*: </text>
-            <input disabled="{{inputDisable}}" class="inputIndexText" id="identity" name="identity" maxlength='18' type="text" value="{{checkProfileState==true?      identity_value : ''}}"/>
+            <text class="pickerTitle">身份证号: </text>
+            <input disabled="{{inputDisable}}" class="inputIndexText" id="identity" name="identity" maxlength='18' type="text" value="{{checkProfileState==true?  identity_value : ''}}"/>
           </view>  
 
-          <view class="input-log" hidden="{{!needToBeShown}}">  
+          <view class="input-log" >  
             <image class="userinfo-logIcon" src="{{telIcon}}"></image> 
-            <text class="pickerTitle">手机号*: </text> 
+            <text class="pickerTitle">手机号: </text> 
             <input disabled="{{inputDisable}}" class="inputIndexText" id="phone" name="phone" maxlength='12' type="text" value="{{checkProfileState==true? phone_value : ''}}"/>
           </view>
 
           <view class="input-log">  
             <image class="userinfo-logIcon" src="{{pwdIcon}}"></image> 
-            <view class="pickerTitle">密码*: </view>  
-            <input disabled="{{inputDisable}}" class="inputIndexText" id="password" name="password" maxlength='20' type="password"/>
+            <view class="pickerTitle">密码: </view>  
+            <input disabled="{{inputDisable}}" class="inputIndexText" id="password" name="password" maxlength='20' type="password" value="{{checkProfileState==true? password_value : ''}}"/>
           </view>
 
           <view class="input-log" hidden="{{secPass}}">  
             <image class="userinfo-logIcon" src="{{pwdIcon}}"></image> 
-            <view class="pickerTitle">再次输入密码*: </view>  
-            <input disabled="{{inputDisable}}" class="inputIndexText" id="passwordSecond" name="passwordSecond" maxlength='20' type="password"/>
+            <view class="pickerTitle">再次输入密码: </view>  
+            <input disabled="{{inputDisable}}" class="inputIndexText" id="passwordSecond" name="passwordSecond" maxlength='20' type="password" value="{{checkProfileState==true? password_value : ''}}"/>
           </view>
 
           <view class="input-log" hidden="{{radioHidden}}">  
           <image class="userinfo-logIcon" src="{{bottleCheck}}"></image>  
-          <view class="pickerTitle"> 是否携带钢瓶*: </view>
+          <view class="pickerTitle"> 是否携带钢瓶: </view>
             <radio-group id="haveCylinder" name="haveCylinder" class="radio-group radioIndexText" bindchange="radioChange">
               <label class="radio" wx:for="{{items}}">
                 <radio value="{{item.checked}}" checked="{{item.checked}}"/>{{item.value}}
@@ -109,12 +109,12 @@
 
         <view class="input-log" hidden="{{addSelectNeedToBeShown}}">  
             <image class="userinfo-logIcon" src="{{logAdd}}"  bindtap="selectAddress"></image> 
-                <view class="pickerTitle">地址*:</view>
+                <view class="pickerTitle">地址:</view>
                 <text disabled="{{inputDisable}}" class='inputIndexText textStyle'>{{AddressData.provinceName}}{{AddressData.cityName}}{{AddressData.countyName}}\r\n{{AddressData.detailInfo}}</text>  
         </view> 
 
         <view class="btn-area" hidden="{{needToBeHidden}}">
-            <label class="note_text" hidden="{{LabelNeedToBeHidden}}">带*为必填项</label>
+            <!-- <label class="note_text" hidden="{{LabelNeedToBeHidden}}">带*为必填项</label> -->
             <button  disabled="{{registDisabled}}" style="background-color:{{registBtnBgBgColor}}"   formType="submit"  loading="{{btnLoading}}"> {{registBtnTxt}} </button>
             <view class="txt-area" hidden="{{needToBeShown}}">
                  <navigator open-type="switchTab" url="../index/index"><text class="forgot-password">回首页                         </text></navigator>

@@ -5,6 +5,7 @@ var user_login_state = getApp().globalData.loginState;
 
 Page({
   data:{
+    loginState: false,
     logoSrc: '',
     avatarUrl: '',
     nickName: '',
@@ -112,6 +113,13 @@ Page({
     wx.hideNavigationBarLoading();
   },
   onShow:function(){
+    var that = this;
+    var app = getApp();
+    if (app.globalData.loginState) {
+      that.setData({
+        loginState: true,
+      });
+    } 
   },
   onHide:function(){
   },
