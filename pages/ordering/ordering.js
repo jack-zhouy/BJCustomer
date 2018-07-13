@@ -131,7 +131,8 @@ Page({
         status:0,
         province: app.globalData.address.province,
         city: app.globalData.address.city,
-        county: app.globalData.address.county
+        county: app.globalData.address.county,
+        cstUserId: app.globalData.userId
       },
       method: "GET",
       complete: function (res) {
@@ -146,12 +147,15 @@ Page({
           for (var i = 0; i < count; i++) {
             var tempSource = res.data.items[i].name;
             that.data.goodsTypeArray.push(tempSource);
+           
           }
           that.setData({
             goodsTypeArray: that.data.goodsTypeArray,
             originalGoodsTypeArray: res.data.items,
             goodsInfo:res.data.items[0],
           })
+
+          console.info(that.data.originalGoodsTypeArray);
 
         }
       }
@@ -193,7 +197,8 @@ Page({
     orderDetail.goods = goods;
     
     orderDetail.originalPrice = good.price;
-    orderDetail.dealPrice = good.price;
+   // orderDetail.dealPrice = good.price;
+    orderDetail.dealPrice = good.realPrice;
     orderDetail.quantity = 0;
     orderDetail.subtotal = orderDetail.quantity * orderDetail.dealPrice;
     
@@ -373,6 +378,7 @@ Page({
     orderInfo.orderDetailList = [];
 
     var cartObjects = that.data.cartObjects;
+    console.info(that.data.cartObjects);
     for (var i = 0; i < cartObjects.length; i++) {
       
       var orderDetail = {};
@@ -380,7 +386,8 @@ Page({
           var good = { code: cartObjects[i].good.code, name: cartObjects[i].good.name }
           orderDetail.goods = good;
           orderDetail.originalPrice = cartObjects[i].good.price;
-          orderDetail.dealPrice = cartObjects[i].good.price;
+          orderDetail.dealPrice = cartObjects[i].good.realPrice;
+         // orderDetail.dealPrice = cartObjects[i].good.price;
           orderDetail.quantity = cartObjects[i].quantity;
           orderDetail.subtotal = orderDetail.quantity * orderDetail.dealPrice;
           orderInfo.orderDetailList.push(orderDetail);
@@ -477,7 +484,8 @@ Page({
     var amount = 0;
     var quantity = 0;
     cartObjects.forEach(function (item, index) {
-        amount += item.quantity * item.good.price;
+        //amount += item.quantity * item.good.price;
+        amount += item.quantity * item.good.realPrice;
         quantity += item.quantity;   
     });
     that.setData({

@@ -114,14 +114,14 @@ margin-top:30rpx;
 /*价格*/
 .price {
 	flex: 1;
-	font-size: 18px;
+	font-size: 15px;
 	color: #ff6000;
 }
 
 /*人民币符号*/
 .price:before {
 	content: "￥";
-	font-size: 14px;
+	font-size: 15px;
 }
 
 /*加减器*/
@@ -143,5 +143,10 @@ margin-top:30rpx;
 
 /*数量*/
 .value {
-	font-size: 14px;
+	font-size: 12px;
+}
+
+.priceText{
+  font-size: 15px;
+  color: grey;
 }

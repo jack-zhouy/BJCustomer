@@ -27,7 +27,22 @@
 				<view class="title">{{item.name}}</view>
 				<!-- <view class="summary">{{item.summary}}</view> -->
 				<view class="price-stepper">
-					<view class="price">{{item.price}}</view>
+					<!-- <view class="price">{{item.price}}</view> -->
+          <view class="flex-wrp" style="height: 15px;flex-direction:column;">
+            <view class="flex-item">
+              <ul>
+                <li class="priceText">原始单价:</li>
+                <li class="price">{{item.price}}</li>
+              </ul>
+            </view>
+        
+            <view class="flex-item">
+              <ul>
+                <li class="priceText">优惠单价:</li>
+                <li class="price">{{item.realPrice}}</li>
+              </ul>
+            </view>
+        </view>
 					<view class="stepper">
 						<!-- 减号 -->
 						<image src="/images/subtract.png" class="symbol" bindtap="subtract_new" wx:if="{{cartData[item.id]}}" data-good="{{item}}" />
