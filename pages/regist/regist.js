@@ -22,7 +22,7 @@ Page({
     inputDisable:false,
     checkProfileState:false,
     editProfileState:false,
-
+    
     secPass:false,
     customerShown:true,
     radioHidden: true,
@@ -110,6 +110,7 @@ Page({
         needToBeShown: true,
         customerShown:false,
         radioHidden: false,
+        addSelectNeedToBeShown: true,
       })
     }
   },
