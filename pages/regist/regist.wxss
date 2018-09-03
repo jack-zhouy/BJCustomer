@@ -1,7 +1,7 @@
 @import "../login/login.wxss";
 .pickerTitle{
   height: 60rpx;
-  margin-top: 20rpx;
+  margin-top: 35rpx;
   color:gray; 
   font-size:30rpx;
 }
@@ -18,7 +18,7 @@
   font-size:30rpx;
 }
 .inputIndexText{
-  margin-top: -10rpx;
+  margin-top: 0rpx;
   margin-left: 20rpx;
   font-size:30rpx;
 }

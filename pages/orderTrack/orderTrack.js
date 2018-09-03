@@ -12,6 +12,7 @@ Page({
     orderState:"",
     markers: [],
     position: {},
+    orderLocation:{},
     circles: {},
     deliverPhonecall:"",
 
@@ -128,6 +129,8 @@ var that = this;
   console.log(that.data.position);
   var tempLatitude = that.data.position.latitude;
   var tempLongitude = that.data.position.longitude;
+  var tempLatitudeOrder = that.data.orderLocation.latitude;
+  var tempLongitudeOrder = that.data.orderLocation.longitude;
   wx.getLocation({
       //当前经纬度
       latitude: tempLatitude,
@@ -140,21 +143,22 @@ var that = this;
         // position: tempPosition,
         markers: [ {
           id: "1",
-          latitude: tempLatitude + 0.002,
-          longitude: tempLongitude + 0.002,
-          iconPath: "../../images/icon/delivery.png",
-          width: 50,
-          height: 50,
-          title: "配送车"
-        }],
-        circles: [{
           latitude: tempLatitude,
           longitude: tempLongitude,
-          color: '#FF0000DD',
-          fillColor: '#7cb5ec88',
-          radius: 50,
-          strokeWidth: 2
-        }]
+          iconPath: "../../images/icon/delivery.png",
+          width: 50,
+          height: 35,
+          title: "配送车"
+        }, {
+          id: "2",
+          latitude: tempLatitudeOrder,
+          longitude: tempLongitudeOrder,
+          iconPath: "../../images/icon/home.png",
+          width: 50,
+          height: 50,
+          title: "配送地址"
+        }],
+       
       })
 
     },
@@ -207,13 +211,16 @@ var that = this;
             position.latitude = res.data.items[0].dispatcher.userPosition.latitude;
             deliverPhonecall = res.data.items[0].dispatcher.mobilePhone
           }
-         
+          var orderLocation = {};
+          orderLocation.longitude = res.data.items[0].recvLongitude;
+          orderLocation.latitude = res.data.items[0].recvLatitude;
           
 
           that.setData({
             orderTrackInfo: res.data,
             orderState: orderState,
             position: position,
+            orderLocation: orderLocation,
             deliverPhonecall: deliverPhonecall
           })
           console.log(that.data.position);

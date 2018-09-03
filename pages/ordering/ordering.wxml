@@ -90,13 +90,13 @@
 
 
   <view class="input-log">  
-    <view class="pickerTitle margin_style">支付方式: </view>
+    <view class="pickerTitle margin_style">支付方式: 气到付款</view>
     <!-- <radio-group id="payMethod" name="payMethod" class="radio-group radioIndexText" bindchange="payMethodRadioChange">
     <label class="radio" wx:for="{{payMethodItems}}">
         <radio value="{{item.checked}}" />{{item.value}}
     </label>
     </radio-group> -->
-    <label class="radioIndexText">气到付款</label>
+    <!-- <view class="subtitle-label">气到付款</view> -->
 
   </view>
 

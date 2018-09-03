@@ -35,7 +35,7 @@
           </view>
       </block>
       </view>
-       <view class=" nav_box padding-bottom pt_50">
+       <!-- <view class=" nav_box padding-bottom pt_50">
         <block wx:for="{{classList}}" wx:for-item="classItem" wx:key="index">
           <view class="nav_item">
             <navigator url="{{classItem.gotoUrl}}" open-type="navigate">
@@ -44,7 +44,8 @@
             </navigator>
           </view>
         </block>
-      </view>
+      </view> -->
+      <image src="../../images/advert/baijiang3.jpg" class="slide-image"></image>
     </view>
   </view>
 </scroll-view>

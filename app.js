@@ -2,7 +2,7 @@
 
 App({
   GlobalConfig: {
-    baseUrl: 'http://www.yunnanbaijiang.com',
+    baseUrl: 'https://www.yunnanbaijiang.com',
     appid: 'wxb137ebfa3dc90901',
     secret: 'ec3bbfe9300efa39b561ebac0aac5f2d',
     openid: null

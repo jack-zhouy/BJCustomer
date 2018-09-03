@@ -94,9 +94,10 @@ Page({
   },
   showDetail: function (e) {
     var order = e.currentTarget.dataset.order;
+    wx.setStorageSync('showOrder', order);
 
     wx.navigateTo({
-      url: '../detail/detail?order=' + JSON.stringify(order),
+      url: '../detail/detail',
       success: function (res) { },
       fail: function (res) { },
       complete: function (res) { },

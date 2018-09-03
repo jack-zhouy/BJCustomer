@@ -2,7 +2,7 @@
 
     <view class="list-info" data-order="{{item}}">
       <view class="list-thumb">
-        <image class="bottleThumb" src="../../images/bottom.jpg"></image>
+        <image class="bottleThumb" src="../../images/myBottle.png"></image>
         <icon class="i-play"></icon>
       </view>
 

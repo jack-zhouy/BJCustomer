@@ -79,7 +79,8 @@ Page({
       url: getApp().GlobalConfig.baseUrl + "/api/Ticket",
       method: "GET",
       data: {
-        customerUserId: app.globalData.userId
+        customerUserId: app.globalData.userId,
+        useStatus: 0 
       },
       complete: function (res) {
         if (res.statusCode == 200) {
@@ -105,7 +106,8 @@ Page({
       url: getApp().GlobalConfig.baseUrl + "/api/Coupon",
       method: "GET",
       data: {
-        customerUserId: app.globalData.userId
+        customerUserId: app.globalData.userId,
+        useStatus: 0
       },
       complete: function (res) {
         if (res.statusCode == 200) {

@@ -142,6 +142,7 @@
 .listview .item .bd {
 	font-size: 16px;
 	margin-left: 10px;
+  margin-top: -5px;
 	flex: 1;
 }
 /*.通用列表*/

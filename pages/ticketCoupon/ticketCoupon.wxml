@@ -1,3 +1,13 @@
+<view class="list-item">
+<view class="list-info">
+<view class="list-content">
+<view class="list-title">
+<text hidden="{{ticketHide}}">气票张数：{{ticketsList.length}}</text>
+<text hidden="{{couponHide}}">优惠券张数：{{ticketsList.length}}</text>
+</view>
+</view>
+</view>
+</view>
 <view class="list-item" wx:for="{{ticketsList}}" wx:key="id" >
     <view class="list-info"  data-order="{{item}}">
       <view class="list-content">

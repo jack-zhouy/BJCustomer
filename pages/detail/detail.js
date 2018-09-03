@@ -17,7 +17,8 @@ Page({
 
   onLoad: function (options) {
     var that = this;
-    var order = JSON.parse(options.order);
+    var order = wx.getStorageSync('showOrder')
+    //var order = JSON.parse(options.order);
 
     console.log(order);
     if (order.payStatus != null){
